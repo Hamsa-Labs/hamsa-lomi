@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "279237859010",
+    "project_id": "hamsa-lomi",
+    "storage_bucket": "hamsa-lomi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:279237859010:android:44e75e7ae1988b33c8cd5b",
+        "android_client_info": {
+          "package_name": "org.hamsa.lomi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "279237859010-cuusvs2ljn5curvro8liam1s36tao3vc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1bt70m1BkGmj5mwH2F9gSEY5LzXMEVs8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "279237859010-cuusvs2ljn5curvro8liam1s36tao3vc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
