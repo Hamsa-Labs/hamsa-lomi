@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -46,9 +50,21 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  // TODO(nebiyu): Remove unnecessary code
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   int _counter = 0;
 
   void _incrementCounter() {
+    final CollectionReference users = _firestore.collection('users');
+    users
+        .add(<String, dynamic>{
+          'full_name': 'John Doe', // John Doe
+          'company': 'Stokes and Sons', // Stokes and Sons
+          'age': 42 // 42
+        })
+        .then((value) => print('User Added'))
+        .catchError((Object e) => print('Failed to add user: $e'));
+
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
@@ -93,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
+            const Text(
               'You have pushed the button this many times:',
             ),
             Text(
@@ -106,7 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
