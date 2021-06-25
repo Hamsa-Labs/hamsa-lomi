@@ -23,5 +23,5 @@ jobs:
     - uses: subosito/flutter-action@v1
       with:
         channel: 'stable' # or: 'beta', 'dev' or 'master'
-    - run: flutter pub get
-    - run: flutter test
+    - run: cd hamsa_lomi && flutter pub get
+    - run: cd hamsa_lomi && flutter test
