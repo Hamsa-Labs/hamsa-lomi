@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "ios-logo.png",
+      "filename" : "LOGO.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ios-logo@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ios-logo@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
