@@ -1,9 +1,13 @@
+// Dart imports:
 import 'dart:async';
 
+// Package imports:
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:injectable/injectable.dart';
+
+// Project imports:
 import '../../../domain/create_account/entities/user.dart';
 import '../../../domain/create_account/use_cases/create_account_use_case.dart';
 import '../form_inputs/email_input.dart';

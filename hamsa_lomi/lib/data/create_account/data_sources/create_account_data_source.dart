@@ -1,6 +1,8 @@
+// Package imports:
 import 'package:firebase_auth/firebase_auth.dart' as fire_auth;
 import 'package:injectable/injectable.dart';
 
+// Project imports:
 import '../../../domain/create_account/entities/user.dart';
 import '../models/user_model.dart';
 

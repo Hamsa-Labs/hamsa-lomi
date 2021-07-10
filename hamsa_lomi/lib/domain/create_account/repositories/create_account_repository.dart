@@ -1,6 +1,8 @@
+// Package imports:
 import 'package:dartz/dartz.dart';
-import '../../core/failure.dart';
 
+// Project imports:
+import '../../core/failure.dart';
 import '../entities/user.dart';
 
 abstract class CreateAccountRepository {

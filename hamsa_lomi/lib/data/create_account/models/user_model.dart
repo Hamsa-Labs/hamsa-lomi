@@ -1,3 +1,4 @@
+// Project imports:
 import '../../../domain/create_account/entities/user.dart';
 
 class UserModel extends User {

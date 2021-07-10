@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 
