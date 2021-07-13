@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 
 // Project imports:
 import '../../../domain/create_account/entities/user.dart';
+import '../exceptions/create_account_exception.dart';
 import '../models/user_model.dart';
 
 abstract class CreateAccountDataSource {
@@ -18,11 +19,24 @@ class CreateAccountDataSourceImpl implements CreateAccountDataSource {
 
   @override
   Future<User> createAccount(UserModel userModel) async {
-    // TODO: Catch FirebaseAuthException:
-    // https://blog.logrocket.com/implementing-firebase-authentication-in-a-flutter-app/
-    final credentials = await _auth.createUserWithEmailAndPassword(
-        email: userModel.email, password: userModel.password);
-    await credentials.user?.updateDisplayName(userModel.username);
-    return userModel;
+    try {
+      final credentials = await _auth.createUserWithEmailAndPassword(
+          email: userModel.email, password: userModel.password);
+      await credentials.user?.updateDisplayName(userModel.username);
+
+      // TODO: Think about what should be returned from this method.
+      return userModel;
+    } on fire_auth.FirebaseAuthException catch (e) {
+      var message = 'something went wrong';
+      if (e.code == 'email-already-in-use') {
+        message = 'email address already in use';
+      } else if (e.code == 'invalid-email') {
+        message = 'invalid email address';
+      } else if (e.code == 'weak-password') {
+        message = 'password is weak';
+      }
+
+      throw CreateAccountException(message);
+    }
   }
 }
