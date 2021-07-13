@@ -1,5 +1,8 @@
 // Package imports:
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hamsa_lomi/data/create_account/exceptions/create_account_exception.dart';
+import 'package:hamsa_lomi/domain/core/failure.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -27,8 +30,17 @@ void main() {
   test('should call data source method', () async {
     when(mock.createAccount(tUserModel)).thenAnswer((_) async => tUserModel);
 
-    await repositoryImpl.createAccount(tUserModel);
+    final result = await repositoryImpl.createAccount(tUserModel);
 
     verify(mock.createAccount(tUserModel));
+    expect(result, right(tUserModel));
+  });
+
+  test('should return a failure when something goes wrong', () async {
+    when(mock.createAccount(tUserModel)).thenThrow(CreateAccountException());
+
+    final result = await repositoryImpl.createAccount(tUserModel);
+
+    expect(result, left(Failure()));
   });
 }
