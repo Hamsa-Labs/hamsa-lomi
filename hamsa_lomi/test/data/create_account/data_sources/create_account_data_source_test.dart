@@ -6,6 +6,7 @@ import 'package:mockito/mockito.dart';
 
 // Project imports:
 import 'package:hamsa_lomi/data/create_account/data_sources/create_account_data_source.dart';
+import 'package:hamsa_lomi/data/create_account/exceptions/create_account_exception.dart';
 import 'package:hamsa_lomi/data/create_account/models/user_model.dart';
 import 'create_account_data_source_test.mocks.dart';
 
@@ -38,5 +39,14 @@ void main() {
     await dataSource.createAccount(tUserModel);
     verify(mock.createUserWithEmailAndPassword(
         email: tUserModel.email, password: tUserModel.password));
+  });
+
+  test('should catch FirebaseAuthException', () async {
+    when(mock.createUserWithEmailAndPassword(
+            email: tUserModel.email, password: tUserModel.password))
+        .thenThrow(
+            fire_auth.FirebaseAuthException(code: 'email-already-in-use'));
+    expect(() async => await dataSource.createAccount(tUserModel),
+        throwsA(isA<CreateAccountException>()));
   });
 }
