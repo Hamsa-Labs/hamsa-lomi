@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 class HamsaColors {
   //Primary colors
- static const Color accentColor  = Color(0xff9ACB34);
+ static const Color primaryColor  = Color(0xff9ACB34);//update it
  static const Color secondaryColor = Color(0xff04D0D9) ;
  static const Color lightBackground = Color(0xffF7F7F7);
  static const Color darkGreen = Color(0xff353E4A);
@@ -22,4 +22,5 @@ class HamsaIcons {
 
 class HamsaImages {
 // default image we need to add
+ static const String rectangleBackground = 'lib/presentation/assets/images/rectangle_background.png';
 }
