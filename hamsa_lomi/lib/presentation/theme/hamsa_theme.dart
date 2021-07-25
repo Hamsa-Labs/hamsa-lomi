@@ -1,36 +1,78 @@
 import 'package:flutter/material.dart';
-import 'package:hamsa_lomi/presentation/constants/app_assets_constant.dart';
+import '../constants/app_assets_constant.dart';
 
-class HamsaTheme extends StatelessWidget {
-  final Widget home;
- final String title;
 
-  const HamsaTheme({Key key, this.home, this.title}) : super(key: key); // by default
+mixin HamsaTheme {
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        // Define the default brightness and colors.
-        brightness: Brightness.light,
-        primaryColor: HamsaColors.primaryColor,
-        accentColor: HamsaColors.secondaryColor,
+  static ThemeData get lightTheme  {
+    var big = true;// default for time been
+    var wValue =  5; // by default for time been
+    FontWeight weight;
+    if (wValue == 6) {
+      weight = FontWeight.w600;
+    }
+    else if (wValue == 5) {
+      weight = FontWeight.w500;
+    }
+    else if (wValue == 4) {
+      weight = FontWeight.w400;
+    }
+    return ThemeData(
+      primaryColor: HamsaColors.primaryColor,
+      accentColor: HamsaColors.secondaryColor,
 
-        // Define the default font family.
-        fontFamily: 'POPPINS',
-
-        // Define the default TextTheme. Use this to specify the default
-        // text styling for headlines, titles, bodies of text, and more.
-        textTheme: TextTheme(
-          //h1,h2
-          //
-          headline1: TextStyle(fontSize: 24.0,fontFamily: 'Poppins-Bold',
-              fontWeight: FontWeight.bold),
-          bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Poppins-Regular'),
+      textTheme:TextTheme(
+        headline1: big?TextStyle(
+            color:HamsaColors.darkGray,
+            fontWeight: FontWeight.w700,
+            fontSize: 24,
+            fontFamily:'Poppins'
+        ):TextStyle(
+            color:HamsaColors.darkGray,
+            fontWeight: FontWeight.w500,
+            fontSize: 24,
+            fontFamily:'Poppins'
+        ),
+        headline2: big?TextStyle(
+          color:HamsaColors.darkGray,
+          fontWeight: FontWeight.w600,
+          fontSize: 18,
+          fontFamily: 'Poppins',
+        ):TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 18,
+            fontFamily: 'Poppins'
+        ),
+        headline3: TextStyle(
+          color:HamsaColors.darkGray,
+          fontWeight: FontWeight.w600,
+          fontSize: 16,
+          fontFamily: 'Poppins',
+        ),
+        headline4: TextStyle(
+            fontWeight: weight,
+            fontSize: 14,
+            fontFamily: 'Poppins'
+        ),
+        bodyText1: TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 14,
+            fontFamily: 'Poppins'
+        ),
+        bodyText2: TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 12,
+            fontFamily: 'Poppins'
+        ),
+        caption: TextStyle(
+          fontWeight: FontWeight.w500,
+          fontSize: 11,
         ),
       ),
-      home: home,
-    );
+      fontFamily: 'Poppins',
+     );
+
   }
+
+
 }

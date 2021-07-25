@@ -6,8 +6,8 @@ import 'package:hamsa_lomi/presentation/theme/hamsa_theme.dart';
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return HamsaTheme(
-      title: 'Hamsa Lomi',
+    return MaterialApp(
+      theme: HamsaTheme.lightTheme,
       home: OnboardingPage(),
     );
   }

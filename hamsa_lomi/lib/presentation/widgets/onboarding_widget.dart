@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:hamsa_lomi/presentation/constants/app_assets_constant.dart';
 
-class MainAppBar extends StatelessWidget with PreferredSizeWidget {
+import '../constants/app_assets_constant.dart';
+import '../theme/hamsa_theme.dart';
+
+class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   final TextButton title;
   final double barHeight = 40.0;
+
   MainAppBar({Key key, this.title}) : super(key: key);
+
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight + 450.0);
+  Size get preferredSize => Size.fromHeight(kToolbarHeight + 400.0);
+
   @override
   Widget build(BuildContext context) {
     return PreferredSize(
@@ -50,7 +55,6 @@ class WaveClip extends CustomClipper<Path> {
   }
 }
 
-
 class DrawCircle extends CustomPainter {
   Paint _paint;
   final Color active;
@@ -74,57 +78,46 @@ class DrawCircle extends CustomPainter {
 }
 
 class BuildHeadingText extends StatelessWidget {
-
   final String text;
+
   BuildHeadingText(this.text);
+
   @override
   Widget build(BuildContext context) {
-
     return Text(
       text,
-      style: TextStyle(
-          color: HamsaColors.darkGreen,
-          fontSize: 20,
-          fontFamily: 'Poppins-Bold',
-      fontWeight: FontWeight.bold),
+      style: HamsaTheme.lightTheme.textTheme.headline1,
     );
   }
 }
 
-
-
 class BuildBodyText extends StatelessWidget {
   final String text;
+
   BuildBodyText(this.text);
+
   @override
   Widget build(BuildContext context) {
-
     return Text(
       text,
       textAlign: TextAlign.left,
-      style: TextStyle(
-          color: HamsaColors.darkGreen,
-          fontSize: 15,
-          fontFamily: 'Poppins-Regular',
-          fontWeight: FontWeight.normal),
+      style: HamsaTheme.lightTheme.textTheme.headline4,
     );
   }
-
 }
 
 class BuildCircleDot extends StatelessWidget {
   final bool active;
-  BuildCircleDot(this.active);
+
+  BuildCircleDot({this.active});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:
-        active? Container(
-            child: CustomPaint(painter: DrawCircle(HamsaColors.primaryColor))):
-        Container(
-            child: CustomPaint(painter: DrawCircle(Colors.grey))) ,
-
+      child: active
+          ? Container(
+              child: CustomPaint(painter: DrawCircle(HamsaColors.primaryColor)))
+          : Container(child: CustomPaint(painter: DrawCircle(Colors.grey))),
     );
   }
 }
