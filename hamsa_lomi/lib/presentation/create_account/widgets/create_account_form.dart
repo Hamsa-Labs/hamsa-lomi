@@ -27,8 +27,13 @@ class CreateAccountForm extends StatelessWidget {
       child: SingleChildScrollView(
         child: Form(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Setup your information'),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16.0),
+                child: Text('Setup your information',
+                    style: Theme.of(context).textTheme.headline5),
+              ),
               _UsernameInput(),
               _EmailInput(),
               _PasswordInput(),
@@ -51,16 +56,27 @@ class _UsernameInput extends StatelessWidget {
       buildWhen: (previousState, state) =>
           previousState.username.value != state.username.value,
       builder: (context, state) {
-        return TextFormField(
-          decoration: InputDecoration(
-            labelText: 'Username',
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.0),
-            ),
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Username'),
+              SizedBox(
+                height: 8.0,
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16.0),
+                  ),
+                ),
+                onChanged: (value) {
+                  context.read<CreateAccountBloc>().add(UsernameChanged(value));
+                },
+              ),
+            ],
           ),
-          onChanged: (value) {
-            context.read<CreateAccountBloc>().add(UsernameChanged(value));
-          },
         );
       },
     );
@@ -76,16 +92,27 @@ class _EmailInput extends StatelessWidget {
       buildWhen: (previousState, state) =>
           previousState.email.value != state.email.value,
       builder: (context, state) {
-        return TextFormField(
-          decoration: InputDecoration(
-            labelText: 'Email',
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.0),
-            ),
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Email'),
+              SizedBox(
+                height: 8.0,
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16.0),
+                  ),
+                ),
+                onChanged: (value) {
+                  context.read<CreateAccountBloc>().add(EmailChanged(value));
+                },
+              ),
+            ],
           ),
-          onChanged: (value) {
-            context.read<CreateAccountBloc>().add(EmailChanged(value));
-          },
         );
       },
     );
@@ -109,27 +136,38 @@ class _PasswordInputState extends State<_PasswordInput> {
           previousState.password.value.password !=
           state.password.value.password,
       builder: (context, state) {
-        return TextFormField(
-          obscureText: _obscureText,
-          decoration: InputDecoration(
-            labelText: 'Password',
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            suffixIcon: IconButton(
-              icon: Icon(
-                _obscureText ? Icons.visibility : Icons.visibility_off,
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Password'),
+              SizedBox(
+                height: 8.0,
               ),
-              onPressed: () {
-                setState(() {
-                  _obscureText = !_obscureText;
-                });
-              },
-            ),
+              TextFormField(
+                obscureText: _obscureText,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16.0),
+                  ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      _obscureText ? Icons.visibility : Icons.visibility_off,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _obscureText = !_obscureText;
+                      });
+                    },
+                  ),
+                ),
+                onChanged: (value) {
+                  context.read<CreateAccountBloc>().add(PasswordChanged(value));
+                },
+              ),
+            ],
           ),
-          onChanged: (value) {
-            context.read<CreateAccountBloc>().add(PasswordChanged(value));
-          },
         );
       },
     );
@@ -153,28 +191,41 @@ class _ConfirmPasswordInputState extends State<_ConfirmPasswordInput> {
           previousState.password.value.confirmPassword !=
           state.password.value.confirmPassword,
       builder: (context, state) {
-        return TextFormField(
-          obscureText: _obscureText,
-          decoration: InputDecoration(
-            labelText: 'Confirm Password',
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            suffixIcon: IconButton(
-              icon:
-                  Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
-              onPressed: () {
-                setState(() {
-                  _obscureText = !_obscureText;
-                });
-              },
-            ),
+        return Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 8.0,
           ),
-          onChanged: (value) {
-            context
-                .read<CreateAccountBloc>()
-                .add(ConfirmPasswordChanged(value));
-          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Confirm Password'),
+              SizedBox(
+                height: 8.0,
+              ),
+              TextFormField(
+                obscureText: _obscureText,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16.0),
+                  ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                        _obscureText ? Icons.visibility : Icons.visibility_off),
+                    onPressed: () {
+                      setState(() {
+                        _obscureText = !_obscureText;
+                      });
+                    },
+                  ),
+                ),
+                onChanged: (value) {
+                  context
+                      .read<CreateAccountBloc>()
+                      .add(ConfirmPasswordChanged(value));
+                },
+              ),
+            ],
+          ),
         );
       },
     );
