@@ -1,16 +1,21 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
 // Project imports:
 import '../bloc/create_account_bloc.dart';
+import '../form_inputs/password_input.dart';
 
-class CreateAccountForm extends StatelessWidget {
+class CreateAccountForm extends StatefulWidget {
   const CreateAccountForm({Key? key}) : super(key: key);
 
+  @override
+  _CreateAccountFormState createState() => _CreateAccountFormState();
+}
+
+class _CreateAccountFormState extends State<CreateAccountForm> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<CreateAccountBloc, CreateAccountState>(
@@ -53,8 +58,6 @@ class _UsernameInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CreateAccountBloc, CreateAccountState>(
-      buildWhen: (previousState, state) =>
-          previousState.username.value != state.username.value,
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -66,15 +69,22 @@ class _UsernameInput extends StatelessWidget {
                 height: 8.0,
               ),
               TextFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16.0),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
                   ),
-                ),
-                onChanged: (value) {
-                  context.read<CreateAccountBloc>().add(UsernameChanged(value));
-                },
-              ),
+                  onChanged: (value) {
+                    context
+                        .read<CreateAccountBloc>()
+                        .add(UsernameChanged(value));
+                  },
+                  validator: (_) {
+                    if (state.username.status == FormzInputStatus.invalid) {
+                      return 'Username is required';
+                    }
+                  }),
             ],
           ),
         );
@@ -102,15 +112,20 @@ class _EmailInput extends StatelessWidget {
                 height: 8.0,
               ),
               TextFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16.0),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
                   ),
-                ),
-                onChanged: (value) {
-                  context.read<CreateAccountBloc>().add(EmailChanged(value));
-                },
-              ),
+                  onChanged: (value) {
+                    context.read<CreateAccountBloc>().add(EmailChanged(value));
+                  },
+                  validator: (_) {
+                    if (state.email.status == FormzInputStatus.invalid) {
+                      return 'Please enter a valid email address';
+                    }
+                  }),
             ],
           ),
         );
@@ -146,6 +161,7 @@ class _PasswordInputState extends State<_PasswordInput> {
                 height: 8.0,
               ),
               TextFormField(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 obscureText: _obscureText,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -162,6 +178,11 @@ class _PasswordInputState extends State<_PasswordInput> {
                     },
                   ),
                 ),
+                validator: (_) {
+                  if (state.password.error == PasswordInputError.empty) {
+                    return 'Please enter your password';
+                  }
+                },
                 onChanged: (value) {
                   context.read<CreateAccountBloc>().add(PasswordChanged(value));
                 },
@@ -188,8 +209,7 @@ class _ConfirmPasswordInputState extends State<_ConfirmPasswordInput> {
   Widget build(BuildContext context) {
     return BlocBuilder<CreateAccountBloc, CreateAccountState>(
       buildWhen: (previousState, state) =>
-          previousState.password.value.confirmPassword !=
-          state.password.value.confirmPassword,
+          previousState.password.value != state.password.value,
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.symmetric(
@@ -203,6 +223,7 @@ class _ConfirmPasswordInputState extends State<_ConfirmPasswordInput> {
                 height: 8.0,
               ),
               TextFormField(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 obscureText: _obscureText,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -223,6 +244,15 @@ class _ConfirmPasswordInputState extends State<_ConfirmPasswordInput> {
                       .read<CreateAccountBloc>()
                       .add(ConfirmPasswordChanged(value));
                 },
+                validator: (_) {
+                  if (state.password.error ==
+                      PasswordInputError.confirmPasswordEmpty) {
+                    return 'Please enter your confirm password.';
+                  } else if (state.password.error ==
+                      PasswordInputError.doesNotMatch) {
+                    return 'Make sure your passwords match';
+                  }
+                },
               ),
             ],
           ),
@@ -242,11 +272,18 @@ class _SignUpButton extends StatelessWidget {
         if (state.status.isSubmissionInProgress) {
           return CircularProgressIndicator();
         } else {
-          return ElevatedButton(
-              onPressed: () {
-                context.read<CreateAccountBloc>().add(CreateAccountSubmitted());
-              },
-              child: Text('SIGNUP'));
+          return Center(
+            child: ElevatedButton(
+              onPressed: state.status.isValidated
+                  ? () {
+                      context
+                          .read<CreateAccountBloc>()
+                          .add(CreateAccountSubmitted());
+                    }
+                  : null,
+              child: Text('SIGN UP'),
+            ),
+          );
         }
       },
     );
