@@ -45,6 +45,7 @@ class CreateAccountBloc extends Bloc<CreateAccountEvent, CreateAccountState> {
     final usernameInput = UsernameInput.dirty(username);
     return state.copyWith(
         username: usernameInput,
+        error: null,
         status: Formz.validate([usernameInput, state.email, state.password]));
   }
 
@@ -53,6 +54,7 @@ class CreateAccountBloc extends Bloc<CreateAccountEvent, CreateAccountState> {
     final emailInput = EmailInput.dirty(email);
     return state.copyWith(
         email: emailInput,
+        error: null,
         status: Formz.validate([emailInput, state.username, state.password]));
   }
 
@@ -62,6 +64,7 @@ class CreateAccountBloc extends Bloc<CreateAccountEvent, CreateAccountState> {
         confirmPassword: state.password.value.confirmPassword));
     return state.copyWith(
         password: passwordInput,
+        error: null,
         status: Formz.validate([passwordInput, state.username, state.email]));
   }
 
@@ -71,6 +74,7 @@ class CreateAccountBloc extends Bloc<CreateAccountEvent, CreateAccountState> {
         password: state.password.value.password));
     return state.copyWith(
         password: passwordInput,
+        error: null,
         status: Formz.validate([passwordInput, state.username, state.email]));
   }
 
@@ -85,7 +89,8 @@ class CreateAccountBloc extends Bloc<CreateAccountEvent, CreateAccountState> {
           password: state.password.value.password));
 
       yield* failureOrSuccess.fold((l) async* {
-        yield state.copyWith(status: FormzStatus.submissionFailure);
+        yield state.copyWith(
+            status: FormzStatus.submissionFailure, error: l.message);
       }, (r) async* {
         yield state.copyWith(status: FormzStatus.submissionSuccess);
       });

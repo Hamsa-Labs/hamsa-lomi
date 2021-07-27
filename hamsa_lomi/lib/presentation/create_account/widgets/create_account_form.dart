@@ -26,7 +26,8 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
               SnackBar(content: Text('Account created successfully!'));
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         } else if (state.status.isSubmissionFailure) {
-          final snackBar = SnackBar(content: Text('Something went wrong!'));
+          final errorMessage = state.error ?? 'Something went wrong!';
+          final snackBar = SnackBar(content: Text(errorMessage));
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
         }
       },
@@ -268,13 +269,13 @@ class _SignUpButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CreateAccountBloc, CreateAccountState>(
-      builder: (context, state) {
-        if (state.status.isSubmissionInProgress) {
-          return CircularProgressIndicator();
-        } else {
-          return Center(
-            child: ElevatedButton(
+    return Center(
+      child: BlocBuilder<CreateAccountBloc, CreateAccountState>(
+        builder: (context, state) {
+          if (state.status.isSubmissionInProgress) {
+            return CircularProgressIndicator();
+          } else {
+            return ElevatedButton(
               onPressed: state.status.isValidated
                   ? () {
                       context
@@ -283,10 +284,10 @@ class _SignUpButton extends StatelessWidget {
                     }
                   : null,
               child: Text('SIGN UP'),
-            ),
-          );
-        }
-      },
+            );
+          }
+        },
+      ),
     );
   }
 }
