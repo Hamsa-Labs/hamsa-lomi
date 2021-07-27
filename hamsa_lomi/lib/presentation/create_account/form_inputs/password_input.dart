@@ -12,7 +12,7 @@ class Password extends Equatable {
   List<Object> get props => [password, confirmPassword];
 }
 
-enum PasswordInputError { empty, doesNotMatch }
+enum PasswordInputError { empty, confirmPasswordEmpty, doesNotMatch }
 
 class PasswordInput extends FormzInput<Password, PasswordInputError> {
   const PasswordInput.pure()
@@ -25,8 +25,12 @@ class PasswordInput extends FormzInput<Password, PasswordInputError> {
       return PasswordInputError.doesNotMatch;
     }
 
-    return value.password.isEmpty || value.confirmPassword.isEmpty
-        ? PasswordInputError.empty
-        : null;
+    if (value.password.isEmpty) {
+      return PasswordInputError.empty;
+    }
+
+    if (value.confirmPassword.isEmpty) {
+      return PasswordInputError.confirmPasswordEmpty;
+    }
   }
 }

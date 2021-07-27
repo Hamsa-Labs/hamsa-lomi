@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hamsa_lomi/presentation/theme/hamsa_theme.dart';
+
 import '../constants/app_assets_constant.dart';
 import '../constants/app_string_constant.dart';
+import '../create_account/pages/create_account_page.dart';
+import '../theme/hamsa_theme.dart';
 import '../widgets/onboarding_widget.dart';
 
 class OnboardingPage extends StatelessWidget {
@@ -115,7 +117,10 @@ class BuildIntroContent2 extends StatelessWidget {
                 ),
                 // SizedBox(height: MediaQuery.of(context).size.height / 15),
                 Padding(
-                  padding: const EdgeInsets.only(top: 15.0, left: 15.0,),
+                  padding: const EdgeInsets.only(
+                    top: 15.0,
+                    left: 15.0,
+                  ),
                   child: _buildRowCirecleDots(),
                 )
               ]),
@@ -179,7 +184,8 @@ class BuildIntroContent3 extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 5.0),
                     child: Container(
                       // width: MediaQuery.of(context).size.height / 5.9,
-                      child: _startButton(OnboradingStrings.getStarted),
+                      child:
+                          _startButton(context, OnboradingStrings.getStarted),
                     ),
                   )
                 ],
@@ -210,9 +216,12 @@ class BuildIntroContent3 extends StatelessWidget {
   }
 
   // ElevatedButton
-  ElevatedButton _startButton(String text) {
+  ElevatedButton _startButton(BuildContext context, String text) {
     return ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => CreateAccountPage()));
+        },
         child: Text(
           text,
           style: TextStyle(fontSize: 15),
