@@ -20,7 +20,10 @@ class CreateAccountPage extends StatelessWidget {
       ),
       body: BlocProvider(
         create: (context) => getIt<CreateAccountBloc>(),
-        child: CreateAccountForm(),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+          child: CreateAccountForm(),
+        ),
       ),
     );
   }

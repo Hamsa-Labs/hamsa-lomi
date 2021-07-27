@@ -1,14 +1,16 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+// Project imports:
 import '../constants/app_assets_constant.dart';
 import '../theme/hamsa_theme.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final TextButton title;
+  final TextButton? title;
   final double barHeight = 40.0;
 
-  MainAppBar({Key key, this.title}) : super(key: key);
+  MainAppBar({Key? key, this.title}) : super(key: key);
 
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight + 400.0);
@@ -56,7 +58,7 @@ class WaveClip extends CustomClipper<Path> {
 }
 
 class DrawCircle extends CustomPainter {
-  Paint _paint;
+  late Paint _paint;
   final Color active;
 
   DrawCircle(this.active) {
@@ -107,9 +109,9 @@ class BuildBodyText extends StatelessWidget {
 }
 
 class BuildCircleDot extends StatelessWidget {
-  final bool active;
+  late final bool active;
 
-  BuildCircleDot({this.active});
+  BuildCircleDot({required this.active});
 
   @override
   Widget build(BuildContext context) {
