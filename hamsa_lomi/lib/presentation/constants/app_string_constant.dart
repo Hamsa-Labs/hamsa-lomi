@@ -16,4 +16,5 @@ class OnboradingStrings {
 
   static const String getStarted = 'Get started';
   static const String skip = 'Skip';
+  static const String signup = 'Signup';
 }
