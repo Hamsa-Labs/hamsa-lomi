@@ -1,79 +1,63 @@
 // in here we have hamsa lomi appbar widget
 
 import 'package:flutter/material.dart';
-import '../constants/app_assets_constant.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../constants/app_assets_constant.dart';
+
 class HamsaAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final Text? appBarText;
   final bool withLogo;
+  final Text? appBarText;
+
   const HamsaAppBar({
-    required this.withLogo,
     this.appBarText,
+    required this.withLogo,
   });
+
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight + 10);
 
   @override
   Widget build(BuildContext context) {
-    return withLogo
-        ? PreferredSize(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 5.0),
-              child: AppBar(
-                backgroundColor: HamsaColors.lightBackground,
-                title: appBarText,
-                leading: Container(
-                  padding: EdgeInsets.only(top: 5),
-                  // margin: EdgeInsets.only(left: 2,),
-                  decoration: BoxDecoration(
-                    color: HamsaColors.lightGray,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                      bottomRight: Radius.circular(20),
-                      bottomLeft: Radius.circular(20),
-                    ),
-                  ),
-                  child: IconButton(
-                    icon: Icon(Icons.arrow_back),
-                    onPressed: () {},
-                  ),
-                ),
-                actions: [
-                  Container(
-
-                    padding: EdgeInsets.only(right: 10),
-                    child: SvgPicture.asset(HamsaIcons.hamsaLogo,
-                        allowDrawingOutsideViewBox: true),
-                  )
-                ],
+    return PreferredSize(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 5.0),
+        child: AppBar(
+          centerTitle: false,
+          backgroundColor: HamsaColors.lightBackground,
+          title: appBarText,
+          leading: Container(
+            // color: HamsaColors.primaryColor,
+            padding: EdgeInsets.only(top: 5),
+            // margin: EdgeInsets.only(left: 2,),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: HamsaColors.lightGray,
+              ),
+              // color: HamsaColors.lightGray,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+                bottomRight: Radius.circular(20),
+                bottomLeft: Radius.circular(20),
               ),
             ),
-            preferredSize: Size.fromHeight(kToolbarHeight + 10))
-        : PreferredSize(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 5.0),
-              child: AppBar(
-                backgroundColor: HamsaColors.lightBackground,
-                title: appBarText,
-                leading: Container(
-                  decoration: BoxDecoration(
-                    color: HamsaColors.lightGray,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                      bottomRight: Radius.circular(20),
-                      bottomLeft: Radius.circular(20),
-                    ),
-                  ),
-                  child: IconButton(
-                    icon: Icon(Icons.arrow_back),
-                    onPressed: () {},
-                  ),
-                ),
-              ),
+            child: IconButton(
+              // color: Colors.transparent,
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {},
             ),
-            preferredSize: Size.fromHeight(kToolbarHeight + 10));
+          ),
+          actions: [
+            withLogo ?
+            Container(
+                child: SvgPicture.asset(
+              HamsaIcons.hamsaLogo,
+            )): Container(),
+          ],
+        ),
+      ),
+      preferredSize: Size.fromHeight(kToolbarHeight + 10),
+    );
   }
 }
