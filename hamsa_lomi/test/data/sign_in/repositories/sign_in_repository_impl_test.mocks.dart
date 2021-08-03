@@ -2,11 +2,14 @@
 // in hamsa_lomi/test/data/sign_in/repositories/sign_in_repository_impl_test.dart.
 // Do not manually edit this file.
 
+// Dart imports:
 import 'dart:async' as _i3;
+
+// Package imports:
+import 'package:mockito/mockito.dart' as _i1;
 
 import 'package:hamsa_lomi/data/sign_in/data_sources/sign_in_data_source.dart'
     as _i2;
-import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: comment_references

@@ -1,7 +1,6 @@
 // Package imports:
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hamsa_lomi/domain/params/use_case_param.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
@@ -10,6 +9,7 @@ import 'package:hamsa_lomi/domain/core/failure.dart';
 import 'package:hamsa_lomi/domain/create_account/entities/user.dart';
 import 'package:hamsa_lomi/domain/create_account/repositories/create_account_repository.dart';
 import 'package:hamsa_lomi/domain/create_account/use_cases/create_account_use_case.dart';
+import 'package:hamsa_lomi/domain/params/use_case_param.dart';
 import 'create_account_use_case_test.mocks.dart';
 
 @GenerateMocks([CreateAccountRepository])

@@ -1,5 +1,7 @@
+// Package imports:
 import 'package:dartz/dartz.dart';
 
+// Project imports:
 import '../failure.dart';
 
 /// A base class with generic params [T] the return
