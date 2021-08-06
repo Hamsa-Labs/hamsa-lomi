@@ -1,12 +1,12 @@
 // Package imports:
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hamsa_lomi/data/core/exceptions/server_exception.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 // Project imports:
 import 'package:hamsa_lomi/data/sign_in/data_sources/sign_in_data_source.dart';
-import 'package:hamsa_lomi/data/sign_in/exceptions/sign_in_exception.dart';
 import 'package:hamsa_lomi/data/sign_in/repositories/sign_in_repository_impl.dart';
 import 'package:hamsa_lomi/domain/core/failure.dart';
 import 'package:hamsa_lomi/domain/sign_in/entities/sign_in_credential.dart';
@@ -43,7 +43,7 @@ void main() {
       () async {
     when(mockSignInDataSource.signInWithEmail(
             tCredential.email, tCredential.password))
-        .thenThrow(SignInException());
+        .thenThrow(ServerException());
 
     final result = await signInRepositoryImpl.signInWithEmail(tCredential);
 

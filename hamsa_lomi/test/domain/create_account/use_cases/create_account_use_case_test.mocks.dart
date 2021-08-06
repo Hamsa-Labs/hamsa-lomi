@@ -2,19 +2,14 @@
 // in hamsa_lomi/test/domain/create_account/use_cases/create_account_use_case_test.dart.
 // Do not manually edit this file.
 
-// Dart imports:
 import 'dart:async' as _i4;
 
-// Package imports:
 import 'package:dartz/dartz.dart' as _i2;
-import 'package:mockito/mockito.dart' as _i1;
-
-// Project imports:
 import 'package:hamsa_lomi/domain/core/failure.dart' as _i5;
 import 'package:hamsa_lomi/domain/create_account/entities/user.dart' as _i6;
-
 import 'package:hamsa_lomi/domain/create_account/repositories/create_account_repository.dart'
     as _i3;
+import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: comment_references
