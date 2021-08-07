@@ -41,27 +41,24 @@ class HamsaStrings {
   static const String organization = 'Organization';
 
 
-  //BottomBar strings
-static const String home = 'HOME';
-static const String fundraisers = 'FUNDRAISERS';
-static const String profile = 'PROFILE';
+    //BottomBar strings
+  static const String home = 'HOME';
+  static const String fundraisers = 'FUNDRAISERS';
+  static const String profile = 'PROFILE';
 
-//icons strings
+  //icons strings
 
-static const String health = 'Health';
-static const String education = 'Education';
-static const String charity = 'Charity';
-
-
-
-
-//Home page Strings
-
-static const String emg = 'Emergency Donations';
-static const String startNewFundrasing = 'Start new fundraising';
-static const String start = 'Start';
-static const String viewall = 'View all';
+  static const String health = 'Health';
+  static const String education = 'Education';
+  static const String charity = 'Charity';
 
 
 
+
+  //Home page Strings
+
+  static const String emg = 'Emergency Donations';
+  static const String startNewFundrasing = 'Start new fundraising';
+  static const String start = 'Start';
+  static const String viewall = 'View all';
 }
