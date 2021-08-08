@@ -1,9 +1,9 @@
 // Package imports:
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formz/formz.dart';
+import 'package:hamsa_lomi/presentation/core/form_inputs/email_input.dart';
 
 // Project imports:
-import 'package:hamsa_lomi/presentation/create_account/form_inputs/email_input.dart';
 
 void main() {
   test('pure constructor works', () {

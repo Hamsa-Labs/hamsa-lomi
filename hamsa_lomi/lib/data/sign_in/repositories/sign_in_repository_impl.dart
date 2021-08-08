@@ -1,5 +1,6 @@
 // Package imports:
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 
 // Project imports:
 import '../../../domain/core/failure.dart';
@@ -8,6 +9,7 @@ import '../../../domain/sign_in/repositories/sign_in_repository.dart';
 import '../../core/exceptions/server_exception.dart';
 import '../data_sources/sign_in_data_source.dart';
 
+@LazySingleton(as: SignInRepository)
 class SignInRepositoryImpl implements SignInRepository {
   final SignInDataSource _dataSource;
 

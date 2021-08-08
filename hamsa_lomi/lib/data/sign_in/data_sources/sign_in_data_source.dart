@@ -1,10 +1,15 @@
+// Package imports:
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:injectable/injectable.dart';
+
+// Project imports:
 import '../../core/exceptions/server_exception.dart';
 
 abstract class SignInDataSource {
   Future<void> signInWithEmail(String email, String password);
 }
 
+@LazySingleton(as: SignInDataSource)
 class SignInDataSourceImpl implements SignInDataSource {
   final FirebaseAuth _auth;
 

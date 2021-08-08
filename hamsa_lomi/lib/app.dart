@@ -1,8 +1,7 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-
-// Project imports:
 import 'presentation/page/onboarding_page.dart';
+
 import 'presentation/theme/hamsa_theme.dart';
 
 class App extends StatelessWidget {

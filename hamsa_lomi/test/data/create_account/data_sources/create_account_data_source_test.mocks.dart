@@ -2,17 +2,9 @@
 // in hamsa_lomi/test/data/create_account/data_sources/create_account_data_source_test.dart.
 // Do not manually edit this file.
 
-// Dart imports:
 import 'dart:async' as _i7;
 
-// Package imports:
 import 'package:firebase_auth/firebase_auth.dart' as _i4;
-import 'package:firebase_auth_platform_interface/src/types.dart' as _i9;
-import 'package:firebase_auth_platform_interface/src/user_info.dart' as _i12;
-import 'package:firebase_auth_platform_interface/src/user_metadata.dart' as _i5;
-import 'package:firebase_core/firebase_core.dart' as _i2;
-import 'package:mockito/mockito.dart' as _i1;
-
 import 'package:firebase_auth_platform_interface/src/action_code_info.dart'
     as _i3;
 import 'package:firebase_auth_platform_interface/src/action_code_settings.dart'
@@ -25,6 +17,11 @@ import 'package:firebase_auth_platform_interface/src/id_token_result.dart'
     as _i6;
 import 'package:firebase_auth_platform_interface/src/providers/phone_auth.dart'
     as _i13;
+import 'package:firebase_auth_platform_interface/src/types.dart' as _i9;
+import 'package:firebase_auth_platform_interface/src/user_info.dart' as _i12;
+import 'package:firebase_auth_platform_interface/src/user_metadata.dart' as _i5;
+import 'package:firebase_core/firebase_core.dart' as _i2;
+import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: comment_references

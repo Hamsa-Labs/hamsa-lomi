@@ -11,9 +11,9 @@ import 'package:injectable/injectable.dart';
 import '../../../domain/create_account/entities/user.dart';
 import '../../../domain/create_account/use_cases/create_account_use_case.dart';
 import '../../../domain/params/use_case_param.dart';
-import '../form_inputs/email_input.dart';
-import '../form_inputs/password_input.dart';
-import '../form_inputs/username_input.dart';
+import '../../core/form_inputs/email_input.dart';
+import '../../core/form_inputs/password_input.dart';
+import '../../core/form_inputs/username_input.dart';
 
 part 'create_account_event.dart';
 part 'create_account_state.dart';

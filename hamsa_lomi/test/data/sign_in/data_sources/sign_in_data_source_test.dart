@@ -1,9 +1,12 @@
+// Package imports:
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hamsa_lomi/data/core/exceptions/server_exception.dart';
-import 'package:hamsa_lomi/data/sign_in/data_sources/sign_in_data_source.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+
+// Project imports:
+import 'package:hamsa_lomi/data/core/exceptions/server_exception.dart';
+import 'package:hamsa_lomi/data/sign_in/data_sources/sign_in_data_source.dart';
 import 'sign_in_data_source_test.mocks.dart';
 
 @GenerateMocks([FirebaseAuth, UserCredential])
