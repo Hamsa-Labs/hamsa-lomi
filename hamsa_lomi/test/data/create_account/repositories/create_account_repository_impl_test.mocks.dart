@@ -2,13 +2,18 @@
 // in hamsa_lomi/test/data/create_account/repositories/create_account_repository_impl_test.dart.
 // Do not manually edit this file.
 
+// Dart imports:
 import 'dart:async' as _i4;
+
+// Package imports:
+import 'package:mockito/mockito.dart' as _i1;
+
+// Project imports:
+import 'package:hamsa_lomi/data/create_account/models/user_model.dart' as _i5;
+import 'package:hamsa_lomi/domain/create_account/entities/user.dart' as _i2;
 
 import 'package:hamsa_lomi/data/create_account/data_sources/create_account_data_source.dart'
     as _i3;
-import 'package:hamsa_lomi/data/create_account/models/user_model.dart' as _i5;
-import 'package:hamsa_lomi/domain/create_account/entities/user.dart' as _i2;
-import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: comment_references

@@ -1,9 +1,11 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
+// Project imports:
 import '../../core/form_inputs/password_input.dart';
 import '../../sign_in/pages/sign_in_page.dart';
 import '../bloc/create_account_bloc.dart';

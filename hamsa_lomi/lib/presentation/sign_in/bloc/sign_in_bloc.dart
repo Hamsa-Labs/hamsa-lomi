@@ -1,10 +1,13 @@
+// Dart imports:
 import 'dart:async';
 
+// Package imports:
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:injectable/injectable.dart';
 
+// Project imports:
 import '../../../domain/params/use_case_param.dart';
 import '../../../domain/sign_in/entities/sign_in_credential.dart';
 import '../../../domain/sign_in/use_cases/sign_in_use_case.dart';
