@@ -6,8 +6,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
 // Project imports:
+import '../../core/form_inputs/password_input.dart';
+import '../../sign_in/pages/sign_in_page.dart';
 import '../bloc/create_account_bloc.dart';
-import '../form_inputs/password_input.dart';
+
+// Project imports:
 
 class CreateAccountForm extends StatefulWidget {
   const CreateAccountForm({Key? key}) : super(key: key);
@@ -25,6 +28,8 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
           final snackBar =
               SnackBar(content: Text('Account created successfully!'));
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => SignInPage()));
         } else if (state.status.isSubmissionFailure) {
           final errorMessage = state.error ?? 'Something went wrong!';
           final snackBar = SnackBar(content: Text(errorMessage));
