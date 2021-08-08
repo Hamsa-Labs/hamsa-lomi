@@ -49,12 +49,12 @@ class BuildIntroContent1 extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(bottom: 10.0),
-              child: BuildHeadingText(OnboradingStrings.title1),
+              child: BuildHeadingText(HamsaStrings.title1),
             ),
             // SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.only(bottom: 10.0),
-              child: BuildBodyText(OnboradingStrings.body1),
+              child: BuildBodyText(HamsaStrings.body1),
             ),
             // SizedBox(height: MediaQuery.of(context).size.height / 15),
             Padding(
@@ -110,12 +110,12 @@ class BuildIntroContent2 extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10.0),
-                  child: BuildHeadingText(OnboradingStrings.title2),
+                  child: BuildHeadingText(HamsaStrings.title2),
                 ),
                 // SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10.0),
-                  child: BuildBodyText(OnboradingStrings.body2),
+                  child: BuildBodyText(HamsaStrings.body2),
                 ),
                 // SizedBox(height: MediaQuery.of(context).size.height / 15),
                 Padding(
@@ -164,12 +164,12 @@ class BuildIntroContent3 extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(bottom: 10.0),
-              child: BuildHeadingText(OnboradingStrings.title3),
+              child: BuildHeadingText(HamsaStrings.title3),
             ),
             // SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.only(bottom: 10.0),
-              child: BuildBodyText(OnboradingStrings.body3),
+              child: BuildBodyText(HamsaStrings.body3),
             ),
             // SizedBox(height: MediaQuery.of(context).size.height / 15),
             Padding(
@@ -187,7 +187,7 @@ class BuildIntroContent3 extends StatelessWidget {
                     child: Container(
                       // width: MediaQuery.of(context).size.height / 5.9,
                       child:
-                          _startButton(context, OnboradingStrings.getStarted),
+                          _startButton(context, HamsaStrings.getStarted),
                     ),
                   )
                 ],
