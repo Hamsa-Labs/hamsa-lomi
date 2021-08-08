@@ -1,8 +1,8 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-import 'presentation/share_widgets/tabsbar_widget.dart';
 
 // Project imports:
+import 'presentation/share_widgets/tabsbar_widget.dart';
 import 'presentation/theme/hamsa_theme.dart';
 
 class App extends StatelessWidget {
