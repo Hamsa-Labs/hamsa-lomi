@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import '../../share_widgets/tabsbar_widget.dart';
 
 // Project imports:
+import '../../share_widgets/tabsbar_widget.dart';
 import '../bloc/sign_in_bloc.dart';
 
 class SignInForm extends StatelessWidget {
