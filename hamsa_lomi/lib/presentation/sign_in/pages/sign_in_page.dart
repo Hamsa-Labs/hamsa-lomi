@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 // Project imports:
 import '../../../injection/injection.dart';
+import '../../share_widgets/appbar_widget.dart';
 import '../bloc/sign_in_bloc.dart';
 import '../widgets/sign_in_form.dart';
 
@@ -15,8 +16,13 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // TODO: Replace with hamsa app bar
-      appBar: AppBar(),
+      appBar: HamsaAppBar(
+        withLogo: true,
+        appBarText: Text(
+          'Login',
+          style: Theme.of(context).textTheme.headline6,
+        ),
+      ),
       body: BlocProvider(
         create: (context) => getIt<SignInBloc>(),
         child: Padding(

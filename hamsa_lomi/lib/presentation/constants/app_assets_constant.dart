@@ -10,6 +10,7 @@ class HamsaColors {
   static const Color darkGray = Color(0xff353E4A);
   static const Color lightGray = Color(0xffaaa4a4);
   static const Color creamColor = Color(0xffFBF8EF);
+  static const Color lightGrayTextColor = Color(0xFF707070);
 
   static const MaterialColor primarySwatch =
       MaterialColor(0xFF9ACB34, <int, Color>{
@@ -28,7 +29,8 @@ class HamsaColors {
 
 class HamsaIcons {
   //Icons path
-  static const String hamsaLogo = 'lib/presentation/assets/icons/hamsa_logo.svg';
+  static const String hamsaLogo =
+      'lib/presentation/assets/icons/hamsa_logo.svg';
   static const String charityIcon = 'assets/icons/charity.svg';
   static const String educationIcon = 'assets/icons/enducation.svg';
   static const String healthIcon = 'assets/icons/healthIcon.svg';

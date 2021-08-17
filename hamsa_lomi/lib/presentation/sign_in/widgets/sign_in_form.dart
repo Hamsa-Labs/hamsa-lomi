@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
 // Project imports:
+import '../../share_widgets/tabsbar_widget.dart';
 import '../bloc/sign_in_bloc.dart';
 
 class SignInForm extends StatelessWidget {
@@ -26,11 +27,24 @@ class SignInForm extends StatelessWidget {
       },
       child: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.only(bottom: 16.0),
-              child: Text('Enter your credentials',
-                  style: Theme.of(context).textTheme.headline5),
+              child: Text(
+                'Enter your credentials',
+                style: Theme.of(context).textTheme.headline5,
+              ),
+            ),
+            HamsaTabBar(
+              tab1: TabBarView(
+                children: [Text('data')],
+              ),
+              tab2: TabBarView(
+                children: [],
+              ),
+              firstText: 'Tab 1',
+              secondText: 'Tab 2',
             ),
             _EmailInput(),
             _PasswordInput(),
@@ -56,9 +70,12 @@ class _EmailInput extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Email'),
+              Text(
+                'Email',
+                style: Theme.of(context).textTheme.caption,
+              ),
               SizedBox(
-                height: 8.0,
+                height: 4.0,
               ),
               TextFormField(
                 decoration: InputDecoration(
@@ -101,9 +118,9 @@ class _PasswordInputState extends State<_PasswordInput> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Password'),
+                Text('Password', style: Theme.of(context).textTheme.caption),
                 SizedBox(
-                  height: 8.0,
+                  height: 4.0,
                 ),
                 TextFormField(
                   obscureText: _obscureText,
@@ -140,21 +157,26 @@ class _SignInButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignInBloc, SignInBlocState>(
-      builder: (context, state) {
-        if (state.status.isSubmissionInProgress) {
-          return CircularProgressIndicator();
-        }
+    return Center(
+      child: BlocBuilder<SignInBloc, SignInBlocState>(
+        builder: (context, state) {
+          if (state.status.isSubmissionInProgress) {
+            return CircularProgressIndicator();
+          }
 
-        return ElevatedButton(
-          onPressed: state.status.isValidated
-              ? () {
-                  context.read<SignInBloc>().add(SignInSubmitted());
-                }
-              : null,
-          child: Text('Sign In'),
-        );
-      },
+          return ElevatedButton(
+            onPressed: state.status.isValidated
+                ? () {
+                    context.read<SignInBloc>().add(SignInSubmitted());
+                  }
+                : null,
+            child: Text(
+              'Sign In',
+              style: Theme.of(context).textTheme.button,
+            ),
+          );
+        },
+      ),
     );
   }
 }
