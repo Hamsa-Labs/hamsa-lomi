@@ -26,34 +26,36 @@ class HamsaAppBar extends StatelessWidget implements PreferredSizeWidget {
           centerTitle: false,
           backgroundColor: HamsaColors.lightBackground,
           title: appBarText,
-          leading: Container(
-            // color: HamsaColors.primaryColor,
-            padding: EdgeInsets.only(top: 5),
-            // margin: EdgeInsets.only(left: 2,),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: HamsaColors.lightGray,
+          leading: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              // color: HamsaColors.primaryColor,
+              // margin: EdgeInsets.only(left: 2,),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: HamsaColors.lightGray,
+                ),
+                // color: HamsaColors.lightGray,
+                borderRadius: BorderRadius.circular(15.0),
               ),
-              // color: HamsaColors.lightGray,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-                bottomRight: Radius.circular(20),
-                bottomLeft: Radius.circular(20),
+              child: IconButton(
+                // color: Colors.transparent,
+                // padding: EdgeInsets.zero,
+                // constraints: BoxConstraints(maxHeight: 12.0, maxWidth: 12.0),
+                icon: Icon(Icons.arrow_back),
+                onPressed: () {},
               ),
-            ),
-            child: IconButton(
-              // color: Colors.transparent,
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {},
             ),
           ),
           actions: [
-            withLogo ?
-            Container(
-                child: SvgPicture.asset(
-              HamsaIcons.hamsaLogo,
-            )): Container(),
+            withLogo
+                ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SvgPicture.asset(
+                      HamsaIcons.hamsaLogo,
+                    ),
+                  )
+                : Container(),
           ],
         ),
       ),

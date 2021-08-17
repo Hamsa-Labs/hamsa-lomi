@@ -1,8 +1,8 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'presentation/page/onboarding_page.dart';
 
 // Project imports:
-import 'presentation/share_widgets/tabsbar_widget.dart';
 import 'presentation/theme/hamsa_theme.dart';
 
 class App extends StatelessWidget {
@@ -12,19 +12,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Hamsa Lomi',
       theme: HamsaTheme.lightTheme,
-      home: DefaultTabController(
-        length: 2,
-        child: HamsaTabBar(
-          firstText: 'Email',
-          secondText: 'Phone',
-          tab1: TabBarView(
-            children: [Text('email')],
-          ),
-          tab2: TabBarView(
-            children: [],
-          ),
-        ),
-      ),
+      home: OnboardingPage(),
     );
   }
 }

@@ -24,19 +24,13 @@ class HamsaTabBar extends StatefulWidget {
 
 class _HamsaTabBarState extends State<HamsaTabBar>
     with SingleTickerProviderStateMixin {
-  TabController? _tabController;
+  late final TabController _tabController;
 
-  // @override
-  // void initState() {
-  //   _tabController = TabController(length: 2, vsync: this);
-  //   super.initState();
-  // }
-  //
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   _tabController!.dispose();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +39,7 @@ class _HamsaTabBarState extends State<HamsaTabBar>
       child: Container(
         height: 50,
         decoration: BoxDecoration(
-          color: Color(0xffF7F7F7),
+          color: Color(0xFFF7F7F7),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(10),
             topRight: Radius.circular(10),
@@ -83,5 +77,11 @@ class _HamsaTabBarState extends State<HamsaTabBar>
       ),
       // ),
     );
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 }
