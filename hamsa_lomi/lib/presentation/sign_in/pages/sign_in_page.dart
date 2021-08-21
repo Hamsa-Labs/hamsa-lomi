@@ -1,8 +1,8 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
+// Project imports:
 import '../../share_widgets/appbar_widget.dart';
-// Package imports:
 import '../../share_widgets/tabsbar_widget.dart';
 import '../widgets/sign_in_with_email_form.dart';
 import '../widgets/sign_in_with_phone_form.dart';
