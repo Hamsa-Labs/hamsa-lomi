@@ -1,55 +1,42 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
-// Project imports:
-import '../../share_widgets/tabsbar_widget.dart';
+import '../../../injection/injection.dart';
+import '../../widgets/hamsa_rounded_button.dart';
 import '../bloc/sign_in_bloc.dart';
 
-class SignInForm extends StatelessWidget {
-  const SignInForm({Key? key}) : super(key: key);
+class SignInWithEmailForm extends StatelessWidget {
+  const SignInWithEmailForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<SignInBloc, SignInBlocState>(
-      listener: (context, state) {
-        if (state.status.isSubmissionFailure) {
-          final errorMessage = state.error ?? 'Something went wrong!';
-          final snackBar = SnackBar(content: Text(errorMessage));
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        } else if (state.status.isSubmissionSuccess) {
-          final snackBar = SnackBar(content: Text('Sign in successfull'));
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        }
-      },
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
-              child: Text(
-                'Enter your credentials',
-                style: Theme.of(context).textTheme.headline5,
-              ),
-            ),
-            HamsaTabBar(
-              tab1: TabBarView(
-                children: [Text('data')],
-              ),
-              tab2: TabBarView(
-                children: [],
-              ),
-              firstText: 'Tab 1',
-              secondText: 'Tab 2',
-            ),
-            _EmailInput(),
-            _PasswordInput(),
-            _SignInButton(),
-          ],
+    return BlocProvider(
+      create: (context) => getIt<SignInBloc>(),
+      child: BlocListener<SignInBloc, SignInBlocState>(
+        listener: (context, state) {
+          if (state.status.isSubmissionFailure) {
+            final errorMessage = state.error ?? 'Something went wrong!';
+            final snackBar = SnackBar(content: Text(errorMessage));
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          } else if (state.status.isSubmissionSuccess) {
+            final snackBar = SnackBar(content: Text('Sign in successfull'));
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          }
+        },
+        child: Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              _EmailInput(),
+              _PasswordInput(),
+              Expanded(child: SizedBox.shrink()),
+              _SignInButton(),
+            ],
+          ),
         ),
       ),
     );
@@ -164,17 +151,13 @@ class _SignInButton extends StatelessWidget {
             return CircularProgressIndicator();
           }
 
-          return ElevatedButton(
-            onPressed: state.status.isValidated
-                ? () {
-                    context.read<SignInBloc>().add(SignInSubmitted());
-                  }
-                : null,
-            child: Text(
-              'Sign In',
-              style: Theme.of(context).textTheme.button,
-            ),
-          );
+          return HamsaRoundedButton(
+              label: 'LOGIN',
+              onPressed: state.status.isValidated
+                  ? () {
+                      context.read<SignInBloc>().add(SignInSubmitted());
+                    }
+                  : null);
         },
       ),
     );

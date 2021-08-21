@@ -4,33 +4,15 @@ import 'package:flutter/material.dart';
 // Project imports:
 import '../constants/app_assets_constant.dart';
 
-class HamsaTabBar extends StatefulWidget {
-  final TabBarView tab1;
-  final TabBarView tab2;
+class HamsaTabBar extends StatelessWidget {
   final String firstText;
   final String secondText;
 
-  const HamsaTabBar(
-      {Key? key,
-      required this.tab1,
-      required this.tab2,
-      required this.firstText,
-      required this.secondText})
-      : super(key: key);
-
-  @override
-  _HamsaTabBarState createState() => _HamsaTabBarState();
-}
-
-class _HamsaTabBarState extends State<HamsaTabBar>
-    with SingleTickerProviderStateMixin {
-  late final TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 2, vsync: this);
-  }
+  const HamsaTabBar({
+    Key? key,
+    required this.firstText,
+    required this.secondText,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +32,6 @@ class _HamsaTabBarState extends State<HamsaTabBar>
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: TabBar(
-            controller: _tabController,
             indicator: BoxDecoration(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10),
@@ -64,12 +45,10 @@ class _HamsaTabBarState extends State<HamsaTabBar>
             unselectedLabelColor: Color(0xffC7C7C7),
             tabs: [
               Tab(
-                text: widget.firstText,
-                // child: widget.tab1,
+                text: firstText,
               ),
               Tab(
-                text: widget.secondText,
-                // child: widget.tab2,
+                text: secondText,
               ),
             ],
           ),
@@ -77,11 +56,5 @@ class _HamsaTabBarState extends State<HamsaTabBar>
       ),
       // ),
     );
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
   }
 }

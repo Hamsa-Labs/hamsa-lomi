@@ -29,7 +29,7 @@ dependencies:
   firebase_core: "^1.3.0"
   flutter:
     sdk: flutter
-  flutter_bloc: ^7.0.1
+  flutter_bloc: ^7.1.0
   flutter_svg: ^0.22.0
   formz: ^0.4.0
   get_it:

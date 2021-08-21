@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 // Project imports:
 import '../constants/app_assets_constant.dart';
 import '../constants/app_string_constant.dart';
-import '../create_account/pages/create_account_page.dart';
+import '../sign_in/pages/sign_in_page.dart';
 import '../widgets/onboarding_widget.dart';
 
 class OnboardingPage extends StatelessWidget {
@@ -35,7 +35,9 @@ class BuildIntroContent1 extends StatelessWidget {
           onPressed: () {},
           child: Text(
             'Skip',
-            style: Theme.of(context).textTheme.button,
+            style: Theme.of(context).textTheme.button!.copyWith(
+                  color: HamsaColors.darkGray,
+                ),
           ),
         ),
       ),
@@ -96,7 +98,9 @@ class BuildIntroContent2 extends StatelessWidget {
             onPressed: () {},
             child: Text(
               'Skip',
-              style: Theme.of(context).textTheme.button,
+              style: Theme.of(context).textTheme.button!.copyWith(
+                    color: HamsaColors.darkGray,
+                  ),
             ),
           ),
         ),
@@ -219,8 +223,8 @@ class BuildIntroContent3 extends StatelessWidget {
   ElevatedButton _startButton(BuildContext context, String text) {
     return ElevatedButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => CreateAccountPage()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => SignInPage()));
         },
         child: Text(
           text,
