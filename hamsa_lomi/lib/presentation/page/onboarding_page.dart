@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:hamsa_lomi/presentation/lang_acct_type/pages/choose_account_type.dart';
 
 // Project imports:
 import '../constants/app_assets_constant.dart';
@@ -33,7 +34,10 @@ class BuildIntroContent1 extends StatelessWidget {
     return Scaffold(
       appBar: MainAppBar(
         title: TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => AccountType()));
+          },
           child: Text(
             'Skip',
             style: HamsaTheme.lightTheme.textTheme.headline3,
@@ -94,7 +98,10 @@ class BuildIntroContent2 extends StatelessWidget {
     return Scaffold(
         appBar: MainAppBar(
           title: TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AccountType()));
+            },
             child: Text(
               'Skip',
               style: TextStyle(color: HamsaColors.darkGray, fontSize: 20),

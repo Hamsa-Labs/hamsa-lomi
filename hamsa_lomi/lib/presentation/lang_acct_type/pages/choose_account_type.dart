@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:hamsa_lomi/presentation/create_account/pages/create_account_page.dart';
 import '../../constants/app_assets_constant.dart';
 import '../../constants/app_string_constant.dart';
 import '../widget/button_widget.dart';
 import '../../share_widgets/appbar_widget.dart';
 import '../../theme/hamsa_theme.dart';
 
-class AccountType extends StatelessWidget {
+class AccountType extends StatefulWidget {
   const AccountType({Key? key}) : super(key: key);
+
+  @override
+  _AccountTypeState createState() => _AccountTypeState();
+}
+
+class _AccountTypeState extends State<AccountType> {
+  bool _flag = false;
+  var bg = Color(0xffd7d7db);
+  var txtColor = Color(0xff898787);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +26,7 @@ class AccountType extends StatelessWidget {
         withLogo: false,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(50.0),
+        padding: EdgeInsets.all(50),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -27,11 +37,20 @@ class AccountType extends StatelessWidget {
             ),
             Column(
               children: [
-                _buildTextButton(HamsaStrings.personal, false),
+                if (_flag == true)
+                  _buildTextButton(HamsaStrings.personal,
+                      HamsaColors.primaryColor, HamsaColors.lightBackground)
+                else
+                  _buildTextButton(HamsaStrings.personal, bg, txtColor),
                 SizedBox(height: 10),
                 Text('or'),
                 SizedBox(height: 10),
-                _buildTextButton(HamsaStrings.organization, true)
+                //which mean that org is selected
+                if (_flag == false)
+                  _buildTextButton(HamsaStrings.organization,
+                      HamsaColors.primaryColor, HamsaColors.lightBackground)
+                else
+                  _buildTextButton(HamsaStrings.organization, bg, txtColor)
               ],
             ),
             Column(
@@ -39,45 +58,65 @@ class AccountType extends StatelessWidget {
                 ButtonWidget(
                   isActive: false,
                   buttonText: HamsaStrings.signup,
-                  onPress: () {},
+                  onPress: () {
+                    if (_flag == true) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CreateAccountPage()));
+                    } else {
+                      // Organization account
+                      //T0DO add Nav for org page
+                      print("Sign up for organization Screen");
+                    }
+                  },
                 ),
                 SizedBox(height: 20),
                 ButtonWidget(
-                    isActive: true, buttonText: HamsaStrings.login,
-                    onPress: () {})
+                    isActive: true,
+                    buttonText: HamsaStrings.login,
+                    onPress: () {
+                      if (_flag == true) {
+                        print("Login for personal page");
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => LoginAccountPage()));
+                      } else {
+                        // Organization account
+                        //T0DO add Nav for org page
+                        print("Login for organization page");
+                      }
+                    })
               ],
-            )
+            ),
           ],
         ),
       ),
     );
   }
 
-  _buildTextButton(String text, bool isActivity) {
-    return Container(
-        height: 50,
-        width: 200,
-        decoration: BoxDecoration(
-          color: isActivity?HamsaColors.primaryColor:Color(0xffd7d7db),
-          borderRadius: BorderRadius.only(
-
-            topLeft: Radius.circular(10),
-            topRight: Radius.circular(10),
-            bottomRight: Radius.circular(10),
-            bottomLeft: Radius.circular(10),
-          ),
-        ),
-        child: TextButton(
-          onPressed: () {},
-          child: isActivity
-              ? Text(
-                  text,
-                  style: TextStyle(color: HamsaColors.lightBackground),
-                )
-              : Text(
-                  text,
-                  style: TextStyle(color: Color(0xffC7C7C7)),
-                ),
-        ));
+  _buildTextButton(String text, Color bg, Color txtColor) {
+    return ElevatedButton(
+      onPressed: () {
+        setState(() => _flag = !_flag);
+      },
+      child: Text(
+        text,
+        style: TextStyle(color: txtColor),
+      ),
+      style: ElevatedButton.styleFrom(
+          primary: bg,
+          elevation: 10,
+          fixedSize: Size(200, 50),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10),
+              topRight: Radius.circular(10),
+              bottomRight: Radius.circular(10),
+              bottomLeft: Radius.circular(10),
+            ),
+          )),
+    );
   }
 }
