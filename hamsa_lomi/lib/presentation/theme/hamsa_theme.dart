@@ -11,7 +11,6 @@ mixin HamsaTheme {
     return ThemeData(
       primaryColor: HamsaColors.primaryColor,
       primarySwatch: HamsaColors.primarySwatch,
-      accentColor: HamsaColors.secondaryColor,
       appBarTheme: AppBarTheme(
         backgroundColor: HamsaColors.lightBackground,
         elevation: 0,

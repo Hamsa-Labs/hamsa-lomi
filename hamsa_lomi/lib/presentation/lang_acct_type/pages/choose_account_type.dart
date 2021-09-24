@@ -1,10 +1,13 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:hamsa_lomi/presentation/create_account/pages/create_account_page.dart';
+
+// Project imports:
 import '../../constants/app_assets_constant.dart';
 import '../../constants/app_string_constant.dart';
-import '../widget/button_widget.dart';
+import '../../create_account/pages/create_account_page.dart';
 import '../../share_widgets/appbar_widget.dart';
 import '../../theme/hamsa_theme.dart';
+import '../widget/button_widget.dart';
 
 class AccountType extends StatefulWidget {
   const AccountType({Key? key}) : super(key: key);
@@ -15,8 +18,8 @@ class AccountType extends StatefulWidget {
 
 class _AccountTypeState extends State<AccountType> {
   bool _flag = false;
-  var bg = Color(0xffd7d7db);
-  var txtColor = Color(0xff898787);
+  Color bg = Color(0xffd7d7db);
+  Color txtColor = Color(0xff898787);
 
   @override
   Widget build(BuildContext context) {
@@ -64,11 +67,7 @@ class _AccountTypeState extends State<AccountType> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => CreateAccountPage()));
-                    } else {
-                      // Organization account
-                      //T0DO add Nav for org page
-                      print("Sign up for organization Screen");
-                    }
+                    } else {}
                   },
                 ),
                 SizedBox(height: 20),
@@ -77,16 +76,7 @@ class _AccountTypeState extends State<AccountType> {
                     buttonText: HamsaStrings.login,
                     onPress: () {
                       if (_flag == true) {
-                        print("Login for personal page");
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => LoginAccountPage()));
-                      } else {
-                        // Organization account
-                        //T0DO add Nav for org page
-                        print("Login for organization page");
-                      }
+                      } else {}
                     })
               ],
             ),

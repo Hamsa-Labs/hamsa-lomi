@@ -1,8 +1,12 @@
 // in here we have hamsa lomi appbar widget
 
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_svg/flutter_svg.dart';
 
+// Project imports:
 import '../constants/app_assets_constant.dart';
 
 class HamsaAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -49,11 +53,12 @@ class HamsaAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
           actions: [
-            withLogo ?
-            Container(
-                child: SvgPicture.asset(
-              HamsaIcons.hamsaLogo,
-            )): Container(),
+            withLogo
+                ? Container(
+                    child: SvgPicture.asset(
+                    HamsaIcons.hamsaLogo,
+                  ))
+                : Container(),
           ],
         ),
       ),

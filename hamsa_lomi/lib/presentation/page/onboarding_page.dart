@@ -1,11 +1,11 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:hamsa_lomi/presentation/lang_acct_type/pages/choose_account_type.dart';
 
 // Project imports:
 import '../constants/app_assets_constant.dart';
 import '../constants/app_string_constant.dart';
 import '../create_account/pages/create_account_page.dart';
+import '../lang_acct_type/pages/choose_account_type.dart';
 import '../theme/hamsa_theme.dart';
 import '../widgets/onboarding_widget.dart';
 
@@ -193,8 +193,7 @@ class BuildIntroContent3 extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 5.0),
                     child: Container(
                       // width: MediaQuery.of(context).size.height / 5.9,
-                      child:
-                          _startButton(context, HamsaStrings.getStarted),
+                      child: _startButton(context, HamsaStrings.getStarted),
                     ),
                   )
                 ],

@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import '../../constants/app_assets_constant.dart';
 import '../../constants/app_string_constant.dart';
 import '../../theme/hamsa_theme.dart';
@@ -11,7 +14,7 @@ class SelectLanguage extends StatelessWidget {
     return Container(
       color: HamsaColors.lightBackground,
       child: Padding(
-        padding: const EdgeInsets.only(top: 90.0,left: 15),
+        padding: const EdgeInsets.only(top: 90.0, left: 15),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -23,25 +26,25 @@ class SelectLanguage extends StatelessWidget {
                 HamsaStrings.chososeLang,
                 style: TextStyle(
                     decoration: TextDecoration.none,
-                    fontSize: HamsaTheme.lightTheme.textTheme
-                        .headline1!.fontSize,
+                    fontSize:
+                        HamsaTheme.lightTheme.textTheme.headline1!.fontSize,
                     fontWeight: FontWeight.normal,
                     color: HamsaColors.primarySwatch.shade900),
               ),
             ),
-           Padding(
-             padding: const EdgeInsets.all(10.0),
-             child: Column(
-               children: [
-                 Padding(padding: const EdgeInsets.all(10.0),
-                 child:
-                 _buildTextButton(HamsaStrings.amharic, false)),
-      Padding(padding: const EdgeInsets.all(10.0),
-          child:
-          _buildTextButton(HamsaStrings.english, true)),
-               ],
-             ),
-           )
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                children: [
+                  Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: _buildTextButton(HamsaStrings.amharic, false)),
+                  Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: _buildTextButton(HamsaStrings.english, true)),
+                ],
+              ),
+            )
           ],
         ),
       ),
