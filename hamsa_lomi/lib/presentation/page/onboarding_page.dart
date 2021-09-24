@@ -40,7 +40,7 @@ class BuildIntroContent1 extends StatelessWidget {
           },
           child: Text(
             'Skip',
-            style: HamsaTheme.lightTheme.textTheme.headline3,
+            style: Theme.of(context).textTheme.button,
           ),
         ),
       ),
@@ -104,7 +104,7 @@ class BuildIntroContent2 extends StatelessWidget {
             },
             child: Text(
               'Skip',
-              style: TextStyle(color: HamsaColors.darkGray, fontSize: 20),
+              style: Theme.of(context).textTheme.button,
             ),
           ),
         ),

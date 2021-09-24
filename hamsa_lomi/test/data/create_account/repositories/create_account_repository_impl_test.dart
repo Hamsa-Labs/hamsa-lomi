@@ -5,8 +5,8 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 // Project imports:
+import 'package:hamsa_lomi/data/core/exceptions/server_exception.dart';
 import 'package:hamsa_lomi/data/create_account/data_sources/create_account_data_source.dart';
-import 'package:hamsa_lomi/data/create_account/exceptions/create_account_exception.dart';
 import 'package:hamsa_lomi/data/create_account/models/user_model.dart';
 import 'package:hamsa_lomi/data/create_account/repositories/create_account_repository_impl.dart';
 import 'package:hamsa_lomi/domain/core/failure.dart';
@@ -37,7 +37,7 @@ void main() {
   });
 
   test('should return a failure when something goes wrong', () async {
-    when(mock.createAccount(tUserModel)).thenThrow(CreateAccountException());
+    when(mock.createAccount(tUserModel)).thenThrow(ServerException());
 
     final result = await repositoryImpl.createAccount(tUserModel);
 

@@ -27,6 +27,12 @@ class _HamsaTabBarState extends State<HamsaTabBar>
   TabController? _tabController;
 
   @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
@@ -71,5 +77,11 @@ class _HamsaTabBarState extends State<HamsaTabBar>
       ),
       // ),
     );
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 }

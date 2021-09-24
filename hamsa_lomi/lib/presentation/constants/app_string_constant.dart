@@ -11,7 +11,6 @@ class HamsaStrings {
   static const String body3 =
       'Start a fundraiser today to receive funds or donate to one, '
       'and let us all grow together.';
-
   static const String getStarted = 'Get started';
   static const String skip = 'Skip';
 
@@ -38,14 +37,13 @@ class HamsaStrings {
   static const String personal = 'Personal';
   static const String organization = 'Organization';
 
-
   //BottomBar strings
   static const String home = 'HOME';
   static const String fundraisers = 'FUNDRAISERS';
   static const String profile = 'PROFILE';
 
-//icons strings
 
+  //icons strings
   static const String health = 'Health';
   static const String education = 'Education';
   static const String charity = 'Charity';
@@ -54,12 +52,8 @@ class HamsaStrings {
 
 
 //Home page Strings
-
   static const String emg = 'Emergency Donations';
   static const String startNewFundrasing = 'Start new fundraising';
   static const String start = 'Start';
   static const String viewall = 'View all';
-
-
-
-  }
+}

@@ -4,7 +4,7 @@ import 'package:injectable/injectable.dart';
 
 // Project imports:
 import '../../../domain/create_account/entities/user.dart';
-import '../exceptions/create_account_exception.dart';
+import '../../core/exceptions/server_exception.dart';
 import '../models/user_model.dart';
 
 abstract class CreateAccountDataSource {
@@ -36,7 +36,7 @@ class CreateAccountDataSourceImpl implements CreateAccountDataSource {
         message = 'password is weak';
       }
 
-      throw CreateAccountException(message);
+      throw ServerException(message);
     }
   }
 }
