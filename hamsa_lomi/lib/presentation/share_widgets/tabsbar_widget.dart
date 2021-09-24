@@ -24,7 +24,7 @@ class HamsaTabBar extends StatefulWidget {
 
 class _HamsaTabBarState extends State<HamsaTabBar>
     with SingleTickerProviderStateMixin {
-  late final TabController _tabController;
+  TabController? _tabController;
 
   @override
   void initState() {
@@ -39,7 +39,7 @@ class _HamsaTabBarState extends State<HamsaTabBar>
       child: Container(
         height: 50,
         decoration: BoxDecoration(
-          color: Color(0xFFF7F7F7),
+          color: Color(0xffF7F7F7),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(10),
             topRight: Radius.circular(10),
