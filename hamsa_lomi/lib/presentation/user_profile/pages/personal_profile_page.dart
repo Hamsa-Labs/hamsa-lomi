@@ -1,11 +1,11 @@
 //flutter imports:
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hamsa_lomi/presentation/theme/hamsa_theme.dart';
-import 'package:hamsa_lomi/presentation/user_profile/widgets/balance_card.dart';
-import 'package:hamsa_lomi/presentation/user_profile/widgets/image_container.dart';
-import 'package:hamsa_lomi/presentation/user_profile/widgets/settion_container.dart';
-import 'package:hamsa_lomi/presentation/user_profile/widgets/text_button.dart';
+// import '../../theme/hamsa_theme.dart';
+import '../widgets/balance_card.dart';
+import '../widgets/image_container.dart';
+import '../widgets/settion_container.dart';
+import '../widgets/text_button.dart';
 // file imports:
 import '../../constants/app_assets_constant.dart';
 import '../../share_widgets/appbar_widget.dart';

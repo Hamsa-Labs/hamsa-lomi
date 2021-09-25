@@ -6,7 +6,7 @@ import '../constants/app_assets_constant.dart';
 import '../constants/app_string_constant.dart';
 import '../create_account/pages/create_account_page.dart';
 import '../lang_acct_type/pages/choose_account_type.dart';
-import '../theme/hamsa_theme.dart';
+// import '../theme/hamsa_theme.dart';
 import '../widgets/onboarding_widget.dart';
 
 class OnboardingPage extends StatelessWidget {

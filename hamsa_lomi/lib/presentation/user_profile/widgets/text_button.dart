@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hamsa_lomi/presentation/constants/app_assets_constant.dart';
+// import '../../constants/app_assets_constant.dart';
 
 class PrimaryTextButton extends StatelessWidget {
   final String buttonText;
