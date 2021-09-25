@@ -11,11 +11,13 @@ import '../constants/app_assets_constant.dart';
 
 class HamsaAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool withLogo;
+  final bool withLeading;
   final Text? appBarText;
 
   const HamsaAppBar({
     this.appBarText,
     required this.withLogo,
+    required this.withLeading
   });
 
   @override
@@ -30,7 +32,7 @@ class HamsaAppBar extends StatelessWidget implements PreferredSizeWidget {
           centerTitle: false,
           backgroundColor: HamsaColors.lightBackground,
           title: appBarText,
-          leading: Padding(
+          leading: withLeading? Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
               // color: HamsaColors.primaryColor,
@@ -50,13 +52,9 @@ class HamsaAppBar extends StatelessWidget implements PreferredSizeWidget {
                 onPressed: () {},
               ),
             ),
-          ),
+          ): null,
           actions: [
             withLogo
-                ? Container(
-                    child: SvgPicture.asset(
-                    HamsaIcons.hamsaLogo,
-                  ))
                 ? Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: SvgPicture.asset(

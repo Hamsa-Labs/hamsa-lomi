@@ -31,10 +31,14 @@ class HamsaIcons {
   //Icons path
   static const String hamsaLogo =
       'lib/presentation/assets/icons/hamsa_logo.svg';
-  static const String charityIcon = 'assets/icons/charity.svg';
-  static const String educationIcon = 'assets/icons/enducation.svg';
-  static const String healthIcon = 'assets/icons/healthIcon.svg';
-  static const String optionsIcon = 'assets/icons/options.svg';
+  static const String charityIcon = 'lib/presentation/assets/icons/charity.svg';
+  static const String educationIcon = 'lib/presentation/assets/icons/education.svg';
+  static const String healthIcon = 'lib/presentation/assets/icons/health.svg';
+  static const String optionsIcon = 'lib/presentation/assets/icons/options.svg';
+  static const String balanceIcon = 'lib/presentation/assets/icons/balance_icon.svg';
+  static const String paymentIcon = 'lib/presentation/assets/icons/payment_icon.svg';
+  static const String editIcon = 'lib/presentation/assets/icons/edit_icon.svg';
+
 }
 
 class HamsaImages {

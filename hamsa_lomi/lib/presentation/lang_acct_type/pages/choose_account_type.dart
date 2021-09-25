@@ -26,6 +26,7 @@ class _AccountTypeState extends State<AccountType> {
     return Scaffold(
       backgroundColor: HamsaColors.lightBackground,
       appBar: HamsaAppBar(
+        withLeading: true,
         withLogo: false,
       ),
       body: Padding(

@@ -81,7 +81,6 @@ class _HamsaTabBarState extends State<HamsaTabBar>
 
   @override
   void dispose() {
-    _tabController.dispose();
     super.dispose();
   }
 }

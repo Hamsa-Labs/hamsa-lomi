@@ -17,6 +17,7 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HamsaAppBar(
+        withLeading: true,
         withLogo: true,
         appBarText: Text(
           'Login',

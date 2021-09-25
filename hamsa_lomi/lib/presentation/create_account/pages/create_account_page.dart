@@ -19,6 +19,7 @@ class CreateAccountPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: HamsaColors.lightBackground,
       appBar: HamsaAppBar(
+        withLeading: true,
         withLogo: true,
         appBarText: Text(
           'Sign Up',
