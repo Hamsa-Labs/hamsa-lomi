@@ -6,8 +6,8 @@ import 'package:injectable/injectable.dart';
 import '../../../domain/core/failure.dart';
 import '../../../domain/create_account/entities/user.dart';
 import '../../../domain/create_account/repositories/create_account_repository.dart';
+import '../../core/exceptions/server_exception.dart';
 import '../data_sources/create_account_data_source.dart';
-import '../exceptions/create_account_exception.dart';
 import '../models/user_model.dart';
 
 @LazySingleton(as: CreateAccountRepository)
@@ -22,7 +22,7 @@ class CreateAccountRepositoryImpl extends CreateAccountRepository {
       final result = await _dataSource.createAccount(UserModel(
           username: user.username, password: user.password, email: user.email));
       return right(result);
-    } on CreateAccountException catch (e) {
+    } on ServerException catch (e) {
       return left(Failure(e.message));
     }
   }

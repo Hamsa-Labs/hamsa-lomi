@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 
 // Project imports:
 import '../constants/app_assets_constant.dart';
-import '../theme/hamsa_theme.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   final TextButton? title;
@@ -88,7 +87,7 @@ class BuildHeadingText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: HamsaTheme.lightTheme.textTheme.headline1,
+      style: Theme.of(context).textTheme.headline4,
     );
   }
 }
@@ -103,7 +102,7 @@ class BuildBodyText extends StatelessWidget {
     return Text(
       text,
       textAlign: TextAlign.left,
-      style: HamsaTheme.lightTheme.textTheme.headline4,
+      style: Theme.of(context).textTheme.bodyText1,
     );
   }
 }

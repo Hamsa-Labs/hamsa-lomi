@@ -1,3 +1,4 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 class HamsaBottomBar extends StatelessWidget {
@@ -5,8 +6,6 @@ class HamsaBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-
-    );
+    return BottomAppBar();
   }
 }

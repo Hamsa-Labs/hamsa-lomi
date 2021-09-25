@@ -9,6 +9,7 @@ import 'package:hamsa_lomi/domain/core/failure.dart';
 import 'package:hamsa_lomi/domain/create_account/entities/user.dart';
 import 'package:hamsa_lomi/domain/create_account/repositories/create_account_repository.dart';
 import 'package:hamsa_lomi/domain/create_account/use_cases/create_account_use_case.dart';
+import 'package:hamsa_lomi/domain/params/use_case_param.dart';
 import 'create_account_use_case_test.mocks.dart';
 
 @GenerateMocks([CreateAccountRepository])
@@ -28,7 +29,7 @@ void main() {
     when(repository.createAccount(tUser))
         .thenAnswer((_) async => await right(tUser));
 
-    final result = await useCase.createAccount(tUser);
+    final result = await useCase(UseCaseParam<User>(tUser));
 
     expect(result, right(tUser));
     verify(repository.createAccount(tUser));
@@ -38,7 +39,7 @@ void main() {
     when(repository.createAccount(tUser))
         .thenAnswer((_) async => await left(Failure()));
 
-    final result = await useCase.createAccount(tUser);
+    final result = await useCase(UseCaseParam<User>(tUser));
 
     expect(result, left(Failure()));
     verify(repository.createAccount(tUser));

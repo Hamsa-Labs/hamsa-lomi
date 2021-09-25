@@ -6,8 +6,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
 // Project imports:
+import '../../core/form_inputs/password_input.dart';
+import '../../sign_in/pages/sign_in_page.dart';
 import '../bloc/create_account_bloc.dart';
-import '../form_inputs/password_input.dart';
+
+// Project imports:
+
+final sizedBox = SizedBox(
+  height: 4.0,
+);
 
 class CreateAccountForm extends StatefulWidget {
   const CreateAccountForm({Key? key}) : super(key: key);
@@ -25,6 +32,8 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
           final snackBar =
               SnackBar(content: Text('Account created successfully!'));
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => SignInPage()));
         } else if (state.status.isSubmissionFailure) {
           final errorMessage = state.error ?? 'Something went wrong!';
           final snackBar = SnackBar(content: Text(errorMessage));
@@ -38,8 +47,10 @@ class _CreateAccountFormState extends State<CreateAccountForm> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
-                child: Text('Setup your information',
-                    style: Theme.of(context).textTheme.headline5),
+                child: Text(
+                  'Setup your information',
+                  style: Theme.of(context).textTheme.headline5,
+                ),
               ),
               _UsernameInput(),
               _EmailInput(),
@@ -66,10 +77,11 @@ class _UsernameInput extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Username'),
-              SizedBox(
-                height: 8.0,
+              Text(
+                'Username',
+                style: Theme.of(context).textTheme.caption,
               ),
+              sizedBox,
               TextFormField(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   decoration: InputDecoration(
@@ -109,10 +121,11 @@ class _EmailInput extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Email'),
-              SizedBox(
-                height: 8.0,
+              Text(
+                'Email',
+                style: Theme.of(context).textTheme.caption,
               ),
+              sizedBox,
               TextFormField(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   decoration: InputDecoration(
@@ -158,10 +171,11 @@ class _PasswordInputState extends State<_PasswordInput> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Password'),
-              SizedBox(
-                height: 8.0,
+              Text(
+                'Password',
+                style: Theme.of(context).textTheme.caption,
               ),
+              sizedBox,
               TextFormField(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 obscureText: _obscureText,
@@ -220,10 +234,11 @@ class _ConfirmPasswordInputState extends State<_ConfirmPasswordInput> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Confirm Password'),
-              SizedBox(
-                height: 8.0,
+              Text(
+                'Confirm Password',
+                style: Theme.of(context).textTheme.caption,
               ),
+              sizedBox,
               TextFormField(
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 obscureText: _obscureText,
@@ -276,15 +291,17 @@ class _SignUpButton extends StatelessWidget {
             return CircularProgressIndicator();
           } else {
             return ElevatedButton(
-              onPressed: state.status.isValidated
-                  ? () {
-                      context
-                          .read<CreateAccountBloc>()
-                          .add(CreateAccountSubmitted());
-                    }
-                  : null,
-              child: Text('SIGN UP'),
-            );
+                onPressed: state.status.isValidated
+                    ? () {
+                        context
+                            .read<CreateAccountBloc>()
+                            .add(CreateAccountSubmitted());
+                      }
+                    : null,
+                child: Text(
+                  'SIGN UP',
+                  style: Theme.of(context).textTheme.button,
+                ));
           }
         },
       ),
