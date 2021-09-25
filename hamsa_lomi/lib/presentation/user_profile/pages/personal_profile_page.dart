@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 // import '../../theme/hamsa_theme.dart';
 import '../widgets/balance_card.dart';
 import '../widgets/image_container.dart';
-import '../widgets/settion_container.dart';
+import '../widgets/setting_container.dart';
 import '../widgets/text_button.dart';
 // file imports:
 import '../../constants/app_assets_constant.dart';
