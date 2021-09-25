@@ -33,7 +33,7 @@ class _SelectLanguageState extends State<SelectLanguage> {
                 style: TextStyle(
                     decoration: TextDecoration.none,
                     fontSize:
-                        HamsaTheme.lightTheme.textTheme.headline1!.fontSize,
+                        HamsaTheme.lightTheme.textTheme.headline4!.fontSize,
                     fontWeight: FontWeight.normal,
                     color: HamsaColors.primarySwatch.shade900),
               ),
