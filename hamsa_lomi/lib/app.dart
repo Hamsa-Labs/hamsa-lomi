@@ -16,7 +16,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Hamsa Lomi',
       theme: HamsaTheme.lightTheme,
-      home: AccountType()
+      home: SelectLanguage()
     );
   }
 }
