@@ -12,14 +12,17 @@ class PrimaryTextButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       height: 80,
-      width: MediaQuery.of(context).size.width/2.5,
+      width: MediaQuery.of(context).size.width/2.4,
         child: TextButton(
-         child: Text(
-             buttonText,
-             style: TextStyle(
-                 fontSize: 14,
-               fontWeight: FontWeight.w600,
-               color: Colors.black
+         child: Padding(
+           padding: const EdgeInsets.only(top: 20,right: 40),
+           child: Text(
+               buttonText,
+               style: TextStyle(
+                   fontSize: 14,
+                 fontWeight: FontWeight.w600,
+                 color: Colors.black
+             ),
            ),
          ),
           onPressed: (){},

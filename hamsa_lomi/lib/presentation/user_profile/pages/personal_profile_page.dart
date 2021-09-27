@@ -54,7 +54,7 @@ class ProfilePage extends StatelessWidget {
             children: [
               //image profile
               Padding(
-                padding: const EdgeInsets.only(left: 5.0),
+                padding: const EdgeInsets.only(left: 0),
                 child: ImageContainer(imgPath: 'https://googleflutter.com/sample_image.jpg'
                 ),
               ),
@@ -131,16 +131,23 @@ class ProfilePage extends StatelessWidget {
           ),
           //4th row two tab for my donations and my fundraise
           Padding(
-            padding: EdgeInsets.all(4),
+            padding: EdgeInsets.symmetric(vertical: 10,horizontal:10),
             child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              // mainAxisSize: MainAxisSize.min,
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                PrimaryTextButton(
-                  buttonText: 'My\nDonation',
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: PrimaryTextButton(
+                    buttonText: 'My\nDonations',
+                  ),
                 ),
-                PrimaryTextButton(
-                  buttonText: 'My\nFundraisers',
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: PrimaryTextButton(
+                    buttonText: 'My\nFundraisers',
+                  ),
                 ),
               ],
             ),
