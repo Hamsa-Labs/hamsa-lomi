@@ -1,6 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:hamsa_lomi/presentation/constants/app_assets_constant.dart';
+import '../constants/app_assets_constant.dart';
 
 class HamsaBottomBar extends StatelessWidget {
 
