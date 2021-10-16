@@ -20,4 +20,3 @@ linter:
     avoid_print: true
     sort_pub_dependencies: true
     directives_ordering: false
-

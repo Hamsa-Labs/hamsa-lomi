@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 // Project imports:
 import '../constants/app_assets_constant.dart';
 import '../constants/app_string_constant.dart';
+import '../lang_acct_type/pages/choose_account_type.dart';
 import '../sign_in/pages/sign_in_page.dart';
 import '../widgets/onboarding_widget.dart';
 
@@ -32,12 +33,13 @@ class BuildIntroContent1 extends StatelessWidget {
     return Scaffold(
       appBar: MainAppBar(
         title: TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => AccountType()));
+          },
           child: Text(
             'Skip',
-            style: Theme.of(context).textTheme.button!.copyWith(
-                  color: HamsaColors.darkGray,
-                ),
+            style: Theme.of(context).textTheme.button,
           ),
         ),
       ),
@@ -95,12 +97,13 @@ class BuildIntroContent2 extends StatelessWidget {
     return Scaffold(
         appBar: MainAppBar(
           title: TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AccountType()));
+            },
             child: Text(
               'Skip',
-              style: Theme.of(context).textTheme.button!.copyWith(
-                    color: HamsaColors.darkGray,
-                  ),
+              style: Theme.of(context).textTheme.button,
             ),
           ),
         ),

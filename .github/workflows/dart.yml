@@ -8,6 +8,8 @@ name: Flutter
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main]
 
 jobs:
   build:
@@ -23,3 +25,4 @@ jobs:
         channel: 'stable' # or: 'beta', 'dev' or 'master'
     - run: cd hamsa_lomi && flutter pub get
     - run: cd hamsa_lomi && flutter test
+    - run: cd hamsa_lomi && flutter analyze
