@@ -8,7 +8,7 @@ import 'package:formz/formz.dart';
 // Project imports:
 import '../../../injection/injection.dart';
 import '../../widgets/hamsa_rounded_button.dart';
-import '../bloc/sign_in_bloc.dart';
+import '../blocs/blocs.dart';
 
 class SignInWithEmailForm extends StatelessWidget {
   const SignInWithEmailForm({Key? key}) : super(key: key);
@@ -16,8 +16,8 @@ class SignInWithEmailForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<SignInBloc>(),
-      child: BlocListener<SignInBloc, SignInBlocState>(
+      create: (context) => getIt<SignInWithEmailBloc>(),
+      child: BlocListener<SignInWithEmailBloc, SignInWithEmailState>(
         listener: (context, state) {
           if (state.status.isSubmissionFailure) {
             final errorMessage = state.error ?? 'Something went wrong!';
@@ -50,7 +50,7 @@ class _EmailInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignInBloc, SignInBlocState>(
+    return BlocBuilder<SignInWithEmailBloc, SignInWithEmailState>(
       buildWhen: (previousState, state) =>
           previousState.email.value != state.email.value,
       builder: (context, state) {
@@ -73,7 +73,7 @@ class _EmailInput extends StatelessWidget {
                   ),
                 ),
                 onChanged: (value) {
-                  context.read<SignInBloc>().add(EmailChanged(value));
+                  context.read<SignInWithEmailBloc>().add(EmailChanged(value));
                 },
               ),
             ],
@@ -96,7 +96,7 @@ class _PasswordInputState extends State<_PasswordInput> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignInBloc, SignInBlocState>(
+    return BlocBuilder<SignInWithEmailBloc, SignInWithEmailState>(
       buildWhen: (previousState, state) =>
           previousState.password.value.password !=
           state.password.value.password,
@@ -129,7 +129,9 @@ class _PasswordInputState extends State<_PasswordInput> {
                     ),
                   ),
                   onChanged: (value) {
-                    context.read<SignInBloc>().add(PasswordChanged(value));
+                    context
+                        .read<SignInWithEmailBloc>()
+                        .add(PasswordChanged(value));
                   },
                 ),
               ],
@@ -147,7 +149,7 @@ class _SignInButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: BlocBuilder<SignInBloc, SignInBlocState>(
+      child: BlocBuilder<SignInWithEmailBloc, SignInWithEmailState>(
         builder: (context, state) {
           if (state.status.isSubmissionInProgress) {
             return CircularProgressIndicator();
@@ -157,7 +159,9 @@ class _SignInButton extends StatelessWidget {
               label: 'LOGIN',
               onPressed: state.status.isValidated
                   ? () {
-                      context.read<SignInBloc>().add(SignInSubmitted());
+                      context
+                          .read<SignInWithEmailBloc>()
+                          .add(SignInSubmitted());
                     }
                   : null);
         },

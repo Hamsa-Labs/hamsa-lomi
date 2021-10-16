@@ -12,6 +12,10 @@ class PhoneNumberChanged extends SignInWithPhoneEvent {
 }
 
 class CodeSent extends SignInWithPhoneEvent {
+  final String verificationId;
+
+  CodeSent(this.verificationId);
+
   @override
   List<Object> get props => [];
 }
@@ -28,4 +32,14 @@ class PhoneVerificationFailed extends SignInWithPhoneEvent {
 
   @override
   List<Object?> get props => [errorMessage];
+}
+
+class VerifySmsCodeRequested extends SignInWithPhoneEvent {
+  final String verificationId;
+  final String code;
+
+  VerifySmsCodeRequested({required this.verificationId, required this.code});
+
+  @override
+  List<Object> get props => [verificationId, code];
 }

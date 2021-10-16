@@ -35,6 +35,10 @@ class SignInPage extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline5,
                 ),
               ),
+              Text(
+                'Choose your login method',
+                style: Theme.of(context).textTheme.caption,
+              ),
               HamsaTabBar(
                 firstText: 'Email',
                 secondText: 'Phone',

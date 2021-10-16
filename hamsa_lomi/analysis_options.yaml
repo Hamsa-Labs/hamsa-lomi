@@ -19,3 +19,5 @@ linter:
     one_member_abstracts: false
     avoid_print: true
     sort_pub_dependencies: true
+    directives_ordering: false
+
