@@ -1,8 +1,8 @@
-part of 'sign_in_bloc.dart';
+part of 'sign_in_email_bloc.dart';
 
-abstract class SignInBlocEvent extends Equatable {}
+abstract class SignInWithEmailEvent extends Equatable {}
 
-class EmailChanged extends SignInBlocEvent {
+class EmailChanged extends SignInWithEmailEvent {
   final String email;
 
   EmailChanged(this.email);
@@ -11,7 +11,7 @@ class EmailChanged extends SignInBlocEvent {
   List<Object> get props => [email];
 }
 
-class PasswordChanged extends SignInBlocEvent {
+class PasswordChanged extends SignInWithEmailEvent {
   final String password;
 
   PasswordChanged(this.password);
@@ -20,7 +20,7 @@ class PasswordChanged extends SignInBlocEvent {
   List<Object> get props => [password];
 }
 
-class SignInSubmitted extends SignInBlocEvent {
+class SignInSubmitted extends SignInWithEmailEvent {
   @override
   List<Object> get props => [];
 }

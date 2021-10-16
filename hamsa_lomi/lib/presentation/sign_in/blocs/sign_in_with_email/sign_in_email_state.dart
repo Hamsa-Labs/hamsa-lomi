@@ -1,6 +1,6 @@
-part of 'sign_in_bloc.dart';
+part of 'sign_in_email_bloc.dart';
 
-class SignInBlocState extends Equatable {
+class SignInWithEmailState extends Equatable {
   final EmailInput email;
 
   final PasswordInput password;
@@ -9,7 +9,7 @@ class SignInBlocState extends Equatable {
 
   final String? error;
 
-  const SignInBlocState(
+  const SignInWithEmailState(
       {this.error,
       this.email = const EmailInput.pure(),
       this.password = const PasswordInput.pure(),
@@ -18,15 +18,15 @@ class SignInBlocState extends Equatable {
   @override
   List<Object?> get props => [email, password, status, error];
 
-  SignInBlocState copyWith(
+  SignInWithEmailState copyWith(
       {EmailInput? email,
       PasswordInput? password,
       FormzStatus? status,
       String? error}) {
-    return SignInBlocState(
+    return SignInWithEmailState(
         email: email ?? this.email,
         password: password ?? this.password,
         status: status ?? this.status,
-        error: error);
+        error: error ?? this.error);
   }
 }

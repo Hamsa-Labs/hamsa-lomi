@@ -1,13 +1,13 @@
 // Package imports:
 import 'package:firebase_auth/firebase_auth.dart' as fire_auth;
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
-
 // Project imports:
 import 'package:hamsa_lomi/data/core/exceptions/server_exception.dart';
 import 'package:hamsa_lomi/data/create_account/data_sources/create_account_data_source.dart';
 import 'package:hamsa_lomi/data/create_account/models/user_model.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
+
 import 'create_account_data_source_test.mocks.dart';
 
 @GenerateMocks(

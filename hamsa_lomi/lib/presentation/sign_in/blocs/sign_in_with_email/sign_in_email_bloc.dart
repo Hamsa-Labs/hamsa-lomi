@@ -7,25 +7,27 @@ import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:injectable/injectable.dart';
 
-// Project imports:
-import '../../../domain/params/use_case_param.dart';
-import '../../../domain/sign_in/entities/sign_in_credential.dart';
-import '../../../domain/sign_in/use_cases/sign_in_use_case.dart';
-import '../../core/form_inputs/email_input.dart';
-import '../../core/form_inputs/password_input.dart';
+import '../../../../domain/params/use_case_param.dart';
+import '../../../../domain/sign_in/entities/sign_in_credential.dart';
+import '../../../../domain/sign_in/use_cases/sign_in_use_case.dart';
+import '../../../core/form_inputs/email_input.dart';
+import '../../../core/form_inputs/password_input.dart';
 
-part 'sign_in_bloc_event.dart';
-part 'sign_in_bloc_state.dart';
+// Project imports:
+
+part 'sign_in_email_event.dart';
+part 'sign_in_email_state.dart';
 
 @injectable
-class SignInBloc extends Bloc<SignInBlocEvent, SignInBlocState> {
+class SignInWithEmailBloc
+    extends Bloc<SignInWithEmailEvent, SignInWithEmailState> {
   final SignInUseCase _signInUseCase;
 
-  SignInBloc(this._signInUseCase) : super(SignInBlocState());
+  SignInWithEmailBloc(this._signInUseCase) : super(SignInWithEmailState());
 
   @override
-  Stream<SignInBlocState> mapEventToState(
-    SignInBlocEvent event,
+  Stream<SignInWithEmailState> mapEventToState(
+    SignInWithEmailEvent event,
   ) async* {
     if (event is EmailChanged) {
       yield _mapEmailChangedToState(state, event.email);
@@ -36,7 +38,8 @@ class SignInBloc extends Bloc<SignInBlocEvent, SignInBlocState> {
     }
   }
 
-  SignInBlocState _mapEmailChangedToState(SignInBlocState state, String email) {
+  SignInWithEmailState _mapEmailChangedToState(
+      SignInWithEmailState state, String email) {
     final emailInput = EmailInput.dirty(email);
     return state.copyWith(
         email: emailInput,
@@ -44,8 +47,8 @@ class SignInBloc extends Bloc<SignInBlocEvent, SignInBlocState> {
         status: Formz.validate([emailInput, state.password]));
   }
 
-  SignInBlocState _mapPasswordChangedToState(
-      SignInBlocState state, String password) {
+  SignInWithEmailState _mapPasswordChangedToState(
+      SignInWithEmailState state, String password) {
     final passwordInput = PasswordInput.dirty(
         Password(password: password, confirmPassword: password));
 
@@ -55,7 +58,8 @@ class SignInBloc extends Bloc<SignInBlocEvent, SignInBlocState> {
         status: Formz.validate([passwordInput, state.email]));
   }
 
-  Stream<SignInBlocState> _mapSubmittedToState(SignInBlocState state) async* {
+  Stream<SignInWithEmailState> _mapSubmittedToState(
+      SignInWithEmailState state) async* {
     if (state.status.isValidated) {
       yield state.copyWith(status: FormzStatus.submissionInProgress);
 

@@ -53,10 +53,6 @@ class HamsaAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           actions: [
             withLogo
-                ? Container(
-                    child: SvgPicture.asset(
-                    HamsaIcons.hamsaLogo,
-                  ))
                 ? Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: SvgPicture.asset(
