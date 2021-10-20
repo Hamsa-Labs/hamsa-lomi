@@ -7,15 +7,17 @@ import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
 import 'package:injectable/injectable.dart';
 
+// Project imports:
+import '../../../../domain/auth/entities/sign_in_credential.dart';
+import '../../../../domain/auth/use_cases/sign_in_use_case.dart';
 import '../../../../domain/params/use_case_param.dart';
-import '../../../../domain/sign_in/entities/sign_in_credential.dart';
-import '../../../../domain/sign_in/use_cases/sign_in_use_case.dart';
 import '../../../core/form_inputs/email_input.dart';
 import '../../../core/form_inputs/password_input.dart';
 
 // Project imports:
 
 part 'sign_in_email_event.dart';
+
 part 'sign_in_email_state.dart';
 
 @injectable

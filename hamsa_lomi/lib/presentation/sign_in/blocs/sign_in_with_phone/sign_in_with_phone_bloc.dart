@@ -7,11 +7,11 @@ import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 
 // Project imports:
+import '../../../../domain/auth/entities/verify_phone_number_param.dart';
+import '../../../../domain/auth/entities/verify_sms_code_param.dart';
+import '../../../../domain/auth/use_cases/verify_phone_number_use_case.dart';
+import '../../../../domain/auth/use_cases/verify_sms_code_use_case.dart';
 import '../../../../domain/params/use_case_param.dart';
-import '../../../../domain/sign_in/entities/verify_phone_number_param.dart';
-import '../../../../domain/sign_in/entities/verify_sms_code_param.dart';
-import '../../../../domain/sign_in/use_cases/verify_phone_number_use_case.dart';
-import '../../../../domain/sign_in/use_cases/verify_sms_code_use_case.dart';
 import '../../../core/form_inputs/phone_number_input.dart';
 
 part 'sign_in_with_phone_event.dart';
