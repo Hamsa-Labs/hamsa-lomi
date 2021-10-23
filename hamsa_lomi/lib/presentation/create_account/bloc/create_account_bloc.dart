@@ -8,8 +8,8 @@ import 'package:formz/formz.dart';
 import 'package:injectable/injectable.dart';
 
 // Project imports:
-import '../../../domain/create_account/entities/user.dart';
-import '../../../domain/create_account/use_cases/create_account_use_case.dart';
+import '../../../domain/auth/entities/create_user.dart';
+import '../../../domain/auth/use_cases/create_account_use_case.dart';
 import '../../../domain/params/use_case_param.dart';
 import '../../core/form_inputs/email_input.dart';
 import '../../core/form_inputs/password_input.dart';
@@ -85,8 +85,8 @@ class CreateAccountBloc extends Bloc<CreateAccountEvent, CreateAccountState> {
       yield state.copyWith(status: FormzStatus.submissionInProgress);
 
       final failureOrSuccess = await _useCase(
-        UseCaseParam<User>(
-          User(
+        UseCaseParam<CreateUser>(
+          CreateUser(
               username: state.username.value,
               email: state.email.value,
               password: state.password.value.password),
