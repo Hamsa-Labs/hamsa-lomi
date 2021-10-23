@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'presentation/page/onboarding_page.dart';
+import 'presentation/splash/pages/splash_page.dart';
 import 'presentation/theme/hamsa_theme.dart';
 
 class App extends StatelessWidget {
@@ -12,7 +12,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Hamsa Lomi',
       theme: HamsaTheme.lightTheme,
-      home: OnboardingPage(),
+      home: SplashPage(),
     );
   }
 }
