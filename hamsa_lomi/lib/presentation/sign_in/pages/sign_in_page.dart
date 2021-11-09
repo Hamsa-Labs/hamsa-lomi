@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import '../../share_widgets/appbar_widget.dart';
-import '../../share_widgets/tabsbar_widget.dart';
+import '../../core/hamsa_app_bar.dart';
+import '../../core/tabsbar_widget.dart';
 import '../widgets/sign_in_with_email_form.dart';
 import '../widgets/sign_in_with_phone_form.dart';
 
