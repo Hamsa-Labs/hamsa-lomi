@@ -1,9 +1,9 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-import '../../core/hamsa_app_bar.dart';
-import '../../core/tabsbar_widget.dart';
 
 // Project imports:
+import '../../core/hamsa_app_bar.dart';
+import '../../core/tabsbar_widget.dart';
 import '../widgets/sign_in_with_email_form.dart';
 import '../widgets/sign_in_with_phone_form.dart';
 
