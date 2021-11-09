@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../core/hamsa_app_bar.dart';
 
 // Project imports:
 import '../../../injection/injection.dart';
 import '../../constants/app_assets_constant.dart';
-import '../../share_widgets/appbar_widget.dart';
 import '../bloc/create_account_bloc.dart';
 import '../widgets/create_account_form.dart';
 

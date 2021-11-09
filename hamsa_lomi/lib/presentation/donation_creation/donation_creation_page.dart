@@ -1,8 +1,8 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import '../core/hamsa_app_bar.dart';
 
 // Project imports:
-import '../share_widgets/appbar_widget.dart';
 
 class DonationCreationPage extends StatelessWidget {
   const DonationCreationPage({Key? key}) : super(key: key);
