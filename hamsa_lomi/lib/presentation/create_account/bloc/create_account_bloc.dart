@@ -13,7 +13,7 @@ import '../../../domain/auth/use_cases/create_account_use_case.dart';
 import '../../../domain/params/use_case_param.dart';
 import '../../core/form_inputs/email_input.dart';
 import '../../core/form_inputs/password_input.dart';
-import '../../core/form_inputs/username_input.dart';
+import '../../core/form_inputs/required_text_input.dart';
 
 part 'create_account_event.dart';
 part 'create_account_state.dart';
@@ -43,7 +43,7 @@ class CreateAccountBloc extends Bloc<CreateAccountEvent, CreateAccountState> {
 
   CreateAccountState _mapUsernameChangedToState(
       String username, CreateAccountState state) {
-    final usernameInput = UsernameInput.dirty(username);
+    final usernameInput = RequiredTextInput.dirty(username);
     return state.copyWith(
         username: usernameInput,
         error: null,

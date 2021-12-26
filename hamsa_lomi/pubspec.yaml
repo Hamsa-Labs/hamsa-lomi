@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+  cloud_firestore: ^3.1.0
   cupertino_icons: ^1.0.2
   dartz: ^0.10.0-nullsafety.2
   datetime_picker_formfield: ^2.0.0
@@ -38,6 +39,7 @@ dependencies:
   injectable: ^1.4.1
   intl: ^0.17.0
   intl_phone_field: ^2.0.1
+  json_annotation: ^4.4.0
   mockito: ^5.0.10
   sms_autofill: ^2.0.1
 
@@ -46,6 +48,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   injectable_generator: ^1.4.1
+  json_serializable: ^6.1.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
