@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 // Package imports:
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../core/image_uploader.dart';
 import 'package:intl/intl.dart';
 
 // Project imports:
@@ -36,6 +37,7 @@ class DonationCreationForm extends StatelessWidget {
               _GoalInput(),
               _DescriptionInput(),
               _DueDateInput(),
+              _GalleryInput(),
               BlocBuilder<DonationCreationBloc, DonationCreationState>(
                 builder: (context, state) {
                   return ElevatedButton(
@@ -222,6 +224,18 @@ class _DueDateInput extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class _GalleryInput extends StatelessWidget {
+  const _GalleryInput({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CreationFormField(
+      label: 'Add Gallery',
+      child: ImageUploader(),
     );
   }
 }
