@@ -2,12 +2,15 @@
 import 'entities.dart';
 
 class HamsaCampaign extends BaseHamsaCampaign {
+  final String id;
+
   HamsaCampaign({
     required String title,
     required DonationCategory category,
     required double goal,
     required String description,
     required DateTime dueDate,
+    required this.id,
   }) : super(
           title: title,
           category: category,
@@ -17,5 +20,5 @@ class HamsaCampaign extends BaseHamsaCampaign {
         );
 
   @override
-  List<Object?> get props => super.props;
+  List<Object?> get props => [...super.props, id];
 }

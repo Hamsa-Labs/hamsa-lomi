@@ -4,10 +4,14 @@ import 'package:flutter/widgets.dart';
 
 // Package imports:
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 // Project imports:
+import '../../../domain/core/core.dart';
+import '../../../injection/injection.dart';
 import '../../constants/app_assets_constant.dart';
+import '../bloc/donation_creation_bloc.dart';
 import 'creation_form_field.dart';
 
 class DonationCreationForm extends StatelessWidget {
@@ -17,20 +21,35 @@ class DonationCreationForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Enter The Following Details',
-              style: Theme.of(context).textTheme.headline5,
-            ),
-            _TitleInput(),
-            _CategoryInput(),
-            _GoalInput(),
-            _DescriptionInput(),
-            _DueDateInput(),
-          ],
+      child: BlocProvider(
+        create: (context) => getIt<DonationCreationBloc>(),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Enter The Following Details',
+                style: Theme.of(context).textTheme.headline5,
+              ),
+              _TitleInput(),
+              _CategoryInput(),
+              _GoalInput(),
+              _DescriptionInput(),
+              _DueDateInput(),
+              BlocBuilder<DonationCreationBloc, DonationCreationState>(
+                builder: (context, state) {
+                  return ElevatedButton(
+                    onPressed: () {
+                      context
+                          .read<DonationCreationBloc>()
+                          .add(DonationCreationFormSubmitted());
+                    },
+                    child: Text('${state.status} Submit'),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -42,48 +61,65 @@ class _TitleInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CreationFormField(
-      label: 'Title',
-      child: TextFormField(
-        decoration: InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16.0),
+    return BlocBuilder<DonationCreationBloc, DonationCreationState>(
+      builder: (context, state) {
+        return CreationFormField(
+          label: 'Title',
+          child: TextFormField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16.0),
+              ),
+            ),
+            onChanged: (title) {
+              context
+                  .read<DonationCreationBloc>()
+                  .add(TitleChanged(title: title));
+            },
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
 
 class _CategoryInput extends StatelessWidget {
-  final List<String> _categories = const [
-    'Health',
-    'Education',
-    'Personal',
-    'Charity',
-    'Medical'
+  final List<Map<String, dynamic>> _categories = const [
+    {'value': DonationCategory.health, 'display': 'Health'},
+    {'value': DonationCategory.education, 'display': 'Education'},
+    {'value': DonationCategory.personal, 'display': 'Personal'},
+    {'value': DonationCategory.charity, 'display': 'Charity'},
+    {'value': DonationCategory.medical, 'display': 'Medical'},
   ];
 
   const _CategoryInput({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return CreationFormField(
-        label: 'Category',
-        child: DropdownButtonFormField(
-          items: _categories.map((value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
-            );
-          }).toList(),
-          decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16.0),
-            ),
-          ),
-          onChanged: (newValue) {},
-        ));
+    return BlocBuilder<DonationCreationBloc, DonationCreationState>(
+      builder: (context, state) {
+        return CreationFormField(
+            label: 'Category',
+            child: DropdownButtonFormField<DonationCategory>(
+              items: _categories.map((category) {
+                return DropdownMenuItem<DonationCategory>(
+                  value: category['value'],
+                  child: Text(category['display']),
+                );
+              }).toList(),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16.0),
+                ),
+              ),
+              onChanged: (newValue) {
+                context
+                    .read<DonationCreationBloc>()
+                    .add(CategoryChanged(newValue as DonationCategory));
+              },
+            ));
+      },
+    );
   }
 }
 
@@ -92,21 +128,30 @@ class _GoalInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CreationFormField(
-      label: 'Goal',
-      child: TextFormField(
-        decoration: InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16.0),
+    return BlocBuilder<DonationCreationBloc, DonationCreationState>(
+      builder: (context, state) {
+        return CreationFormField(
+          label: 'Goal',
+          child: TextFormField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16.0),
+              ),
+              suffixText: 'ETB',
+              suffixStyle: TextStyle(
+                color: HamsaColors.primaryColor,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            keyboardType: TextInputType.numberWithOptions(),
+            onChanged: (amount) {
+              context
+                  .read<DonationCreationBloc>()
+                  .add(GoalAmountChanged(double.parse(amount)));
+            },
           ),
-          suffixText: 'ETB',
-          suffixStyle: TextStyle(
-            color: HamsaColors.primaryColor,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        keyboardType: TextInputType.numberWithOptions(),
-      ),
+        );
+      },
     );
   }
 }
@@ -116,17 +161,25 @@ class _DescriptionInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CreationFormField(
-      label: 'Description',
-      child: TextFormField(
-        decoration: InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16.0),
-          ),
-        ),
-        minLines: 3,
-        maxLines: 5,
-      ),
+    return BlocBuilder<DonationCreationBloc, DonationCreationState>(
+      builder: (context, state) {
+        return CreationFormField(
+          label: 'Description',
+          child: TextFormField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(16.0),
+                ),
+              ),
+              minLines: 3,
+              maxLines: 5,
+              onChanged: (description) {
+                context
+                    .read<DonationCreationBloc>()
+                    .add(DescriptionChanged(description: description));
+              }),
+        );
+      },
     );
   }
 }
@@ -136,28 +189,39 @@ class _DueDateInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CreationFormField(
-      label: 'Due Date',
-      child: DateTimeField(
-        decoration: InputDecoration(
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16.0),
+    return BlocBuilder<DonationCreationBloc, DonationCreationState>(
+      builder: (context, state) {
+        return CreationFormField(
+          label: 'Due Date',
+          child: DateTimeField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16.0),
+              ),
+              suffixIcon: Icon(
+                Icons.calendar_today,
+                color: HamsaColors.primaryColor,
+              ),
+            ),
+            format: DateFormat('yyyy-MM-dd'),
+            onShowPicker: (context, currentValue) {
+              return showDatePicker(
+                context: context,
+                firstDate: DateTime(1900),
+                initialDate: currentValue ?? DateTime.now(),
+                lastDate: DateTime(2100),
+              );
+            },
+            onChanged: (dueDate) {
+              if (dueDate != null) {
+                context
+                    .read<DonationCreationBloc>()
+                    .add(DueDateChanged(dueDate));
+              }
+            },
           ),
-          suffixIcon: Icon(
-            Icons.calendar_today,
-            color: HamsaColors.primaryColor,
-          ),
-        ),
-        format: DateFormat('yyyy-MM-dd'),
-        onShowPicker: (context, currentValue) {
-          return showDatePicker(
-            context: context,
-            firstDate: DateTime(1900),
-            initialDate: currentValue ?? DateTime.now(),
-            lastDate: DateTime(2100),
-          );
-        },
-      ),
+        );
+      },
     );
   }
 }
