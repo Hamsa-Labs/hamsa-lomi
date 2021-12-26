@@ -35,6 +35,8 @@ dependencies:
   flutter_svg: ^0.22.0
   formz: ^0.4.0
   get_it: null
+  image_cropper: ^1.4.1
+  image_picker: ^0.8.4+4
   import_sorter: ^4.6.0
   injectable: ^1.4.1
   intl: ^0.17.0

@@ -5,7 +5,6 @@ import 'package:flutter/widgets.dart';
 // Package imports:
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../core/image_uploader.dart';
 import 'package:intl/intl.dart';
 
 // Project imports:
@@ -14,6 +13,7 @@ import '../../../injection/injection.dart';
 import '../../constants/app_assets_constant.dart';
 import '../bloc/donation_creation_bloc.dart';
 import 'creation_form_field.dart';
+import 'image_uploader.dart';
 
 class DonationCreationForm extends StatelessWidget {
   const DonationCreationForm({Key? key}) : super(key: key);
