@@ -1,6 +1,5 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 // Package imports:
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
