@@ -2,15 +2,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
+import '../../../../domain/core/core.dart';
+import '../../../../domain/donation_creation/donation_creation.dart';
+import '../../../core/form_inputs/required_text_input.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../donation_creation.dart';
+
 // Project imports:
-import '../../../domain/core/entities/entities.dart';
-import '../../../domain/donation_creation/donation_creation.dart';
-import '../../core/form_inputs/required_text_input.dart';
-import '../form_inputs/required_category_input.dart';
-import '../form_inputs/required_due_date_input.dart';
-import '../form_inputs/required_goal_input.dart';
 
 part 'donation_creation_event.dart';
 part 'donation_creation_state.dart';
