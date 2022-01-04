@@ -30,15 +30,17 @@ class DonationCreationDataSourceImpl implements DonationCreationDataSource {
 
   @override
   Future<UploadTask> uploadImage(UploadImageParam param) async {
+    // TODO: Generate unique image file name for each image to be uploaded.
     final task = storage.ref('uploads/image.jpg').putFile(param.file);
-    task.snapshotEvents.listen((event) {
+    task.snapshotEvents.listen((event) async {
       if (event.state == TaskState.paused) {
         param.onPause();
       } else if (event.state == TaskState.running) {
         final progress = (event.bytesTransferred / event.totalBytes) * 100;
         param.onRunning(progress);
       } else if (event.state == TaskState.success) {
-        param.onSuccess();
+        final downloadUrl = await event.ref.getDownloadURL();
+        param.onSuccess(downloadUrl);
       } else if (event.state == TaskState.canceled) {
         param.onCanceled();
       }

@@ -12,7 +12,7 @@ class UploadImageParam extends Equatable {
   final File file;
   final VoidCallback onPause;
   final ValueChanged<double> onRunning;
-  final VoidCallback onSuccess;
+  final ValueChanged<String> onSuccess;
   final VoidCallback onCanceled;
   final ValueChanged<String> onError;
 
