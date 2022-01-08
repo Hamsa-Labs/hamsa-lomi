@@ -5,18 +5,26 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 // Project imports:
+import '../../../injection/injection.dart';
 import '../../constants/app_assets_constant.dart';
+import '../bloc/image_upload/image_upload_bloc.dart';
 
 const width = 68;
 const height = 56;
 final borderRadius = BorderRadius.circular(16);
 
 class ImageUploader extends StatefulWidget {
-  const ImageUploader({Key? key}) : super(key: key);
+  final ValueChanged<String> onUploadSuccess;
+  final ValueChanged<int> onImageRemove;
+
+  const ImageUploader(
+      {Key? key, required this.onUploadSuccess, required this.onImageRemove})
+      : super(key: key);
 
   @override
   State<ImageUploader> createState() => _ImageUploaderState();
@@ -28,28 +36,32 @@ class _ImageUploaderState extends State<ImageUploader> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => _showDialog(context),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ..._images
-              .map(
-                (i) => Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: _Image(
-                    file: i,
-                    onRemove: (value) {
-                      setState(() {
-                        _images.remove(value);
-                      });
-                    },
-                  ),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ..._images
+            .map(
+              (i) => Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: _Image(
+                  file: i,
+                  onRemove: (value) {
+                    final index = _images.indexOf(value);
+                    widget.onImageRemove(index);
+
+                    setState(() {
+                      _images.remove(value);
+                    });
+                  },
+                  onUploadSuccess: widget.onUploadSuccess,
                 ),
-              )
-              .toList(),
-          if (_images.length < maxImages)
-            Container(
+              ),
+            )
+            .toList(),
+        if (_images.length < maxImages)
+          InkWell(
+            onTap: () => _showDialog(context),
+            child: Container(
               width: 68,
               height: 56,
               decoration: BoxDecoration(
@@ -61,24 +73,30 @@ class _ImageUploaderState extends State<ImageUploader> {
                 color: Colors.white,
               ),
             ),
-        ],
-      ),
+          ),
+      ],
     );
   }
 
   void _showDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder: (_) => AlertDialog(
+      builder: (alertContext) => AlertDialog(
         title: Text('Pick Image Source'),
         actions: [
           IconButton(
             icon: Icon(Icons.photo_camera),
-            onPressed: () => _pickImage(ImageSource.camera),
+            onPressed: () {
+              _pickImage(ImageSource.camera);
+              Navigator.pop(alertContext);
+            },
           ),
           IconButton(
             icon: Icon(Icons.photo_library),
-            onPressed: () => _pickImage(ImageSource.gallery),
+            onPressed: () {
+              _pickImage(ImageSource.gallery);
+              Navigator.pop(alertContext);
+            },
           ),
         ],
         actionsAlignment: MainAxisAlignment.center,
@@ -87,8 +105,6 @@ class _ImageUploaderState extends State<ImageUploader> {
   }
 
   void _pickImage(ImageSource imageSource) async {
-    Navigator.pop(context);
-
     final selected = await ImagePicker().pickImage(source: imageSource);
     if (selected != null) {
       final croppedImage =
@@ -105,42 +121,96 @@ class _ImageUploaderState extends State<ImageUploader> {
 class _Image extends StatelessWidget {
   final File file;
   final ValueChanged<File> onRemove;
-  const _Image({Key? key, required this.file, required this.onRemove})
-      : super(key: key);
+  final ValueChanged<String> onUploadSuccess;
+  const _Image({
+    Key? key,
+    required this.file,
+    required this.onRemove,
+    required this.onUploadSuccess,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          clipBehavior: Clip.antiAlias,
-          decoration: BoxDecoration(
-            borderRadius: borderRadius,
-          ),
-          child: Image.file(
-            file,
-            width: 68,
-            height: 56,
-            fit: BoxFit.cover,
-          ),
+    return BlocProvider(
+      create: (context) => getIt<ImageUploadBloc>()
+        ..add(
+          UploadImageRequested(file),
         ),
-        SizedBox(height: 4),
-        InkWell(
-          onTap: () {
-            onRemove(file);
-          },
-          child: Container(
-            decoration: BoxDecoration(
-              color: HamsaColors.lightGray,
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Icon(
-              Icons.remove,
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ],
+      child: BlocConsumer<ImageUploadBloc, ImageUploadState>(
+        listener: (context, state) {
+          if (state.uploadStatus == ImageUploadStatus.success &&
+              state.downloadUrl != null) {
+            onUploadSuccess(state.downloadUrl!);
+          }
+        },
+        builder: (context, state) {
+          return Column(
+            children: [
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      borderRadius: borderRadius,
+                    ),
+                    child: Image.file(
+                      file,
+                      width: 68,
+                      height: 56,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  if (state.uploadProgress < 100)
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.4),
+                        shape: BoxShape.circle,
+                      ),
+                      child: IconButton(
+                        onPressed: () {
+                          context
+                              .read<ImageUploadBloc>()
+                              .add(RunningStateToggled());
+                        },
+                        icon: Icon(
+                            state.uploadStatus == ImageUploadStatus.running
+                                ? Icons.pause
+                                : Icons.play_arrow,
+                            color: Colors.white),
+                      ),
+                    ),
+                  if (state.uploadProgress < 100)
+                    SizedBox(
+                      width: 24.0,
+                      height: 24.0,
+                      child: CircularProgressIndicator(
+                        value: state.uploadProgress / 100,
+                      ),
+                    ),
+                ],
+              ),
+              SizedBox(height: 4),
+              InkWell(
+                onTap: () {
+                  onRemove(file);
+                  context.read<ImageUploadBloc>().add(ImageUploadCancelled());
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: HamsaColors.lightGray,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Icon(
+                    Icons.remove,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }
