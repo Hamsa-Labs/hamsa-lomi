@@ -232,9 +232,22 @@ class _GalleryInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CreationFormField(
-      label: 'Add Gallery',
-      child: ImageUploader(),
+    return BlocBuilder<DonationCreationBloc, DonationCreationState>(
+      builder: (context, state) {
+        return CreationFormField(
+          label: 'Add Gallery',
+          child: ImageUploader(
+            onUploadSuccess: (value) {
+              context
+                  .read<DonationCreationBloc>()
+                  .add(ImageGalleryUpdated(value));
+            },
+            onImageRemove: (index) {
+              context.read<DonationCreationBloc>().add(ImageRemoved(index));
+            },
+          ),
+        );
+      },
     );
   }
 }
