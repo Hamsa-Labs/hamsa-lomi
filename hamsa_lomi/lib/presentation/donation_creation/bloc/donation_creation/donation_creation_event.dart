@@ -49,6 +49,24 @@ class DueDateChanged extends DonationCreationEvent {
   List<Object?> get props => [dueDate];
 }
 
+class ImageGalleryUpdated extends DonationCreationEvent {
+  final String downloadUrl;
+
+  ImageGalleryUpdated(this.downloadUrl);
+
+  @override
+  List<Object?> get props => [downloadUrl];
+}
+
+class ImageRemoved extends DonationCreationEvent {
+  final int index;
+
+  ImageRemoved(this.index);
+
+  @override
+  List<Object?> get props => [index];
+}
+
 class DonationCreationFormSubmitted extends DonationCreationEvent {
   @override
   List<Object?> get props => [];

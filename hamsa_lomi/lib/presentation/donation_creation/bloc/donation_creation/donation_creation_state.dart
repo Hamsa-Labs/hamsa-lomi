@@ -6,6 +6,7 @@ class DonationCreationState extends Equatable {
   final RequiredCategoryInput category;
   final RequiredGoalInput goal;
   final RequiredDueDateInput dueDate;
+  final ImageGalleryInput imageGallery;
 
   final FormzStatus status;
 
@@ -15,12 +16,13 @@ class DonationCreationState extends Equatable {
     this.category = const RequiredCategoryInput.pure(),
     this.goal = const RequiredGoalInput.pure(),
     this.dueDate = const RequiredDueDateInput.pure(),
+    this.imageGallery = const ImageGalleryInput.pure(),
     this.status = FormzStatus.pure,
   });
 
   @override
   List<Object> get props =>
-      [title, description, status, category, goal, dueDate];
+      [title, description, status, category, goal, dueDate, imageGallery];
 
   DonationCreationState copyWith({
     RequiredTextInput? title,
@@ -28,6 +30,7 @@ class DonationCreationState extends Equatable {
     RequiredCategoryInput? category,
     RequiredGoalInput? goal,
     RequiredDueDateInput? dueDate,
+    ImageGalleryInput? imageGallery,
     FormzStatus? status,
   }) {
     return DonationCreationState(
@@ -37,6 +40,7 @@ class DonationCreationState extends Equatable {
       category: category ?? this.category,
       goal: goal ?? this.goal,
       dueDate: dueDate ?? this.dueDate,
+      imageGallery: imageGallery ?? this.imageGallery,
     );
   }
 }

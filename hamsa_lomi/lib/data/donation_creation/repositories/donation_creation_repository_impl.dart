@@ -1,12 +1,13 @@
 // Package imports:
 import 'package:dartz/dartz.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:injectable/injectable.dart';
 
 // Project imports:
 import '../../../domain/core/entities/hamsa_campaign.dart';
 import '../../../domain/core/failure.dart';
 import '../../../domain/donation_creation/donation_creation.dart';
-import '../data_sources/data_sources.dart';
+import '../../../domain/donation_creation/entities/upload_image_param.dart';
 import '../donation_creation.dart';
 
 @LazySingleton(as: DonationCreationRepository)
@@ -21,5 +22,10 @@ class DonationCreationRepositoryImpl implements DonationCreationRepository {
     final result = await _dataSource
         .createHamsaCampaign(CreateHamsaCampaignModel.toModel(campaign));
     return right(result);
+  }
+
+  @override
+  Future<UploadTask> uploadImage(UploadImageParam uploadImageParam) {
+    return _dataSource.uploadImage(uploadImageParam);
   }
 }

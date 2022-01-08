@@ -10,6 +10,7 @@ class HamsaCampaign extends BaseHamsaCampaign {
     required double goal,
     required String description,
     required DateTime dueDate,
+    required List<String> imageGallery,
     required this.id,
   }) : super(
           title: title,
@@ -17,6 +18,7 @@ class HamsaCampaign extends BaseHamsaCampaign {
           goal: goal,
           description: description,
           dueDate: dueDate,
+          imageGallery: imageGallery,
         );
 
   @override

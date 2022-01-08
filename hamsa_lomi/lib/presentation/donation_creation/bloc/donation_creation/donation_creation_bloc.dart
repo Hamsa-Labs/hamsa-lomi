@@ -2,15 +2,15 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
+import '../../form_inputs/image_gallery_input.dart';
+import '../../../../domain/core/core.dart';
+import '../../../../domain/donation_creation/donation_creation.dart';
+import '../../../core/form_inputs/required_text_input.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../donation_creation.dart';
+
 // Project imports:
-import '../../../domain/core/entities/entities.dart';
-import '../../../domain/donation_creation/donation_creation.dart';
-import '../../core/form_inputs/required_text_input.dart';
-import '../form_inputs/required_category_input.dart';
-import '../form_inputs/required_due_date_input.dart';
-import '../form_inputs/required_goal_input.dart';
 
 part 'donation_creation_event.dart';
 part 'donation_creation_state.dart';
@@ -30,6 +30,7 @@ class DonationCreationBloc
         category: state.category,
         goal: state.goal,
         dueDate: state.dueDate,
+        imageGallery: state.imageGallery,
       );
       emit(state.copyWith(title: titleInput, status: status));
     });
@@ -41,6 +42,7 @@ class DonationCreationBloc
         category: state.category,
         goal: state.goal,
         dueDate: state.dueDate,
+        imageGallery: state.imageGallery,
       );
       emit(state.copyWith(description: descriptionInput, status: status));
     });
@@ -52,6 +54,7 @@ class DonationCreationBloc
         category: categoryInput,
         goal: state.goal,
         dueDate: state.dueDate,
+        imageGallery: state.imageGallery,
       );
       emit(state.copyWith(category: categoryInput, status: status));
     });
@@ -63,18 +66,49 @@ class DonationCreationBloc
         goal: goalInput,
         title: state.title,
         dueDate: state.dueDate,
+        imageGallery: state.imageGallery,
       );
       emit(state.copyWith(status: status, goal: goalInput));
     });
     on<DueDateChanged>((event, emit) {
       final dueDateInput = RequiredDueDateInput.dirty(event.dueDate);
       final status = _validateFormInputs(
-          title: state.title,
-          description: state.description,
-          category: state.category,
-          goal: state.goal,
-          dueDate: dueDateInput);
+        title: state.title,
+        description: state.description,
+        category: state.category,
+        goal: state.goal,
+        dueDate: dueDateInput,
+        imageGallery: state.imageGallery,
+      );
       emit(state.copyWith(status: status, dueDate: dueDateInput));
+    });
+    on<ImageGalleryUpdated>((event, emit) async {
+      final imageGalleryInput = ImageGalleryInput.dirty([
+        ...state.imageGallery.value,
+        event.downloadUrl,
+      ]);
+      final status = _validateFormInputs(
+        title: state.title,
+        description: state.description,
+        category: state.category,
+        goal: state.goal,
+        dueDate: state.dueDate,
+        imageGallery: imageGalleryInput,
+      );
+      emit(state.copyWith(status: status, imageGallery: imageGalleryInput));
+    });
+    on<ImageRemoved>((event, emit) async {
+      final modifiedList = [...state.imageGallery.value]..removeAt(event.index);
+      final imageGalleryInput = ImageGalleryInput.dirty(modifiedList);
+      final status = _validateFormInputs(
+        title: state.title,
+        description: state.description,
+        category: state.category,
+        goal: state.goal,
+        dueDate: state.dueDate,
+        imageGallery: imageGalleryInput,
+      );
+      emit(state.copyWith(status: status, imageGallery: imageGalleryInput));
     });
     on<DonationCreationFormSubmitted>((event, emit) async {
       if (state.status.isValidated) {
@@ -87,6 +121,7 @@ class DonationCreationBloc
             goal: state.goal.value,
             description: state.description.value,
             dueDate: state.dueDate.value!,
+            imageGallery: state.imageGallery.value,
           ),
         );
 
@@ -97,12 +132,21 @@ class DonationCreationBloc
     });
   }
 
-  FormzStatus _validateFormInputs(
-      {required RequiredTextInput title,
-      required RequiredTextInput description,
-      required RequiredCategoryInput category,
-      required RequiredGoalInput goal,
-      required RequiredDueDateInput dueDate}) {
-    return Formz.validate([title, description, category, goal, dueDate]);
+  FormzStatus _validateFormInputs({
+    required RequiredTextInput title,
+    required RequiredTextInput description,
+    required RequiredCategoryInput category,
+    required RequiredGoalInput goal,
+    required RequiredDueDateInput dueDate,
+    required ImageGalleryInput imageGallery,
+  }) {
+    return Formz.validate([
+      title,
+      description,
+      category,
+      goal,
+      dueDate,
+      imageGallery,
+    ]);
   }
 }
