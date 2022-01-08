@@ -15,21 +15,24 @@ class CreateHamsaCampaignModel extends CreateHamsaCampaign {
     required double goal,
     required String description,
     required DateTime dueDate,
+    required List<String> imageGallery,
   }) : super(
-          category: category,
-          description: description,
-          dueDate: dueDate,
-          goal: goal,
-          title: title,
-        );
+            category: category,
+            description: description,
+            dueDate: dueDate,
+            goal: goal,
+            title: title,
+            imageGallery: imageGallery);
 
   static CreateHamsaCampaignModel toModel(CreateHamsaCampaign entity) {
     return CreateHamsaCampaignModel(
-        title: entity.title,
-        category: entity.category,
-        goal: entity.goal,
-        description: entity.description,
-        dueDate: entity.dueDate);
+      title: entity.title,
+      category: entity.category,
+      goal: entity.goal,
+      description: entity.description,
+      dueDate: entity.dueDate,
+      imageGallery: entity.imageGallery,
+    );
   }
 
   Map<String, dynamic> toJson() => _$CreateHamsaCampaignModelToJson(this);

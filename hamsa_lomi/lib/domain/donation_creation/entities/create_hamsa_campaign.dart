@@ -8,12 +8,14 @@ class CreateHamsaCampaign extends BaseHamsaCampaign {
     required double goal,
     required String description,
     required DateTime dueDate,
+    required List<String> imageGallery,
   }) : super(
           title: title,
           category: category,
           goal: goal,
           description: description,
           dueDate: dueDate,
+          imageGallery: imageGallery,
         );
 
   @override

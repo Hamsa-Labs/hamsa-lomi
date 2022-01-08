@@ -14,6 +14,9 @@ CreateHamsaCampaignModel _$CreateHamsaCampaignModelFromJson(
       goal: (json['goal'] as num).toDouble(),
       description: json['description'] as String,
       dueDate: DateTime.parse(json['dueDate'] as String),
+      imageGallery: (json['imageGallery'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
     );
 
 Map<String, dynamic> _$CreateHamsaCampaignModelToJson(
@@ -24,6 +27,7 @@ Map<String, dynamic> _$CreateHamsaCampaignModelToJson(
       'goal': instance.goal,
       'description': instance.description,
       'dueDate': instance.dueDate.toIso8601String(),
+      'imageGallery': instance.imageGallery,
     };
 
 const _$DonationCategoryEnumMap = {
