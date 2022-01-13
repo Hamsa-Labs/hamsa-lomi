@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 import '../bloc/donation_creation/donation_creation_bloc.dart';
 import 'package:intl/intl.dart';
 
@@ -37,18 +38,7 @@ class DonationCreationForm extends StatelessWidget {
               _DescriptionInput(),
               _DueDateInput(),
               _GalleryInput(),
-              BlocBuilder<DonationCreationBloc, DonationCreationState>(
-                builder: (context, state) {
-                  return ElevatedButton(
-                    onPressed: () {
-                      context
-                          .read<DonationCreationBloc>()
-                          .add(DonationCreationFormSubmitted());
-                    },
-                    child: Text('${state.status} Submit'),
-                  );
-                },
-              ),
+              Center(child: _SubmitFormButton()),
             ],
           ),
         ),
@@ -245,6 +235,44 @@ class _GalleryInput extends StatelessWidget {
             onImageRemove: (index) {
               context.read<DonationCreationBloc>().add(ImageRemoved(index));
             },
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _SubmitFormButton extends StatelessWidget {
+  const _SubmitFormButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<DonationCreationBloc, DonationCreationState>(
+      builder: (context, state) {
+        return ElevatedButton(
+          onPressed: state.status.isValidated
+              ? () {
+                  context
+                      .read<DonationCreationBloc>()
+                      .add(DonationCreationFormSubmitted());
+                }
+              : null,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (state.status.isSubmissionInProgress)
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: SizedBox(
+                    width: 16,
+                    height: 16,
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              Text('Start'),
+            ],
           ),
         );
       },
