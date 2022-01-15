@@ -1,10 +1,12 @@
 // Flutter imports:
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 // Project imports:
@@ -39,6 +41,7 @@ class DonationCreationForm extends StatelessWidget {
               _DueDateInput(),
               _GalleryInput(),
               _AddVideoInput(),
+              _AddDocumentInput(),
               Center(child: _SubmitFormButton()),
             ],
           ),
@@ -299,7 +302,7 @@ class _AddVideoInputState extends State<_AddVideoInput> {
         visible: _pickedFile != null,
         child: TextField(
           controller: TextEditingController(text: _pickedFile?.name ?? ''),
-          enabled: false,
+          readOnly: true,
           decoration: InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16.0),
@@ -328,6 +331,69 @@ class _AddVideoInputState extends State<_AddVideoInput> {
                 source: ImageSource.gallery, maxDuration: Duration(minutes: 1));
             setState(() {
               _pickedFile = file;
+            });
+          },
+          child: Text('ADD'),
+        ),
+      ),
+    );
+  }
+}
+
+class _AddDocumentInput extends StatefulWidget {
+  const _AddDocumentInput({Key? key}) : super(key: key);
+
+  @override
+  State<_AddDocumentInput> createState() => _AddDocumentInputState();
+}
+
+class _AddDocumentInputState extends State<_AddDocumentInput> {
+  FilePickerResult? _result;
+
+  @override
+  Widget build(BuildContext context) {
+    return CreationFormField(
+      label: 'Add Document',
+      child: Visibility(
+        visible: _result != null,
+        child: TextField(
+          controller:
+              TextEditingController(text: _result?.files.first.name ?? ''),
+          readOnly: true,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16.0),
+            ),
+            prefixIcon: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                width: 8,
+                height: 8,
+                child: CircularProgressIndicator(),
+              ),
+            ),
+            suffixIcon: IconButton(
+              onPressed: () {
+                setState(() {
+                  _result = null;
+                });
+              },
+              icon: Icon(Icons.close),
+            ),
+          ),
+        ),
+        replacement: OutlinedButton(
+          onPressed: () async {
+            final result = await FilePicker.platform.pickFiles(
+              allowMultiple: false,
+              type: FileType.custom,
+              allowedExtensions: [
+                'jpg',
+                'pdf',
+              ],
+            );
+            setState(() {
+              _result = result;
             });
           },
           child: Text('ADD'),
