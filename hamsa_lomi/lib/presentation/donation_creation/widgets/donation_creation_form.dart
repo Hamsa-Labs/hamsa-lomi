@@ -1,16 +1,19 @@
 // Flutter imports:
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../bloc/donation_creation/donation_creation_bloc.dart';
+import 'package:formz/formz.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 // Project imports:
 import '../../../domain/core/core.dart';
 import '../../../injection/injection.dart';
 import '../../constants/app_assets_constant.dart';
+import '../bloc/donation_creation/donation_creation_bloc.dart';
 import 'creation_form_field.dart';
 import 'image_uploader.dart';
 
@@ -37,18 +40,9 @@ class DonationCreationForm extends StatelessWidget {
               _DescriptionInput(),
               _DueDateInput(),
               _GalleryInput(),
-              BlocBuilder<DonationCreationBloc, DonationCreationState>(
-                builder: (context, state) {
-                  return ElevatedButton(
-                    onPressed: () {
-                      context
-                          .read<DonationCreationBloc>()
-                          .add(DonationCreationFormSubmitted());
-                    },
-                    child: Text('${state.status} Submit'),
-                  );
-                },
-              ),
+              _AddVideoInput(),
+              _AddDocumentInput(),
+              Center(child: _SubmitFormButton()),
             ],
           ),
         ),
@@ -248,6 +242,163 @@ class _GalleryInput extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class _SubmitFormButton extends StatelessWidget {
+  const _SubmitFormButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<DonationCreationBloc, DonationCreationState>(
+      builder: (context, state) {
+        return ElevatedButton(
+          onPressed: state.status.isValidated
+              ? () {
+                  context
+                      .read<DonationCreationBloc>()
+                      .add(DonationCreationFormSubmitted());
+                }
+              : null,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (state.status.isSubmissionInProgress)
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: SizedBox(
+                    width: 16,
+                    height: 16,
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              Text('Start'),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _AddVideoInput extends StatefulWidget {
+  const _AddVideoInput({Key? key}) : super(key: key);
+
+  @override
+  State<_AddVideoInput> createState() => _AddVideoInputState();
+}
+
+class _AddVideoInputState extends State<_AddVideoInput> {
+  XFile? _pickedFile;
+
+  @override
+  Widget build(BuildContext context) {
+    return CreationFormField(
+      label: 'Add Video Attachment',
+      child: Visibility(
+        visible: _pickedFile != null,
+        child: TextField(
+          controller: TextEditingController(text: _pickedFile?.name ?? ''),
+          readOnly: true,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16.0),
+            ),
+            prefixIcon: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                width: 8,
+                height: 8,
+                child: CircularProgressIndicator(),
+              ),
+            ),
+            suffixIcon: IconButton(
+              onPressed: () {
+                setState(() {
+                  _pickedFile = null;
+                });
+              },
+              icon: Icon(Icons.close),
+            ),
+          ),
+        ),
+        replacement: OutlinedButton(
+          onPressed: () async {
+            final file = await ImagePicker().pickVideo(
+                source: ImageSource.gallery, maxDuration: Duration(minutes: 1));
+            setState(() {
+              _pickedFile = file;
+            });
+          },
+          child: Text('ADD'),
+        ),
+      ),
+    );
+  }
+}
+
+class _AddDocumentInput extends StatefulWidget {
+  const _AddDocumentInput({Key? key}) : super(key: key);
+
+  @override
+  State<_AddDocumentInput> createState() => _AddDocumentInputState();
+}
+
+class _AddDocumentInputState extends State<_AddDocumentInput> {
+  FilePickerResult? _result;
+
+  @override
+  Widget build(BuildContext context) {
+    return CreationFormField(
+      label: 'Add Document',
+      child: Visibility(
+        visible: _result != null,
+        child: TextField(
+          controller:
+              TextEditingController(text: _result?.files.first.name ?? ''),
+          readOnly: true,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16.0),
+            ),
+            prefixIcon: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                width: 8,
+                height: 8,
+                child: CircularProgressIndicator(),
+              ),
+            ),
+            suffixIcon: IconButton(
+              onPressed: () {
+                setState(() {
+                  _result = null;
+                });
+              },
+              icon: Icon(Icons.close),
+            ),
+          ),
+        ),
+        replacement: OutlinedButton(
+          onPressed: () async {
+            final result = await FilePicker.platform.pickFiles(
+              allowMultiple: false,
+              type: FileType.custom,
+              allowedExtensions: [
+                'jpg',
+                'pdf',
+              ],
+            );
+            setState(() {
+              _result = result;
+            });
+          },
+          child: Text('ADD'),
+        ),
+      ),
     );
   }
 }
