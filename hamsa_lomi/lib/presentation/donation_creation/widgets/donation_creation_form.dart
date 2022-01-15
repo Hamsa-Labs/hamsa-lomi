@@ -38,6 +38,7 @@ class DonationCreationForm extends StatelessWidget {
               _DescriptionInput(),
               _DueDateInput(),
               _GalleryInput(),
+              _AddVideoInput(),
               Center(child: _SubmitFormButton()),
             ],
           ),
@@ -276,6 +277,62 @@ class _SubmitFormButton extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class _AddVideoInput extends StatefulWidget {
+  const _AddVideoInput({Key? key}) : super(key: key);
+
+  @override
+  State<_AddVideoInput> createState() => _AddVideoInputState();
+}
+
+class _AddVideoInputState extends State<_AddVideoInput> {
+  XFile? _pickedFile;
+
+  @override
+  Widget build(BuildContext context) {
+    return CreationFormField(
+      label: 'Add Video Attachment',
+      child: Visibility(
+        visible: _pickedFile != null,
+        child: TextField(
+          controller: TextEditingController(text: _pickedFile?.name ?? ''),
+          enabled: false,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16.0),
+            ),
+            prefixIcon: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                width: 8,
+                height: 8,
+                child: CircularProgressIndicator(),
+              ),
+            ),
+            suffixIcon: IconButton(
+              onPressed: () {
+                setState(() {
+                  _pickedFile = null;
+                });
+              },
+              icon: Icon(Icons.close),
+            ),
+          ),
+        ),
+        replacement: OutlinedButton(
+          onPressed: () async {
+            final file = await ImagePicker().pickVideo(
+                source: ImageSource.gallery, maxDuration: Duration(minutes: 1));
+            setState(() {
+              _pickedFile = file;
+            });
+          },
+          child: Text('ADD'),
+        ),
+      ),
     );
   }
 }
