@@ -6,13 +6,14 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../domain/donation_creation/entities/upload_attachment_param.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 // Project imports:
 import '../../../injection/injection.dart';
 import '../../constants/app_assets_constant.dart';
-import '../bloc/image_upload/image_upload_bloc.dart';
+import '../bloc/image_upload/attachment_upload_bloc.dart';
 
 const width = 68;
 const height = 56;
@@ -132,13 +133,16 @@ class _Image extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<ImageUploadBloc>()
+      create: (context) => getIt<AttachmentUploadBloc>()
         ..add(
-          UploadImageRequested(file),
+          UploadAttachmentRequested(
+            file: file,
+            attachmentType: AttachmentType.image,
+          ),
         ),
-      child: BlocConsumer<ImageUploadBloc, ImageUploadState>(
+      child: BlocConsumer<AttachmentUploadBloc, AttachmentUploadState>(
         listener: (context, state) {
-          if (state.uploadStatus == ImageUploadStatus.success &&
+          if (state.uploadStatus == AttachmentUploadStatus.success &&
               state.downloadUrl != null) {
             onUploadSuccess(state.downloadUrl!);
           }
@@ -170,11 +174,11 @@ class _Image extends StatelessWidget {
                       child: IconButton(
                         onPressed: () {
                           context
-                              .read<ImageUploadBloc>()
+                              .read<AttachmentUploadBloc>()
                               .add(RunningStateToggled());
                         },
                         icon: Icon(
-                            state.uploadStatus == ImageUploadStatus.running
+                            state.uploadStatus == AttachmentUploadStatus.running
                                 ? Icons.pause
                                 : Icons.play_arrow,
                             color: Colors.white),
@@ -194,7 +198,9 @@ class _Image extends StatelessWidget {
               InkWell(
                 onTap: () {
                   onRemove(file);
-                  context.read<ImageUploadBloc>().add(ImageUploadCancelled());
+                  context
+                      .read<AttachmentUploadBloc>()
+                      .add(AttachmentUploadCancelled());
                 },
                 child: Container(
                   decoration: BoxDecoration(

@@ -7,7 +7,7 @@ import 'package:injectable/injectable.dart';
 import '../../../domain/core/entities/hamsa_campaign.dart';
 import '../../../domain/core/failure.dart';
 import '../../../domain/donation_creation/donation_creation.dart';
-import '../../../domain/donation_creation/entities/upload_image_param.dart';
+import '../../../domain/donation_creation/entities/upload_attachment_param.dart';
 import '../donation_creation.dart';
 
 @LazySingleton(as: DonationCreationRepository)
@@ -25,7 +25,7 @@ class DonationCreationRepositoryImpl implements DonationCreationRepository {
   }
 
   @override
-  Future<UploadTask> uploadImage(UploadImageParam uploadImageParam) {
+  Future<UploadTask> uploadAttachment(UploadAttachmentParam uploadImageParam) {
     return _dataSource.uploadImage(uploadImageParam);
   }
 }

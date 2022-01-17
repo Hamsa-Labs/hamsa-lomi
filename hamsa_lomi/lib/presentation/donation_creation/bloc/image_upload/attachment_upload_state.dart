@@ -1,29 +1,36 @@
-part of 'image_upload_bloc.dart';
+part of 'attachment_upload_bloc.dart';
 
-enum ImageUploadStatus { initial, paused, running, cancelled, success, error }
+enum AttachmentUploadStatus {
+  initial,
+  paused,
+  running,
+  cancelled,
+  success,
+  error
+}
 
-class ImageUploadState extends Equatable {
+class AttachmentUploadState extends Equatable {
   final double uploadProgress;
-  final ImageUploadStatus uploadStatus;
+  final AttachmentUploadStatus uploadStatus;
   final String? error;
 
   final String? downloadUrl;
 
-  const ImageUploadState(
+  const AttachmentUploadState(
       {this.uploadProgress = 0,
-      this.uploadStatus = ImageUploadStatus.initial,
+      this.uploadStatus = AttachmentUploadStatus.initial,
       this.error,
       this.downloadUrl});
 
   @override
   List<Object?> get props => [uploadProgress, uploadStatus, error, downloadUrl];
 
-  ImageUploadState copyWith(
+  AttachmentUploadState copyWith(
       {double? uploadProgress,
-      ImageUploadStatus? uploadStatus,
+      AttachmentUploadStatus? uploadStatus,
       String? error,
       String? downloadUrl}) {
-    return ImageUploadState(
+    return AttachmentUploadState(
         uploadProgress: uploadProgress ?? this.uploadProgress,
         uploadStatus: uploadStatus ?? this.uploadStatus,
         error: error ?? this.error,

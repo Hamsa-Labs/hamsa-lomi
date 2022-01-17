@@ -5,13 +5,13 @@ import 'package:injectable/injectable.dart';
 
 // Project imports:
 import '../../../domain/core/core.dart';
-import '../../../domain/donation_creation/entities/upload_image_param.dart';
+import '../../../domain/donation_creation/entities/upload_attachment_param.dart';
 import '../../core/models/hamsa_campaign_model.dart';
 import '../donation_creation.dart';
 
 abstract class DonationCreationDataSource {
   Future<HamsaCampaign> createHamsaCampaign(CreateHamsaCampaignModel campaign);
-  Future<UploadTask> uploadImage(UploadImageParam param);
+  Future<UploadTask> uploadImage(UploadAttachmentParam param);
 }
 
 @LazySingleton(as: DonationCreationDataSource)
@@ -29,7 +29,7 @@ class DonationCreationDataSourceImpl implements DonationCreationDataSource {
   }
 
   @override
-  Future<UploadTask> uploadImage(UploadImageParam param) async {
+  Future<UploadTask> uploadImage(UploadAttachmentParam param) async {
     // TODO: Generate unique image file name for each image to be uploaded.
     final task = storage.ref('uploads/image.jpg').putFile(param.file);
     task.snapshotEvents.listen((event) async {
