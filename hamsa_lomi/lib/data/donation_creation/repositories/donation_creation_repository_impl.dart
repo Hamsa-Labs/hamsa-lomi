@@ -26,6 +26,6 @@ class DonationCreationRepositoryImpl implements DonationCreationRepository {
 
   @override
   Future<UploadTask> uploadAttachment(UploadAttachmentParam uploadImageParam) {
-    return _dataSource.uploadImage(uploadImageParam);
+    return _dataSource.uploadAttachment(uploadImageParam);
   }
 }

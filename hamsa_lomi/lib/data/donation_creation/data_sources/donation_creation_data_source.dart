@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:injectable/injectable.dart';
+import 'package:path/path.dart';
 
 // Project imports:
 import '../../../domain/core/core.dart';
@@ -11,7 +12,7 @@ import '../donation_creation.dart';
 
 abstract class DonationCreationDataSource {
   Future<HamsaCampaign> createHamsaCampaign(CreateHamsaCampaignModel campaign);
-  Future<UploadTask> uploadImage(UploadAttachmentParam param);
+  Future<UploadTask> uploadAttachment(UploadAttachmentParam param);
 }
 
 @LazySingleton(as: DonationCreationDataSource)
@@ -29,9 +30,8 @@ class DonationCreationDataSourceImpl implements DonationCreationDataSource {
   }
 
   @override
-  Future<UploadTask> uploadImage(UploadAttachmentParam param) async {
-    // TODO: Generate unique image file name for each image to be uploaded.
-    final task = storage.ref('uploads/image.jpg').putFile(param.file);
+  Future<UploadTask> uploadAttachment(UploadAttachmentParam param) async {
+    final task = _getReference(param).putFile(param.file);
     task.snapshotEvents.listen((event) async {
       if (event.state == TaskState.paused) {
         param.onPause();
@@ -50,5 +50,24 @@ class DonationCreationDataSourceImpl implements DonationCreationDataSource {
       }
     });
     return task;
+  }
+
+  Reference _getReference(UploadAttachmentParam param) {
+    Reference ref;
+    // TODO: Generate unique image file name for each image to be uploaded.
+    final fileName = basename(param.file.path);
+
+    switch (param.attachmentType) {
+      case AttachmentType.image:
+        ref = storage.ref('images/$fileName');
+        break;
+      case AttachmentType.video:
+        ref = storage.ref('videos/$fileName');
+        break;
+      case AttachmentType.document:
+        ref = storage.ref('documents/$fileName');
+        break;
+    }
+    return ref;
   }
 }
