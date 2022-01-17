@@ -4,17 +4,15 @@
 // InjectableConfigGenerator
 // **************************************************************************
 
+// Package imports:
 import 'package:firebase_auth/firebase_auth.dart' as _i10;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
+// Project imports:
 import '../data/auth/data_sources/auth_data_source.dart' as _i13;
 import '../data/auth/repositories/auth_repository_impl.dart' as _i15;
-import '../data/donation_creation/data_sources/donation_creation_data_source.dart'
-    as _i7;
 import '../data/donation_creation/donation_creation.dart' as _i9;
-import '../data/donation_creation/repositories/donation_creation_repository_impl.dart'
-    as _i8;
 import '../domain/auth/repositories/auth_repository.dart' as _i14;
 import '../domain/auth/use_cases/create_account_use_case.dart' as _i16;
 import '../domain/auth/use_cases/get_user_changes_stream_use_case.dart' as _i17;
@@ -23,12 +21,17 @@ import '../domain/auth/use_cases/verify_phone_number_use_case.dart' as _i20;
 import '../domain/auth/use_cases/verify_sms_code_use_case.dart' as _i21;
 import '../domain/donation_creation/donation_creation.dart' as _i6;
 import '../domain/donation_creation/repositories/repositories.dart' as _i4;
+import '../presentation/auth/bloc/auth_bloc.dart' as _i22;
+import '../presentation/create_account/bloc/create_account_bloc.dart' as _i23;
+
+import '../data/donation_creation/data_sources/donation_creation_data_source.dart'
+    as _i7;
+import '../data/donation_creation/repositories/donation_creation_repository_impl.dart'
+    as _i8;
 import '../domain/donation_creation/use_cases/create_hamsa_campain_use_case.dart'
     as _i3;
 import '../domain/donation_creation/use_cases/upload_attachment_use_case.dart'
     as _i11;
-import '../presentation/auth/bloc/auth_bloc.dart' as _i22;
-import '../presentation/create_account/bloc/create_account_bloc.dart' as _i23;
 import '../presentation/donation_creation/bloc/donation_creation/donation_creation_bloc.dart'
     as _i5;
 import '../presentation/donation_creation/bloc/image_upload/attachment_upload_bloc.dart'
