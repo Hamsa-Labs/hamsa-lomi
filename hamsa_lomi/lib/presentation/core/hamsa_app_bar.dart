@@ -45,7 +45,6 @@ class HamsaAppBar extends StatelessWidget implements PreferredSizeWidget {
                     child: IconButton(
                       // color: Colors.transparent,
                       // padding: EdgeInsets.zero,
-                      // constraints: BoxConstraints(maxHeight: 12.0, maxWidth: 12.0),
                       icon: Icon(Icons.arrow_back),
                       onPressed: () {
                         Navigator.maybePop(context);
