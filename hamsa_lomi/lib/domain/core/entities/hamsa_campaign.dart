@@ -11,6 +11,8 @@ class HamsaCampaign extends BaseHamsaCampaign {
     required String description,
     required DateTime dueDate,
     required List<String> imageGallery,
+    final String? videoAttachment,
+    final String? documentAttachment,
     required this.id,
   }) : super(
           title: title,
@@ -19,6 +21,8 @@ class HamsaCampaign extends BaseHamsaCampaign {
           description: description,
           dueDate: dueDate,
           imageGallery: imageGallery,
+          videoAttachment: videoAttachment,
+          documentAttachment: documentAttachment,
         );
 
   @override
