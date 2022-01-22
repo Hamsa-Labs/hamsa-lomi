@@ -1,23 +1,24 @@
-// Flutter imports:
+// Dart imports:
 import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import '../../../domain/donation_creation/entities/upload_attachment_param.dart';
-import '../bloc/image_upload/attachment_upload_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
 // Project imports:
 import '../../../domain/core/core.dart';
+import '../../../domain/donation_creation/entities/upload_attachment_param.dart';
 import '../../../injection/injection.dart';
 import '../../constants/app_assets_constant.dart';
 import '../bloc/donation_creation/donation_creation_bloc.dart';
+import '../bloc/image_upload/attachment_upload_bloc.dart';
 import 'creation_form_field.dart';
 import 'image_uploader.dart';
 
@@ -274,7 +275,9 @@ class _AddVideoInputState extends State<_AddVideoInput> {
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
           } else if (state.uploadStatus == AttachmentUploadStatus.success &&
               state.downloadUrl != null) {
-            // TODO
+            context
+                .read<DonationCreationBloc>()
+                .add(VideoAttachmentAdded(state.downloadUrl!));
           }
         },
         builder: (context, state) {
@@ -359,7 +362,9 @@ class _AddDocumentInputState extends State<_AddDocumentInput> {
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
           } else if (state.uploadStatus == AttachmentUploadStatus.success &&
               state.downloadUrl != null) {
-            // TODO
+            context
+                .read<DonationCreationBloc>()
+                .add(DocumentAttachmentAdded(state.downloadUrl!));
           }
         },
         builder: (context, state) {

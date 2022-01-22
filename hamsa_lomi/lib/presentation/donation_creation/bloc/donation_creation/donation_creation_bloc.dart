@@ -2,13 +2,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:formz/formz.dart';
-import '../../form_inputs/image_gallery_input.dart';
+import 'package:injectable/injectable.dart';
+
+// Project imports:
 import '../../../../domain/core/core.dart';
 import '../../../../domain/donation_creation/donation_creation.dart';
 import '../../../core/form_inputs/required_text_input.dart';
-import 'package:injectable/injectable.dart';
-
 import '../../donation_creation.dart';
+import '../../form_inputs/image_gallery_input.dart';
 
 // Project imports:
 
@@ -110,6 +111,12 @@ class DonationCreationBloc
       );
       emit(state.copyWith(status: status, imageGallery: imageGalleryInput));
     });
+    on<VideoAttachmentAdded>((event, emit) {
+      emit(state.copyWith(videoAttachment: event.downloadUrl));
+    });
+    on<DocumentAttachmentAdded>((event, emit) {
+      emit(state.copyWith(documentAttachment: event.downloadUrl));
+    });
     on<DonationCreationFormSubmitted>((event, emit) async {
       if (state.status.isValidated) {
         emit(state.copyWith(status: FormzStatus.submissionInProgress));
@@ -122,6 +129,8 @@ class DonationCreationBloc
             description: state.description.value,
             dueDate: state.dueDate.value!,
             imageGallery: state.imageGallery.value,
+            documentAttachment: state.documentAttachment,
+            videoAttachment: state.videoAttachment,
           ),
         );
 

@@ -67,6 +67,24 @@ class ImageRemoved extends DonationCreationEvent {
   List<Object?> get props => [index];
 }
 
+class VideoAttachmentAdded extends DonationCreationEvent {
+  final String downloadUrl;
+
+  VideoAttachmentAdded(this.downloadUrl);
+
+  @override
+  List<Object?> get props => [downloadUrl];
+}
+
+class DocumentAttachmentAdded extends DonationCreationEvent {
+  final String downloadUrl;
+
+  DocumentAttachmentAdded(this.downloadUrl);
+
+  @override
+  List<Object?> get props => [downloadUrl];
+}
+
 class DonationCreationFormSubmitted extends DonationCreationEvent {
   @override
   List<Object?> get props => [];
