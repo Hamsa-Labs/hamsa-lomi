@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 // Project imports:
 import '../../constants/app_assets_constant.dart';
 import '../../constants/app_string_constant.dart';
+import '../../core/hamsa_app_bar.dart';
 import '../../create_account/pages/create_account_page.dart';
-import '../../share_widgets/appbar_widget.dart';
 import '../../theme/hamsa_theme.dart';
 import '../widget/button_widget.dart';
 

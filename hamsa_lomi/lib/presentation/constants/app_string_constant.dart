@@ -42,14 +42,10 @@ class HamsaStrings {
   static const String fundraisers = 'FUNDRAISERS';
   static const String profile = 'PROFILE';
 
-
   //icons strings
   static const String health = 'Health';
   static const String education = 'Education';
   static const String charity = 'Charity';
-
-
-
 
 //Home page Strings
   static const String emg = 'Emergency Donations';

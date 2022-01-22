@@ -1,14 +1,14 @@
 part of 'create_account_bloc.dart';
 
 class CreateAccountState extends Equatable {
-  final UsernameInput username;
+  final RequiredTextInput username;
   final EmailInput email;
   final PasswordInput password;
   final FormzStatus status;
   final String? error;
 
   const CreateAccountState(
-      {this.username = const UsernameInput.pure(),
+      {this.username = const RequiredTextInput.pure(),
       this.email = const EmailInput.pure(),
       this.password = const PasswordInput.pure(),
       this.status = FormzStatus.pure,
@@ -18,7 +18,7 @@ class CreateAccountState extends Equatable {
   List<Object?> get props => [username, email, password, status, error];
 
   CreateAccountState copyWith(
-      {UsernameInput? username,
+      {RequiredTextInput? username,
       EmailInput? email,
       PasswordInput? password,
       FormzStatus? status,
