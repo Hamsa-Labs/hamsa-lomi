@@ -2,10 +2,8 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-// import 'presentation/lang_acct_type/pages/choose_account_type.dart';
-// import 'presentation/page/onboarding_page.dart';
+import 'presentation/splash/pages/splash_page.dart';
 import 'presentation/theme/hamsa_theme.dart';
-import 'presentation/user_profile/pages/personal_profile_page.dart';
 
 class App extends StatelessWidget {
   @override
@@ -14,7 +12,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Hamsa Lomi',
       theme: HamsaTheme.lightTheme,
-      home: PersonalProfile(),
+      home: SplashPage(),
     );
   }
 }
