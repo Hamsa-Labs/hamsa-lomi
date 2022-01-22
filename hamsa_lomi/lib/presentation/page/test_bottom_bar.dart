@@ -1,7 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
+import '../constants/app_assets_constant.dart';
 import '../core/bottombar_widget.dart';
 import '../core/hamsa_app_bar.dart';
-import '../constants/app_assets_constant.dart';
 
 class BottomNav extends StatefulWidget {
   @override

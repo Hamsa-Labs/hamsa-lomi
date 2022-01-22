@@ -1,14 +1,13 @@
 //flutter imports:
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-// import '../../theme/hamsa_theme.dart';
+import '../../core/hamsa_app_bar.dart';
 import '../widgets/balance_card.dart';
 import '../widgets/image_container.dart';
 import '../widgets/setting_container.dart';
 import '../widgets/text_button.dart';
 // file imports:
 import '../../constants/app_assets_constant.dart';
-import '../../share_widgets/appbar_widget.dart';
 
 class PersonalProfile extends StatefulWidget {
   const PersonalProfile({Key? key}) : super(key: key);

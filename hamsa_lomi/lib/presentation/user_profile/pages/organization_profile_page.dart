@@ -1,8 +1,8 @@
 //flutter imports:
 import 'package:flutter/material.dart';
+import '../../core/hamsa_app_bar.dart';
 // file imports:
 import '../../constants/app_assets_constant.dart';
-import '../../share_widgets/appbar_widget.dart';
 
 class OrganizationProfile extends StatefulWidget {
   const OrganizationProfile({Key? key}) : super(key: key);
