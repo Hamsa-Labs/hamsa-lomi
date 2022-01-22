@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../domain/donation_creation/entities/upload_attachment_param.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 // Project imports:
+import '../../../domain/donation_creation/entities/upload_attachment_param.dart';
 import '../../../injection/injection.dart';
 import '../../constants/app_assets_constant.dart';
 import '../bloc/image_upload/attachment_upload_bloc.dart';

@@ -6,7 +6,6 @@ import 'package:injectable/injectable.dart';
 import '../entities/upload_attachment_param.dart';
 import '../repositories/repositories.dart';
 
-
 @injectable
 class UploadAttachmentUseCase {
   final DonationCreationRepository _donationCreationRepository;
