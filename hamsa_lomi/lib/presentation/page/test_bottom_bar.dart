@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import '../core/bottombar_widget.dart';
+import '../core/hamsa_app_bar.dart';
 import '../constants/app_assets_constant.dart';
-import '../share_widgets/appbar_widget.dart';
-import '../share_widgets/bottombar_widget.dart';
-// import 'package:flutter_animated_bottom/custom_animated_bottom_bar.dart';
 
 class BottomNav extends StatefulWidget {
 
