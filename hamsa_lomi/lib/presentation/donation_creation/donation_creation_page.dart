@@ -18,6 +18,7 @@ class DonationCreationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HamsaAppBar(
+        withLeading: true,
         withLogo: false,
         appBarText: Text(
           'Start Fundraiser',

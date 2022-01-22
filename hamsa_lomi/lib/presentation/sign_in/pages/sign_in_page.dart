@@ -15,6 +15,7 @@ class SignInPage extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: HamsaAppBar(
+        withLeading: true,
         withLogo: true,
         appBarText: Text(
           'Login',

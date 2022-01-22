@@ -11,12 +11,11 @@ import '../constants/app_assets_constant.dart';
 
 class HamsaAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool withLogo;
+  final bool withLeading;
   final Text? appBarText;
 
-  const HamsaAppBar({
-    this.appBarText,
-    required this.withLogo,
-  });
+  const HamsaAppBar(
+      {this.appBarText, required this.withLogo, required this.withLeading});
 
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight + 10);
@@ -30,29 +29,31 @@ class HamsaAppBar extends StatelessWidget implements PreferredSizeWidget {
           centerTitle: false,
           backgroundColor: HamsaColors.lightBackground,
           title: appBarText,
-          leading: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              // color: HamsaColors.primaryColor,
-              // margin: EdgeInsets.only(left: 2,),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: HamsaColors.lightGray,
-                ),
-                // color: HamsaColors.lightGray,
-                borderRadius: BorderRadius.circular(15.0),
-              ),
-              child: IconButton(
-                // color: Colors.transparent,
-                // padding: EdgeInsets.zero,
-                // constraints: BoxConstraints(maxHeight: 12.0, maxWidth: 12.0),
-                icon: Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.maybePop(context);
-                },
-              ),
-            ),
-          ),
+          leading: withLeading
+              ? Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    // color: HamsaColors.primaryColor,
+                    // margin: EdgeInsets.only(left: 2,),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: HamsaColors.lightGray,
+                      ),
+                      // color: HamsaColors.lightGray,
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: IconButton(
+                      // color: Colors.transparent,
+                      // padding: EdgeInsets.zero,
+                      // constraints: BoxConstraints(maxHeight: 12.0, maxWidth: 12.0),
+                      icon: Icon(Icons.arrow_back),
+                      onPressed: () {
+                        Navigator.maybePop(context);
+                      },
+                    ),
+                  ),
+                )
+              : null,
           actions: [
             withLogo
                 ? Padding(

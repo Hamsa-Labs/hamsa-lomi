@@ -1,10 +1,12 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
+import '../constants/app_assets_constant.dart';
 import '../core/bottombar_widget.dart';
 import '../core/hamsa_app_bar.dart';
-import '../constants/app_assets_constant.dart';
 
 class BottomNav extends StatefulWidget {
-
   @override
   _BottomNavState createState() => _BottomNavState();
 }
@@ -17,13 +19,13 @@ class _BottomNavState extends State<BottomNav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: HamsaColors.lightBackground,
+        backgroundColor: HamsaColors.lightBackground,
         appBar: HamsaAppBar(
           withLogo: true,
+          withLeading: true,
           appBarText: Text('Testing bottom nav'),
         ),
-        bottomNavigationBar: _buildBottomBar()
-    );
+        bottomNavigationBar: _buildBottomBar());
   }
 
   Widget _buildBottomBar() {
