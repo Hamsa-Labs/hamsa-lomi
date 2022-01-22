@@ -9,6 +9,8 @@ class CreateHamsaCampaign extends BaseHamsaCampaign {
     required String description,
     required DateTime dueDate,
     required List<String> imageGallery,
+    final String? videoAttachment,
+    final String? documentAttachment,
   }) : super(
           title: title,
           category: category,
@@ -16,6 +18,8 @@ class CreateHamsaCampaign extends BaseHamsaCampaign {
           description: description,
           dueDate: dueDate,
           imageGallery: imageGallery,
+          videoAttachment: videoAttachment,
+          documentAttachment: documentAttachment,
         );
 
   @override

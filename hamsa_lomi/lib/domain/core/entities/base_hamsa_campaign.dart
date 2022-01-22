@@ -11,6 +11,8 @@ abstract class BaseHamsaCampaign extends Equatable {
   final String description;
   final DateTime dueDate;
   final List<String> imageGallery;
+  final String? videoAttachment;
+  final String? documentAttachment;
 
   BaseHamsaCampaign({
     required this.title,
@@ -19,6 +21,8 @@ abstract class BaseHamsaCampaign extends Equatable {
     required this.description,
     required this.dueDate,
     required this.imageGallery,
+    this.videoAttachment,
+    this.documentAttachment,
   });
 
   @override
@@ -29,5 +33,7 @@ abstract class BaseHamsaCampaign extends Equatable {
         description,
         dueDate,
         imageGallery,
+        videoAttachment,
+        documentAttachment
       ];
 }

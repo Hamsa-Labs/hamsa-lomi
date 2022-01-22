@@ -6,10 +6,10 @@ import 'package:firebase_storage/firebase_storage.dart';
 import '../../core/entities/hamsa_campaign.dart';
 import '../../core/failure.dart';
 import '../entities/create_hamsa_campaign.dart';
-import '../entities/upload_image_param.dart';
+import '../entities/upload_attachment_param.dart';
 
 abstract class DonationCreationRepository {
   Future<Either<Failure, HamsaCampaign>> createHamsaCampaign(
       CreateHamsaCampaign campaign);
-  Future<UploadTask> uploadImage(UploadImageParam uploadImageParam);
+  Future<UploadTask> uploadAttachment(UploadAttachmentParam uploadImageParam);
 }

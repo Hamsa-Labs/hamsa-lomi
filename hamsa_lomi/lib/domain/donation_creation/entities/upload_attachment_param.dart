@@ -8,16 +8,20 @@ import 'package:flutter/widgets.dart';
 // Package imports:
 import 'package:equatable/equatable.dart';
 
-class UploadImageParam extends Equatable {
+enum AttachmentType { image, video, document }
+
+class UploadAttachmentParam extends Equatable {
   final File file;
+  final AttachmentType attachmentType;
   final VoidCallback onPause;
   final ValueChanged<double> onRunning;
   final ValueChanged<String> onSuccess;
   final VoidCallback onCanceled;
   final ValueChanged<String> onError;
 
-  UploadImageParam({
+  UploadAttachmentParam({
     required this.file,
+    required this.attachmentType,
     required this.onPause,
     required this.onRunning,
     required this.onSuccess,
@@ -26,6 +30,13 @@ class UploadImageParam extends Equatable {
   });
 
   @override
-  List<Object?> get props =>
-      [file, onPause, onRunning, onSuccess, onCanceled, onError];
+  List<Object?> get props => [
+        file,
+        onPause,
+        onRunning,
+        onSuccess,
+        onCanceled,
+        onError,
+        attachmentType
+      ];
 }
