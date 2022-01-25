@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import '../donation_creation/donation_creation_page.dart';
 
 // Project imports:
 import '../constants/app_assets_constant.dart';
@@ -26,7 +27,7 @@ class HamsaBottomBar extends StatelessWidget {
   final Color? backgroundColor;
   final bool showElevation;
   final Duration animationDuration;
-  final List<BottomNavyBarItem> items;
+  final List<BottomNavBarItem> items;
   final ValueChanged<int> onItemSelected;
   final MainAxisAlignment mainAxisAlignment;
   final double itemCornerRadius;
@@ -38,6 +39,7 @@ class HamsaBottomBar extends StatelessWidget {
     final bgColor = backgroundColor ?? Theme.of(context).bottomAppBarColor;
 
     return Container(
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       decoration: BoxDecoration(
         color: bgColor,
       ),
@@ -45,24 +47,54 @@ class HamsaBottomBar extends StatelessWidget {
         child: Container(
           width: double.infinity,
           height: containerHeight,
-          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
           child: Row(
             mainAxisAlignment: mainAxisAlignment,
-            children: items.map((item) {
-              var index = items.indexOf(item);
-              return GestureDetector(
-                onTap: () => onItemSelected(index),
-                child: _ItemWidget(
-                  item: item,
-                  iconSize: iconSize,
-                  isSelected: index == selectedIndex,
-                  backgroundColor: bgColor,
-                  itemCornerRadius: itemCornerRadius,
-                  animationDuration: animationDuration,
-                  curve: curve,
+            children: [
+              ...items.map((item) {
+                var index = items.indexOf(item);
+                return GestureDetector(
+                  onTap: () => onItemSelected(index),
+                  child: _ItemWidget(
+                    item: item,
+                    iconSize: iconSize,
+                    isSelected: index == selectedIndex,
+                    backgroundColor: bgColor,
+                    itemCornerRadius: itemCornerRadius,
+                    animationDuration: animationDuration,
+                    curve: curve,
+                  ),
+                );
+              }).toList(),
+              Material(
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(context, DonationCreationPage.route());
+                  },
+                  child: Container(
+                    width: 48,
+                    height: double.maxFinite,
+                    decoration: BoxDecoration(
+                      color: HamsaColors.primaryColor,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(14.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Icon(
+                          Icons.add,
+                          size: 18,
+                          color: HamsaColors.primaryColor,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-              );
-            }).toList(),
+              )
+            ],
           ),
         ),
       ),
@@ -73,7 +105,7 @@ class HamsaBottomBar extends StatelessWidget {
 class _ItemWidget extends StatelessWidget {
   final double iconSize;
   final bool isSelected;
-  final BottomNavyBarItem item;
+  final BottomNavBarItem item;
   final Color backgroundColor;
   final double itemCornerRadius;
   final Duration animationDuration;
@@ -96,7 +128,7 @@ class _ItemWidget extends StatelessWidget {
       container: true,
       selected: isSelected,
       child: AnimatedContainer(
-        width: isSelected ? 130 : 50,
+        width: isSelected ? 160 : 50,
         height: double.maxFinite,
         duration: animationDuration,
         curve: curve,
@@ -109,7 +141,7 @@ class _ItemWidget extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           physics: NeverScrollableScrollPhysics(),
           child: Container(
-            width: isSelected ? 130 : 50,
+            width: isSelected ? 160 : 50,
             padding: EdgeInsets.symmetric(horizontal: 8),
             child: Row(
               mainAxisSize: MainAxisSize.max,
@@ -151,8 +183,8 @@ class _ItemWidget extends StatelessWidget {
   }
 }
 
-class BottomNavyBarItem {
-  BottomNavyBarItem({
+class BottomNavBarItem {
+  BottomNavBarItem({
     required this.icon,
     required this.title,
     this.activeColor = HamsaColors.primaryColor,
