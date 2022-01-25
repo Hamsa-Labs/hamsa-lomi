@@ -17,7 +17,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return HamsaBottomBar(
-      containerHeight: 46,
+      containerHeight: 48,
       backgroundColor: HamsaColors.lightBackground,
       selectedIndex: _currentIndex,
       showElevation: true,
@@ -27,7 +27,7 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
       items: <BottomNavBarItem>[
         BottomNavBarItem(
           icon: Icon(Icons.home),
-          title: Text('Home'),
+          title: Text('HOME'),
           activeColor: HamsaColors.primaryColor,
           inactiveColor: _inactiveColor,
           textAlign: TextAlign.center,
