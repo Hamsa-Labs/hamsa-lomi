@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import '../widgets/custom_bottom_nav_bar.dart';
 
 // Project imports:
 import '../../donation_creation/donation_creation_page.dart';
@@ -18,6 +19,7 @@ class HomePage extends StatelessWidget {
           Navigator.push(context, DonationCreationPage.route());
         },
       ),
+      bottomNavigationBar: CustomBottomNavBar(),
     );
   }
 }

@@ -1,58 +1,45 @@
-// Flutter imports:
 import 'package:flutter/material.dart';
+import '../../constants/app_assets_constant.dart';
+import '../../core/hamsa_bottom_bar.dart';
 
-// Project imports:
-import '../constants/app_assets_constant.dart';
-import '../core/bottombar_widget.dart';
-import '../core/hamsa_app_bar.dart';
+class CustomBottomNavBar extends StatefulWidget {
+  const CustomBottomNavBar({Key? key}) : super(key: key);
 
-class BottomNav extends StatefulWidget {
   @override
-  _BottomNavState createState() => _BottomNavState();
+  State<CustomBottomNavBar> createState() => _CustomBottomNavBarState();
 }
 
-class _BottomNavState extends State<BottomNav> {
+class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
   int _currentIndex = 0;
 
   final _inactiveColor = Colors.grey;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: HamsaColors.lightBackground,
-        appBar: HamsaAppBar(
-          withLogo: true,
-          withLeading: true,
-          appBarText: Text('Testing bottom nav'),
-        ),
-        bottomNavigationBar: _buildBottomBar());
-  }
-
-  Widget _buildBottomBar() {
     return HamsaBottomBar(
-      containerHeight: 75,
+      containerHeight: 46,
       backgroundColor: HamsaColors.lightBackground,
       selectedIndex: _currentIndex,
       showElevation: true,
       itemCornerRadius: 15,
       curve: Curves.easeIn,
       onItemSelected: (index) => setState(() => _currentIndex = index),
-      items: <BottomNavyBarItem>[
-        BottomNavyBarItem(
+      items: <BottomNavBarItem>[
+        BottomNavBarItem(
           icon: Icon(Icons.home),
           title: Text('Home'),
           activeColor: HamsaColors.primaryColor,
           inactiveColor: _inactiveColor,
           textAlign: TextAlign.center,
         ),
-        BottomNavyBarItem(
+        BottomNavBarItem(
           icon: Icon(Icons.apps),
           title: Text('FUNDRAISERS'),
           activeColor: HamsaColors.primaryColor,
           inactiveColor: _inactiveColor,
           textAlign: TextAlign.center,
         ),
-        BottomNavyBarItem(
+        BottomNavBarItem(
           icon: Icon(Icons.person),
           title: Text(
             'PROFILE ',

@@ -26,7 +26,7 @@ class HamsaBottomBar extends StatelessWidget {
   final Color? backgroundColor;
   final bool showElevation;
   final Duration animationDuration;
-  final List<BottomNavyBarItem> items;
+  final List<BottomNavBarItem> items;
   final ValueChanged<int> onItemSelected;
   final MainAxisAlignment mainAxisAlignment;
   final double itemCornerRadius;
@@ -73,7 +73,7 @@ class HamsaBottomBar extends StatelessWidget {
 class _ItemWidget extends StatelessWidget {
   final double iconSize;
   final bool isSelected;
-  final BottomNavyBarItem item;
+  final BottomNavBarItem item;
   final Color backgroundColor;
   final double itemCornerRadius;
   final Duration animationDuration;
@@ -151,8 +151,8 @@ class _ItemWidget extends StatelessWidget {
   }
 }
 
-class BottomNavyBarItem {
-  BottomNavyBarItem({
+class BottomNavBarItem {
+  BottomNavBarItem({
     required this.icon,
     required this.title,
     this.activeColor = HamsaColors.primaryColor,
