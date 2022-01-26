@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import '../widgets/start_fundraiser_button.dart';
 import '../../core/hamsa_app_bar.dart';
 
 // Project imports:
@@ -18,7 +19,10 @@ class HomePage extends StatelessWidget {
         withLogo: false,
         appBarText: Text('Home'),
       ),
-      body: Text('Home Page'),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: StartFundraiserButton(),
+      ),
       bottomNavigationBar: CustomBottomNavBar(),
     );
   }
