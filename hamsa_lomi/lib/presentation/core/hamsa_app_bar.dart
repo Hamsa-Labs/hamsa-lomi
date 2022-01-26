@@ -29,6 +29,7 @@ class HamsaAppBar extends StatelessWidget implements PreferredSizeWidget {
           centerTitle: false,
           backgroundColor: HamsaColors.lightBackground,
           title: appBarText,
+          automaticallyImplyLeading: false,
           leading: withLeading
               ? Padding(
                   padding: const EdgeInsets.all(8.0),
