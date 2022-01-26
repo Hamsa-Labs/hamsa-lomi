@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import '../../core/hamsa_app_bar.dart';
 
 // Project imports:
 import '../widgets/custom_bottom_nav_bar.dart';
@@ -12,7 +13,11 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: HamsaAppBar(
+        withLeading: false,
+        withLogo: false,
+        appBarText: Text('Home'),
+      ),
       body: Text('Home Page'),
       bottomNavigationBar: CustomBottomNavBar(),
     );
