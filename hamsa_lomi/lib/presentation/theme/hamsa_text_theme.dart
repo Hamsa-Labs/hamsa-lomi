@@ -25,4 +25,7 @@ final TextTheme hamsaTextTheme = TextTheme(
     fontWeight: FontWeight.w700,
     color: Colors.black,
   ),
+  headline5: TextStyle(
+    fontSize: 18,
+  ),
 );
