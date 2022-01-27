@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import '../widgets/fundraising_filter.dart';
 
 // Project imports:
 import '../../core/hamsa_app_bar.dart';
@@ -21,7 +22,15 @@ class HomePage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: StartFundraiserButton(),
+        child: Column(
+          children: [
+            StartFundraiserButton(),
+            SizedBox(
+              height: 8.0,
+            ),
+            FundraiserFilter(),
+          ],
+        ),
       ),
       bottomNavigationBar: CustomBottomNavBar(),
     );
