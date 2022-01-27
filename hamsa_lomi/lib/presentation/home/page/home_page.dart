@@ -1,10 +1,10 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-import '../widgets/fundraising_filter.dart';
 
 // Project imports:
 import '../../core/hamsa_app_bar.dart';
 import '../widgets/custom_bottom_nav_bar.dart';
+import '../widgets/fundraising_filter.dart';
 import '../widgets/start_fundraiser_button.dart';
 
 // Project imports:

@@ -1,5 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_svg/svg.dart';
+
+// Project imports:
 import '../../constants/app_assets_constant.dart';
 
 class FundraiserFilter extends StatelessWidget {
