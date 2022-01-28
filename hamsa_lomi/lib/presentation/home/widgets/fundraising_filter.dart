@@ -28,14 +28,12 @@ class FundraiserFilter extends StatelessWidget {
           label: 'Charity',
           child: SvgPicture.asset(HamsaIcons.charityIcon),
         ),
-        // TODO: Change color for this option
-        // change color to cyan
         _FilteringOption(
           label: 'More',
+          color: HamsaColors.secondaryColor.withOpacity(0.1),
           child: SvgPicture.asset(
-            // TODO: More Icon isn't working properly.
-            // Asset for whatever reason is not being found.
             HamsaIcons.moreIcon,
+            color: HamsaColors.secondaryColor,
           ),
         ),
       ],
@@ -46,12 +44,11 @@ class FundraiserFilter extends StatelessWidget {
 class _FilteringOption extends StatelessWidget {
   final String label;
   final Widget child;
+  final Color? color;
 
-  const _FilteringOption({
-    Key? key,
-    required this.label,
-    required this.child,
-  }) : super(key: key);
+  const _FilteringOption(
+      {Key? key, required this.label, required this.child, this.color})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +57,7 @@ class _FilteringOption extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.0),
-            color: HamsaColors.lightBackground,
+            color: color ?? HamsaColors.lightBackground,
           ),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
