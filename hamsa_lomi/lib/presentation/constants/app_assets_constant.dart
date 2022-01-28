@@ -28,22 +28,19 @@ class HamsaColors {
 
 class HamsaIcons {
   //Icons path
-  static const String hamsaLogo =
-      'lib/presentation/assets/icons/hamsa_logo.svg';
-  static const String charityIcon = 'lib/presentation/assets/icons/charity.svg';
-  static const String educationIcon =
-      'lib/presentation/assets/icons/education.svg';
-  static const String healthIcon = 'lib/presentation/assets/icons/health.svg';
-  static const String optionsIcon = 'lib/presentation/assets/icons/options.svg';
-  static const String balanceIcon =
-      'lib/presentation/assets/icons/balance_icon.svg';
-  static const String paymentIcon =
-      'lib/presentation/assets/icons/payment_icon.svg';
-  static const String editIcon = 'lib/presentation/assets/icons/edit_icon.svg';
+  static const String hamsaLogo = 'assets/icons/hamsa_logo.svg';
+  static const String charityIcon = 'assets/icons/charity.svg';
+  static const String educationIcon = 'assets/icons/education.svg';
+  static const String healthIcon = 'assets/icons/health.svg';
+  static const String optionsIcon = 'assets/icons/options.svg';
+  static const String balanceIcon = 'assets/icons/balance_icon.svg';
+  static const String paymentIcon = 'assets/icons/payment_icon.svg';
+  static const String editIcon = 'assets/icons/edit_icon.svg';
+  static const String moreIcon = 'assets/icons/more.svg';
 }
 
 class HamsaImages {
 // default image we need to add
   static const String rectangleBackground =
-      'lib/presentation/assets/images/rectangle_background.png';
+      'assets/images/rectangle_background.png';
 }

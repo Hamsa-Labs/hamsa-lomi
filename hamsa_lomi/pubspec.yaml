@@ -65,16 +65,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - lib/presentation/assets/images/rectangle_background.png
-    - lib/presentation/assets/icons/balance_icon.svg
-    - lib/presentation/assets/icons/charity.svg
-    - lib/presentation/assets/icons/education.svg
-    - lib/presentation/assets/icons/health.svg
-    - lib/presentation/assets/icons/options.svg
-    - lib/presentation/assets/icons/payment_icon.svg
-    - lib/presentation/assets/icons/edit_icon.svg
-    - lib/presentation/assets/images/rectangle_background.png
-    - lib/presentation/assets/icons/hamsa_logo.svg
+    - assets/icons/
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -88,9 +80,9 @@ flutter:
   fonts:
     - family: Poppins
       fonts:
-        - asset: lib/presentation/assets/fonts/Poppins/Poppins-Regular.ttf
-        - asset: lib/presentation/assets/fonts/Poppins/Poppins-Bold.ttf
-        - asset: lib/presentation/assets/fonts/Poppins/Poppins-Italic.ttf
+        - asset: assets/fonts/Poppins/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins/Poppins-Bold.ttf
+        - asset: assets/fonts/Poppins/Poppins-Italic.ttf
           style: italic
   #   - family: Trajan Pro
   #     fonts:
