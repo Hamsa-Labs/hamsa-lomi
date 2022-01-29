@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 // Project imports:
 import '../../constants/app_assets_constant.dart';
-import '../../core/hamsa_bottom_bar.dart';
+import '../../core/widgets/hamsa_bottom_bar.dart';
 
 class CustomBottomNavBar extends StatefulWidget {
   const CustomBottomNavBar({Key? key}) : super(key: key);

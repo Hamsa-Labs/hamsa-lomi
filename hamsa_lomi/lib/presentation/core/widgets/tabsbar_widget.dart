@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import '../constants/app_assets_constant.dart';
+import '../../constants/app_assets_constant.dart';
 
 class HamsaTabBar extends StatelessWidget {
   final String firstText;

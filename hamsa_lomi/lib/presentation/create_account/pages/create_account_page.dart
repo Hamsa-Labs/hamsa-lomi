@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // Project imports:
 import '../../../injection/injection.dart';
 import '../../constants/app_assets_constant.dart';
-import '../../core/hamsa_app_bar.dart';
+import '../../core/widgets/hamsa_app_bar.dart';
 import '../bloc/create_account_bloc.dart';
 import '../widgets/create_account_form.dart';
 

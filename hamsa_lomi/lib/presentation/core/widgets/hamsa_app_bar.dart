@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 // Project imports:
-import '../constants/app_assets_constant.dart';
+import '../../constants/app_assets_constant.dart';
 
 class HamsaAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool withLogo;
