@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import '../../core/widgets/hamsa_campaign_card.dart';
 
 // Project imports:
 import '../../core/widgets/hamsa_app_bar.dart';
@@ -29,6 +30,7 @@ class HomePage extends StatelessWidget {
               height: 8.0,
             ),
             FundraiserFilter(),
+            HamsaCampaignCard()
           ],
         ),
       ),
