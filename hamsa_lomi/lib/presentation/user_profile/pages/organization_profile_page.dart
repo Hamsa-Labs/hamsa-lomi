@@ -1,6 +1,6 @@
 //flutter imports:
 import 'package:flutter/material.dart';
-import '../../core/hamsa_app_bar.dart';
+import '../../core/widgets/hamsa_app_bar.dart';
 // file imports:
 import '../../constants/app_assets_constant.dart';
 

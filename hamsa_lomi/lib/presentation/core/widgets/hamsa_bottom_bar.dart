@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import '../constants/app_assets_constant.dart';
-import '../donation_creation/donation_creation_page.dart';
+import '../../constants/app_assets_constant.dart';
+import '../../donation_creation/donation_creation_page.dart';
 
 class HamsaBottomBar extends StatelessWidget {
   HamsaBottomBar({

@@ -1,7 +1,7 @@
 //flutter imports:
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../core/hamsa_app_bar.dart';
+import '../../core/widgets/hamsa_app_bar.dart';
 import '../widgets/balance_card.dart';
 import '../widgets/image_container.dart';
 import '../widgets/setting_container.dart';
@@ -30,7 +30,6 @@ class _PersonalProfileState extends State<PersonalProfile> {
         ),
       ),
       body: ProfilePage(),
-
     );
   }
 }
@@ -40,9 +39,8 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Column(
+    return ListView(children: [
+      Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -54,23 +52,24 @@ class ProfilePage extends StatelessWidget {
               //image profile
               Padding(
                 padding: const EdgeInsets.only(left: 0),
-                child: ImageContainer(imgPath: 'https://googleflutter.com/sample_image.jpg'
-                ),
+                child: ImageContainer(
+                    imgPath: 'https://googleflutter.com/sample_image.jpg'),
               ),
               // username
 
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text('James Bator\nPersonal Fundraiser'),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text('James Bator\nPersonal Fundraiser'),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: SvgPicture.asset(
+                    HamsaIcons.editIcon,
+                  ),
                 ),
-              Padding(padding: const EdgeInsets.all(8.0),
-              child:IconButton(
-                onPressed: () {},
-                icon: SvgPicture.asset(
-                  HamsaIcons.editIcon,
-                ),
-              ),)
-
+              )
 
               //professional
             ],
@@ -130,7 +129,7 @@ class ProfilePage extends StatelessWidget {
           ),
           //4th row two tab for my donations and my fundraise
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 10,horizontal:10),
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             child: Row(
               // mainAxisSize: MainAxisSize.min,
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,

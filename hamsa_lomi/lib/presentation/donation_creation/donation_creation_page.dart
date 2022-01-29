@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import '../core/hamsa_app_bar.dart';
+import '../core/widgets/hamsa_app_bar.dart';
 import 'widgets/donation_creation_form.dart';
 
 // Project imports:
