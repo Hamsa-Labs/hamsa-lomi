@@ -16,6 +16,7 @@ class HamsaCampaignModel extends HamsaCampaign {
     required DateTime dueDate,
     required List<String> imageGallery,
     required String id,
+    double? amountRaised,
   }) : super(
           title: title,
           category: category,
@@ -24,6 +25,7 @@ class HamsaCampaignModel extends HamsaCampaign {
           dueDate: dueDate,
           id: id,
           imageGallery: imageGallery,
+          amountRaised: amountRaised ?? 0
         );
 
   factory HamsaCampaignModel.fromJson(Map<String, dynamic> json) =>
