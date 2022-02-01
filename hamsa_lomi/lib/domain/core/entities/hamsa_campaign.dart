@@ -27,4 +27,8 @@ class HamsaCampaign extends BaseHamsaCampaign {
 
   @override
   List<Object?> get props => [...super.props, id];
+
+  double get remainingDays {
+    return dueDate.difference(DateTime.now()).inHours / 24;
+  }
 }
