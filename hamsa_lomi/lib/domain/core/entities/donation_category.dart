@@ -1,1 +1,1 @@
-enum DonationCategory { health, education, personal, charity, medical }
+enum DonationCategory { health, education, personal, charity, emergency }
