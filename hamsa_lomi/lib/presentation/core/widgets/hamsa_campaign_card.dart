@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
-import '../../../domain/core/entities/entities.dart';
 
 // Project imports:
+import '../../../domain/core/entities/entities.dart';
 import '../../constants/app_assets_constant.dart';
 
 class HamsaCampaignCard extends StatelessWidget {

@@ -1,10 +1,15 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
-import 'horizontal_scroll_view.dart';
+
+// Project imports:
 import '../../../domain/core/entities/entities.dart';
 import '../../../injection/injection.dart';
 import '../bloc/get_donation_campaigns_bloc.dart';
+import 'horizontal_scroll_view.dart';
 
 class EmergencyDonations extends StatelessWidget {
   const EmergencyDonations({Key? key}) : super(key: key);
