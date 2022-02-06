@@ -3,6 +3,6 @@ import '../../core/core.dart';
 import '../../core/entities/entities.dart';
 
 abstract class GetDonationCampaignRepository {
-  Future<Either<Failure, HamsaCampaign>> getDonationCampaigns(
+  Future<Either<Failure, List<HamsaCampaign>>> getDonationCampaigns(
       DonationCategory category);
 }
