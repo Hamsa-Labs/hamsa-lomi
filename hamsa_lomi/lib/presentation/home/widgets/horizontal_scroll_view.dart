@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 // Project imports:
+import '../../../domain/core/entities/entities.dart';
 import '../../core/widgets/hamsa_campaign_card.dart';
 
 class HorizontalScrollView extends StatelessWidget {
   final String label;
+  final List<HamsaCampaign> campaigns;
 
-  const HorizontalScrollView({Key? key, required this.label}) : super(key: key);
+  const HorizontalScrollView(
+      {Key? key, required this.label, required this.campaigns})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +39,12 @@ class HorizontalScrollView extends StatelessWidget {
           height: 250,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
-            itemCount: 3,
+            itemCount: campaigns.length,
             itemBuilder: (context, index) => Container(
               width: width * .85,
-              child: HamsaCampaignCard(),
+              child: HamsaCampaignCard(
+                campaign: campaigns[index],
+              ),
             ),
             separatorBuilder: (context, index) => SizedBox(
               width: 8.0,

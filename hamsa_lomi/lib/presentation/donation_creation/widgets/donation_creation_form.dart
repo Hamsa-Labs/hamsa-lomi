@@ -85,11 +85,11 @@ class _TitleInput extends StatelessWidget {
 
 class _CategoryInput extends StatelessWidget {
   final List<Map<String, dynamic>> _categories = const [
+    {'value': DonationCategory.emergency, 'display': 'Emergency'},
     {'value': DonationCategory.health, 'display': 'Health'},
     {'value': DonationCategory.education, 'display': 'Education'},
     {'value': DonationCategory.personal, 'display': 'Personal'},
     {'value': DonationCategory.charity, 'display': 'Charity'},
-    {'value': DonationCategory.medical, 'display': 'Medical'},
   ];
 
   const _CategoryInput({Key? key}) : super(key: key);

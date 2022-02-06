@@ -2,25 +2,20 @@
 // in hamsa_lomi/test/domain/auth/use_cases/sign_in_use_case_test.dart.
 // Do not manually edit this file.
 
-// Dart imports:
 import 'dart:async' as _i4;
 
-// Package imports:
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:firebase_auth/firebase_auth.dart' as _i5;
-import 'package:mockito/mockito.dart' as _i1;
-
-// Project imports:
 import 'package:hamsa_lomi/domain/auth/entities/create_user.dart' as _i7;
 import 'package:hamsa_lomi/domain/auth/entities/sign_in_credential.dart' as _i8;
-import 'package:hamsa_lomi/domain/core/failure.dart' as _i6;
-
 import 'package:hamsa_lomi/domain/auth/entities/verify_phone_number_param.dart'
     as _i9;
 import 'package:hamsa_lomi/domain/auth/entities/verify_sms_code_param.dart'
     as _i10;
 import 'package:hamsa_lomi/domain/auth/repositories/auth_repository.dart'
     as _i3;
+import 'package:hamsa_lomi/domain/core/failure.dart' as _i6;
+import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters

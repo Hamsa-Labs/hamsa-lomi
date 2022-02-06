@@ -25,13 +25,14 @@ Map<String, dynamic> _$CreateHamsaCampaignModelToJson(
         CreateHamsaCampaignModel instance) =>
     <String, dynamic>{
       'title': instance.title,
-      'category': _$DonationCategoryEnumMap[instance.category],
       'goal': instance.goal,
       'description': instance.description,
       'dueDate': instance.dueDate.toIso8601String(),
       'imageGallery': instance.imageGallery,
       'videoAttachment': instance.videoAttachment,
       'documentAttachment': instance.documentAttachment,
+      'category':
+          CreateHamsaCampaignModel.donationCategoryToJson(instance.category),
     };
 
 const _$DonationCategoryEnumMap = {
@@ -39,5 +40,5 @@ const _$DonationCategoryEnumMap = {
   DonationCategory.education: 'education',
   DonationCategory.personal: 'personal',
   DonationCategory.charity: 'charity',
-  DonationCategory.medical: 'medical',
+  DonationCategory.emergency: 'emergency',
 };

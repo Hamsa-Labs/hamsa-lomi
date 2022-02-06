@@ -17,6 +17,7 @@ HamsaCampaignModel _$HamsaCampaignModelFromJson(Map<String, dynamic> json) =>
           .map((e) => e as String)
           .toList(),
       id: json['id'] as String,
+      amountRaised: (json['amountRaised'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$HamsaCampaignModelToJson(HamsaCampaignModel instance) =>
@@ -28,6 +29,7 @@ Map<String, dynamic> _$HamsaCampaignModelToJson(HamsaCampaignModel instance) =>
       'dueDate': instance.dueDate.toIso8601String(),
       'imageGallery': instance.imageGallery,
       'id': instance.id,
+      'amountRaised': instance.amountRaised,
     };
 
 const _$DonationCategoryEnumMap = {
@@ -35,5 +37,5 @@ const _$DonationCategoryEnumMap = {
   DonationCategory.education: 'education',
   DonationCategory.personal: 'personal',
   DonationCategory.charity: 'charity',
-  DonationCategory.medical: 'medical',
+  DonationCategory.emergency: 'emergency',
 };
