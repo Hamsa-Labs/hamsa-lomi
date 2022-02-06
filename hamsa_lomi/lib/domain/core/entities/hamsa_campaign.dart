@@ -31,7 +31,7 @@ class HamsaCampaign extends BaseHamsaCampaign {
   List<Object?> get props => [...super.props, id, amountRaised];
 
   double get remainingDays {
-    return dueDate.difference(DateTime.now()).inHours / 24;
+    return (dueDate.difference(DateTime.now()).inHours / 24).floorToDouble();
   }
 
   int get amountRaisedPercentage {

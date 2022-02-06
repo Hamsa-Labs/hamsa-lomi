@@ -25,7 +25,7 @@ class GetDonationCampaignDataSourceImpl
         .get();
 
     return querySnapshot.docs
-        .map((e) => HamsaCampaignModel.fromJson(e.data()))
+        .map((e) => HamsaCampaignModel.fromJson({...e.data(), 'id': e.id}))
         .toList();
   }
 }

@@ -5,7 +5,7 @@ import '../../core/entities/entities.dart';
 import '../../core/failure.dart';
 import '../../core/use_cases/base_use_case.dart';
 
-@injectable
+@lazySingleton
 class GetDonationCampaignUseCase
     extends BaseUseCase<List<HamsaCampaign>, DonationCategory> {
   final GetDonationCampaignRepository _getDonationCampaignRepository;
