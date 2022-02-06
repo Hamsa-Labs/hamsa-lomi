@@ -2,12 +2,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
+import '../../../domain/core/entities/entities.dart';
 
 // Project imports:
 import '../../constants/app_assets_constant.dart';
 
 class HamsaCampaignCard extends StatelessWidget {
-  const HamsaCampaignCard({Key? key}) : super(key: key);
+  final HamsaCampaign campaign;
+
+  const HamsaCampaignCard({Key? key, required this.campaign}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,21 +23,25 @@ class HamsaCampaignCard extends StatelessWidget {
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
           child: Stack(
             children: [
-              Image.asset(
-                'assets/images/placeholder.jpg',
+              Image.network(
+                campaign.imageGallery.first,
                 fit: BoxFit.cover,
                 width: double.maxFinite,
               ),
               Positioned(
                 top: 16,
                 right: 16,
-                child: _DaysLeft(),
+                child: _DaysLeft(
+                  remainingDays: campaign.remainingDays,
+                ),
               ),
               Positioned(
                 left: 16,
                 right: 16,
                 bottom: 16,
-                child: _RaisedAmount(),
+                child: _RaisedAmount(
+                  campaign: campaign,
+                ),
               )
             ],
           ),
@@ -43,8 +50,7 @@ class HamsaCampaignCard extends StatelessWidget {
           height: 4.0,
         ),
         Text(
-          'Facilisis nibh velit porttitor felis'
-          'arcu Faci lisis nibh velit porttitor felis arcu ...',
+          campaign.title,
           style: TextStyle(
             fontWeight: FontWeight.w600,
           ),
@@ -55,7 +61,9 @@ class HamsaCampaignCard extends StatelessWidget {
 }
 
 class _DaysLeft extends StatelessWidget {
-  const _DaysLeft({Key? key}) : super(key: key);
+  final double remainingDays;
+
+  const _DaysLeft({Key? key, required this.remainingDays}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +77,7 @@ class _DaysLeft extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            '90',
+            remainingDays.toString(),
             style: Theme.of(context).textTheme.headline5!.copyWith(
                   fontWeight: FontWeight.bold,
                   color: HamsaColors.lightGrayTextColor,
@@ -90,7 +98,9 @@ class _DaysLeft extends StatelessWidget {
 }
 
 class _RaisedAmount extends StatelessWidget {
-  const _RaisedAmount({Key? key}) : super(key: key);
+  final HamsaCampaign campaign;
+
+  const _RaisedAmount({Key? key, required this.campaign}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +122,7 @@ class _RaisedAmount extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  '37.5 K birr',
+                  '${campaign.amountRaised} ETB',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -127,7 +137,7 @@ class _RaisedAmount extends StatelessWidget {
               horizontal: 8.0,
             ),
             child: Text(
-              '5 K',
+              '${campaign.goal}',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: HamsaColors.lightGrayTextColor,
