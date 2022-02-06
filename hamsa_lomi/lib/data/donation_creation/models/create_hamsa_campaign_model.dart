@@ -9,9 +9,12 @@ part 'create_hamsa_campaign_model.g.dart';
 
 @JsonSerializable()
 class CreateHamsaCampaignModel extends CreateHamsaCampaign {
+  @JsonKey(toJson: donationCategoryToJson)
+  final DonationCategory category;
+
   CreateHamsaCampaignModel({
     required String title,
-    required DonationCategory category,
+    required this.category,
     required double goal,
     required String description,
     required DateTime dueDate,
@@ -43,4 +46,19 @@ class CreateHamsaCampaignModel extends CreateHamsaCampaign {
   }
 
   Map<String, dynamic> toJson() => _$CreateHamsaCampaignModelToJson(this);
+
+  static String donationCategoryToJson(DonationCategory category) {
+    switch (category) {
+      case DonationCategory.health:
+        return 'health';
+      case DonationCategory.education:
+        return 'education';
+      case DonationCategory.personal:
+        return 'personal';
+      case DonationCategory.charity:
+        return 'charity';
+      case DonationCategory.emergency:
+        return 'emergency';
+    }
+  }
 }
