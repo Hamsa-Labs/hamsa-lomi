@@ -30,6 +30,7 @@ dependencies:
   file_picker: ^4.3.1
   firebase_auth: ^3.1.0
   firebase_core: ^1.6.0
+  firebase_dynamic_links: ^4.0.5
   firebase_storage: ^10.2.4
   flutter:
     sdk: flutter
@@ -45,6 +46,7 @@ dependencies:
   intl_phone_field: ^2.0.1
   json_annotation: ^4.4.0
   mockito: ^5.0.10
+  share_plus: ^3.0.4
   sms_autofill: ^2.0.1
 
 dev_dependencies:

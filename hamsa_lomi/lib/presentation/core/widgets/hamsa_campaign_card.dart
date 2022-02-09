@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
+import '../../hamsa_campaign_detail/page/hamsa_campaign_detail_page.dart';
 
 // Project imports:
 import '../../../domain/core/entities/entities.dart';
@@ -14,48 +15,54 @@ class HamsaCampaignCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Container(
-          clipBehavior: Clip.antiAlias,
-          height: 202,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
-          child: Stack(
-            children: [
-              Image.network(
-                campaign.imageGallery.first,
-                fit: BoxFit.cover,
-                width: double.maxFinite,
-              ),
-              Positioned(
-                top: 16,
-                right: 16,
-                child: _DaysLeft(
-                  remainingDays: campaign.remainingDays,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context, HamsaCampaignDetailPage.route(campaign));
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Container(
+            clipBehavior: Clip.antiAlias,
+            height: 202,
+            decoration:
+                BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
+            child: Stack(
+              children: [
+                Image.network(
+                  campaign.imageGallery.first,
+                  fit: BoxFit.cover,
+                  width: double.maxFinite,
                 ),
-              ),
-              Positioned(
-                left: 16,
-                right: 16,
-                bottom: 16,
-                child: _RaisedAmount(
-                  campaign: campaign,
+                Positioned(
+                  top: 16,
+                  right: 16,
+                  child: _DaysLeft(
+                    remainingDays: campaign.remainingDays,
+                  ),
                 ),
-              )
-            ],
+                Positioned(
+                  left: 16,
+                  right: 16,
+                  bottom: 16,
+                  child: _RaisedAmount(
+                    campaign: campaign,
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
-        SizedBox(
-          height: 4.0,
-        ),
-        Text(
-          campaign.title,
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
+          SizedBox(
+            height: 4.0,
           ),
-        )
-      ],
+          Text(
+            campaign.title,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+            ),
+          )
+        ],
+      ),
     );
   }
 }
