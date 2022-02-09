@@ -1,8 +1,13 @@
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
-import '../../core/widgets/hamsa_app_bar.dart';
-import '../../../domain/core/entities/entities.dart';
+
+// Package imports:
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:share_plus/share_plus.dart';
+
+// Project imports:
+import '../../../domain/core/entities/entities.dart';
+import '../../core/widgets/hamsa_app_bar.dart';
 
 class HamsaCampaignDetailPage extends StatelessWidget {
   final HamsaCampaign campaign;
