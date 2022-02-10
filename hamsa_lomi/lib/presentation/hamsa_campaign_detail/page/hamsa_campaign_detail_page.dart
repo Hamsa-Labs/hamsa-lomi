@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import '../widgets/donation_goal_bar.dart';
 import 'package:share_plus/share_plus.dart';
 
 // Project imports:
@@ -34,6 +35,9 @@ class HamsaCampaignDetailPage extends StatelessWidget {
           icon: Icon(Icons.share_rounded),
           onPressed: _handleSharing,
         ),
+      ),
+      body: DonationGoalBar(
+        campaign: campaign,
       ),
     );
   }
