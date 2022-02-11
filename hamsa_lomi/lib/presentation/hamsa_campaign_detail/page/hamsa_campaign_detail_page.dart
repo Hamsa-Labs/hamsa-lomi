@@ -36,8 +36,11 @@ class HamsaCampaignDetailPage extends StatelessWidget {
           onPressed: _handleSharing,
         ),
       ),
-      body: DonationGoalBar(
-        campaign: campaign,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: DonationGoalBar(
+          campaign: campaign,
+        ),
       ),
     );
   }
