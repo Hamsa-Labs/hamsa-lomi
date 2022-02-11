@@ -8,6 +8,7 @@ import 'package:share_plus/share_plus.dart';
 // Project imports:
 import '../../../domain/core/entities/entities.dart';
 import '../../core/widgets/hamsa_app_bar.dart';
+import '../widgets/donation_goal_bar.dart';
 
 class HamsaCampaignDetailPage extends StatelessWidget {
   final HamsaCampaign campaign;
@@ -33,6 +34,12 @@ class HamsaCampaignDetailPage extends StatelessWidget {
         actionButton: IconButton(
           icon: Icon(Icons.share_rounded),
           onPressed: _handleSharing,
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: DonationGoalBar(
+          campaign: campaign,
         ),
       ),
     );
