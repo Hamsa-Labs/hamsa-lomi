@@ -90,10 +90,10 @@ class DonationCreationFormSubmitted extends DonationCreationEvent {
   List<Object?> get props => [];
 }
 
-class CoverPhotoAdded extends DonationCreationEvent {
-  final String coverPhoto;
+class CoverPhotoModified extends DonationCreationEvent {
+  final String? coverPhoto;
 
-  CoverPhotoAdded(this.coverPhoto);
+  CoverPhotoModified(this.coverPhoto);
 
   @override
   List<Object?> get props => [coverPhoto];

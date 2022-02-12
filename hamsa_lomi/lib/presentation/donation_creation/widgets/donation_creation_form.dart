@@ -40,6 +40,7 @@ class DonationCreationForm extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline5,
               ),
               _TitleInput(),
+              _CoverPhotoInput(),
               _CategoryInput(),
               _GoalInput(),
               _DescriptionInput(),
@@ -425,6 +426,32 @@ class _AddDocumentInputState extends State<_AddDocumentInput> {
                 child: Text('ADD'),
               ),
             ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _CoverPhotoInput extends StatelessWidget {
+  const _CoverPhotoInput({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CreationFormField(
+      label: 'Cover Photo',
+      child: BlocBuilder<DonationCreationBloc, DonationCreationState>(
+        builder: (context, state) {
+          return ImageUploader(
+            onUploadSuccess: (img) {
+              context.read<DonationCreationBloc>().add(CoverPhotoModified(img));
+            },
+            onImageRemove: (_) {
+              context
+                  .read<DonationCreationBloc>()
+                  .add(CoverPhotoModified(null));
+            },
+            maxImages: 1,
           );
         },
       ),
