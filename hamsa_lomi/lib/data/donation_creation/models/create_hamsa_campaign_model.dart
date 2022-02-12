@@ -19,6 +19,7 @@ class CreateHamsaCampaignModel extends CreateHamsaCampaign {
     required String description,
     required DateTime dueDate,
     required List<String> imageGallery,
+    required String coverPhoto,
     final String? videoAttachment,
     final String? documentAttachment,
   }) : super(
@@ -30,6 +31,7 @@ class CreateHamsaCampaignModel extends CreateHamsaCampaign {
           imageGallery: imageGallery,
           documentAttachment: documentAttachment,
           videoAttachment: videoAttachment,
+          coverPhoto: coverPhoto,
         );
 
   static CreateHamsaCampaignModel toModel(CreateHamsaCampaign entity) {
@@ -42,6 +44,7 @@ class CreateHamsaCampaignModel extends CreateHamsaCampaign {
       imageGallery: entity.imageGallery,
       documentAttachment: entity.documentAttachment,
       videoAttachment: entity.videoAttachment,
+      coverPhoto: entity.coverPhoto,
     );
   }
 

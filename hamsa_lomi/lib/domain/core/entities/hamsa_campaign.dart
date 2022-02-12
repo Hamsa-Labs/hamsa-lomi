@@ -12,6 +12,7 @@ class HamsaCampaign extends BaseHamsaCampaign {
     required String description,
     required DateTime dueDate,
     required List<String> imageGallery,
+    required String coverPhoto,
     final String? videoAttachment,
     final String? documentAttachment,
     required this.id,
@@ -25,6 +26,7 @@ class HamsaCampaign extends BaseHamsaCampaign {
           imageGallery: imageGallery,
           videoAttachment: videoAttachment,
           documentAttachment: documentAttachment,
+          coverPhoto: coverPhoto,
         );
 
   @override
