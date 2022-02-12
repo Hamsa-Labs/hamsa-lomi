@@ -3,6 +3,7 @@ part of 'donation_creation_bloc.dart';
 class DonationCreationState extends Equatable {
   final RequiredTextInput title;
   final RequiredTextInput description;
+  final RequiredTextInput coverPhoto;
   final RequiredCategoryInput category;
   final RequiredGoalInput goal;
   final RequiredDueDateInput dueDate;
@@ -19,6 +20,7 @@ class DonationCreationState extends Equatable {
     this.goal = const RequiredGoalInput.pure(),
     this.dueDate = const RequiredDueDateInput.pure(),
     this.imageGallery = const ImageGalleryInput.pure(),
+    this.coverPhoto = const RequiredTextInput.pure(),
     this.videoAttachment,
     this.documentAttachment,
     this.status = FormzStatus.pure,
@@ -34,7 +36,8 @@ class DonationCreationState extends Equatable {
         dueDate,
         imageGallery,
         videoAttachment,
-        documentAttachment
+        documentAttachment,
+        coverPhoto
       ];
 
   DonationCreationState copyWith({
@@ -43,6 +46,7 @@ class DonationCreationState extends Equatable {
     RequiredCategoryInput? category,
     RequiredGoalInput? goal,
     RequiredDueDateInput? dueDate,
+    RequiredTextInput? coverPhoto,
     ImageGalleryInput? imageGallery,
     String? documentAttachment,
     String? videoAttachment,
@@ -58,6 +62,7 @@ class DonationCreationState extends Equatable {
       imageGallery: imageGallery ?? this.imageGallery,
       documentAttachment: documentAttachment ?? this.documentAttachment,
       videoAttachment: videoAttachment ?? this.videoAttachment,
+      coverPhoto: coverPhoto ?? this.coverPhoto,
     );
   }
 }

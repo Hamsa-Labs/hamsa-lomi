@@ -32,6 +32,7 @@ class DonationCreationBloc
         goal: state.goal,
         dueDate: state.dueDate,
         imageGallery: state.imageGallery,
+        coverPhoto: state.coverPhoto
       );
       emit(state.copyWith(title: titleInput, status: status));
     });
@@ -44,6 +45,7 @@ class DonationCreationBloc
         goal: state.goal,
         dueDate: state.dueDate,
         imageGallery: state.imageGallery,
+        coverPhoto: state.coverPhoto
       );
       emit(state.copyWith(description: descriptionInput, status: status));
     });
@@ -56,6 +58,7 @@ class DonationCreationBloc
         goal: state.goal,
         dueDate: state.dueDate,
         imageGallery: state.imageGallery,
+        coverPhoto: state.coverPhoto
       );
       emit(state.copyWith(category: categoryInput, status: status));
     });
@@ -68,6 +71,7 @@ class DonationCreationBloc
         title: state.title,
         dueDate: state.dueDate,
         imageGallery: state.imageGallery,
+        coverPhoto: state.coverPhoto
       );
       emit(state.copyWith(status: status, goal: goalInput));
     });
@@ -80,6 +84,7 @@ class DonationCreationBloc
         goal: state.goal,
         dueDate: dueDateInput,
         imageGallery: state.imageGallery,
+        coverPhoto: state.coverPhoto
       );
       emit(state.copyWith(status: status, dueDate: dueDateInput));
     });
@@ -95,6 +100,7 @@ class DonationCreationBloc
         goal: state.goal,
         dueDate: state.dueDate,
         imageGallery: imageGalleryInput,
+        coverPhoto: state.coverPhoto
       );
       emit(state.copyWith(status: status, imageGallery: imageGalleryInput));
     });
@@ -108,6 +114,7 @@ class DonationCreationBloc
         goal: state.goal,
         dueDate: state.dueDate,
         imageGallery: imageGalleryInput,
+        coverPhoto: state.coverPhoto
       );
       emit(state.copyWith(status: status, imageGallery: imageGalleryInput));
     });
@@ -116,6 +123,18 @@ class DonationCreationBloc
     });
     on<DocumentAttachmentAdded>((event, emit) {
       emit(state.copyWith(documentAttachment: event.downloadUrl));
+    });
+    on<CoverPhotoAdded>((event, emit) async {
+      final coverPhotoInput = RequiredTextInput.dirty(event.coverPhoto);
+      final status = _validateFormInputs(
+          title: state.title,
+          description: state.description,
+          category: state.category,
+          goal: state.goal,
+          dueDate: state.dueDate,
+          imageGallery: state.imageGallery,
+          coverPhoto: coverPhotoInput);
+      emit(state.copyWith(status: status, coverPhoto: coverPhotoInput));
     });
     on<DonationCreationFormSubmitted>((event, emit) async {
       if (state.status.isValidated) {
@@ -131,6 +150,7 @@ class DonationCreationBloc
             imageGallery: state.imageGallery.value,
             documentAttachment: state.documentAttachment,
             videoAttachment: state.videoAttachment,
+            coverPhoto: state.coverPhoto.value,
           ),
         );
 
@@ -144,6 +164,7 @@ class DonationCreationBloc
   FormzStatus _validateFormInputs({
     required RequiredTextInput title,
     required RequiredTextInput description,
+    required RequiredTextInput coverPhoto,
     required RequiredCategoryInput category,
     required RequiredGoalInput goal,
     required RequiredDueDateInput dueDate,
@@ -156,6 +177,7 @@ class DonationCreationBloc
       goal,
       dueDate,
       imageGallery,
+      coverPhoto
     ]);
   }
 }
