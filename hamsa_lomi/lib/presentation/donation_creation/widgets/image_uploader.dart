@@ -22,10 +22,14 @@ final borderRadius = BorderRadius.circular(16);
 class ImageUploader extends StatefulWidget {
   final ValueChanged<String> onUploadSuccess;
   final ValueChanged<int> onImageRemove;
+  final int maxImages;
 
-  const ImageUploader(
-      {Key? key, required this.onUploadSuccess, required this.onImageRemove})
-      : super(key: key);
+  const ImageUploader({
+    Key? key,
+    required this.onUploadSuccess,
+    required this.onImageRemove,
+    this.maxImages = 4,
+  }) : super(key: key);
 
   @override
   State<ImageUploader> createState() => _ImageUploaderState();
@@ -33,7 +37,6 @@ class ImageUploader extends StatefulWidget {
 
 class _ImageUploaderState extends State<ImageUploader> {
   final _images = <File>[];
-  final maxImages = 4;
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +62,7 @@ class _ImageUploaderState extends State<ImageUploader> {
               ),
             )
             .toList(),
-        if (_images.length < maxImages)
+        if (_images.length < widget.maxImages)
           InkWell(
             onTap: () => _showDialog(context),
             child: Container(
