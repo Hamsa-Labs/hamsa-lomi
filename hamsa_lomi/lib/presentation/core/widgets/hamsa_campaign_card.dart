@@ -30,7 +30,7 @@ class HamsaCampaignCard extends StatelessWidget {
             child: Stack(
               children: [
                 Image.network(
-                  campaign.imageGallery.first,
+                  campaign.coverPhoto,
                   fit: BoxFit.cover,
                   width: double.maxFinite,
                 ),
