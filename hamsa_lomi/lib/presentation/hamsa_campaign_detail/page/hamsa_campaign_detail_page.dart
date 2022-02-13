@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:hamsa_lomi/presentation/hamsa_campaign_detail/widgets/donation_detail_body.dart';
 import 'package:share_plus/share_plus.dart';
 
 // Project imports:
@@ -38,8 +39,18 @@ class HamsaCampaignDetailPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: DonationGoalBar(
+        child: DonationDetailBody(
           campaign: campaign,
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 64.0,
+          vertical: 8.0,
+        ),
+        child: ElevatedButton(
+          child: Text('DONATE'),
+          onPressed: () {},
         ),
       ),
     );
