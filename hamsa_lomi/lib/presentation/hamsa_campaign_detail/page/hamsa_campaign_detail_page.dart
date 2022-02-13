@@ -8,7 +8,7 @@ import 'package:share_plus/share_plus.dart';
 // Project imports:
 import '../../../domain/core/entities/entities.dart';
 import '../../core/widgets/hamsa_app_bar.dart';
-import '../widgets/donation_goal_bar.dart';
+import '../widgets/donation_detail_body.dart';
 
 class HamsaCampaignDetailPage extends StatelessWidget {
   final HamsaCampaign campaign;
@@ -38,8 +38,18 @@ class HamsaCampaignDetailPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: DonationGoalBar(
+        child: DonationDetailBody(
           campaign: campaign,
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 64.0,
+          vertical: 8.0,
+        ),
+        child: ElevatedButton(
+          child: Text('DONATE'),
+          onPressed: () {},
         ),
       ),
     );
