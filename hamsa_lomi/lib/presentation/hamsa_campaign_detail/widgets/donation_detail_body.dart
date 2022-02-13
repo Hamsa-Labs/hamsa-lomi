@@ -1,6 +1,9 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'donation_goal_bar.dart';
+
+// Project imports:
 import '../../../domain/core/entities/entities.dart';
+import 'donation_goal_bar.dart';
 
 class DonationDetailBody extends StatelessWidget {
   final HamsaCampaign campaign;
