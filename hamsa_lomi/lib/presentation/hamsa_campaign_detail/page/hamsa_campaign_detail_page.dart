@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
-import 'package:hamsa_lomi/presentation/hamsa_campaign_detail/widgets/donation_detail_body.dart';
+import '../widgets/donation_detail_body.dart';
 import 'package:share_plus/share_plus.dart';
 
 // Project imports:
 import '../../../domain/core/entities/entities.dart';
 import '../../core/widgets/hamsa_app_bar.dart';
-import '../widgets/donation_goal_bar.dart';
 
 class HamsaCampaignDetailPage extends StatelessWidget {
   final HamsaCampaign campaign;
