@@ -12,13 +12,13 @@ Lomi is DAO (Decenteralize Autonomous Organzation) run as an entity with no cent
 
 👤 **Lomore Nasrallah Hassan**
 
-- GitHub: [@githubhandle](https://github.com/Azizadx)
-- Twitter: [@twitterhandle](https://twitter.com/AzizaDx)
+- GitHub: [@Azizadx](https://github.com/Azizadx)
+- Twitter: [@Azizadx](https://twitter.com/AzizaDx)
 
-👤 **Lomore Nebiyue elias**
+👤 **Lomore Nebiyue Elias**
 
-- GitHub: [@githubhandle](https://github.com/nebiyuelias1)
-- Twitter: [@twitterhandle](https://twitter.com/nebex_elias)
+- GitHub: [@nebiyuelias1](https://github.com/nebiyuelias1)
+- Twitter: [@nebex_elias](https://twitter.com/nebex_elias)
 
 ## 🙌 Want to join us to shape the world?
 
