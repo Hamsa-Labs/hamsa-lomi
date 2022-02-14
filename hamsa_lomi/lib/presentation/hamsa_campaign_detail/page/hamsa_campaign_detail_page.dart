@@ -31,10 +31,16 @@ class HamsaCampaignDetailPage extends StatelessWidget {
         withLogo: false,
         withLeading: true,
         appBarText: Text('Fundraiser'),
-        actionButton: IconButton(
-          icon: Icon(Icons.share_rounded),
-          onPressed: _handleSharing,
-        ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.edit),
+          ),
+          IconButton(
+            icon: Icon(Icons.share_rounded),
+            onPressed: _handleSharing,
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
