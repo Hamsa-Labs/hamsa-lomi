@@ -22,8 +22,27 @@ import '../bloc/image_upload/attachment_upload_bloc.dart';
 import 'creation_form_field.dart';
 import 'image_uploader.dart';
 
-class DonationCreationForm extends StatelessWidget {
-  const DonationCreationForm({Key? key}) : super(key: key);
+class DonationCreationForm extends StatefulWidget {
+  final HamsaCampaign? campaign;
+  const DonationCreationForm({
+    Key? key,
+    this.campaign,
+  }) : super(key: key);
+
+  @override
+  State<DonationCreationForm> createState() => _DonationCreationFormState();
+}
+
+class _DonationCreationFormState extends State<DonationCreationForm> {
+  final _titleController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.campaign != null) {
+      _titleController.text = widget.campaign!.title;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +55,14 @@ class DonationCreationForm extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Enter The Following Details',
+                widget.campaign == null
+                    ? 'Enter The Following Details'
+                    : 'Update The Following Details',
                 style: Theme.of(context).textTheme.headline5,
               ),
-              _TitleInput(),
+              _TitleInput(
+                controller: _titleController,
+              ),
               _CoverPhotoInput(),
               _CategoryInput(),
               _GoalInput(),
@@ -58,7 +81,11 @@ class DonationCreationForm extends StatelessWidget {
 }
 
 class _TitleInput extends StatelessWidget {
-  const _TitleInput({Key? key}) : super(key: key);
+  final TextEditingController controller;
+  const _TitleInput({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +99,7 @@ class _TitleInput extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16.0),
               ),
             ),
+            controller: controller,
             onChanged: (title) {
               context
                   .read<DonationCreationBloc>()

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import '../../donation_creation/donation_creation_page.dart';
 import 'package:share_plus/share_plus.dart';
 
 // Project imports:
@@ -33,7 +34,10 @@ class HamsaCampaignDetailPage extends StatelessWidget {
         appBarText: Text('Fundraiser'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context, DonationCreationPage.route(campaign: campaign));
+            },
             icon: Icon(Icons.edit),
           ),
           IconButton(
