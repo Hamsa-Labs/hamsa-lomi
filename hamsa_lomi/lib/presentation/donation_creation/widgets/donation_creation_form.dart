@@ -35,12 +35,14 @@ class DonationCreationForm extends StatefulWidget {
 
 class _DonationCreationFormState extends State<DonationCreationForm> {
   final _titleController = TextEditingController();
+  final _descriptionController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     if (widget.campaign != null) {
       _titleController.text = widget.campaign!.title;
+      _descriptionController.text = widget.campaign!.description;
     }
   }
 
@@ -66,7 +68,9 @@ class _DonationCreationFormState extends State<DonationCreationForm> {
               _CoverPhotoInput(),
               _CategoryInput(),
               _GoalInput(),
-              _DescriptionInput(),
+              _DescriptionInput(
+                controller: _descriptionController,
+              ),
               _DueDateInput(),
               _GalleryInput(),
               _AddVideoInput(),
@@ -186,7 +190,11 @@ class _GoalInput extends StatelessWidget {
 }
 
 class _DescriptionInput extends StatelessWidget {
-  const _DescriptionInput({Key? key}) : super(key: key);
+  final TextEditingController controller;
+  const _DescriptionInput({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -202,6 +210,7 @@ class _DescriptionInput extends StatelessWidget {
               ),
               minLines: 3,
               maxLines: 5,
+              controller: controller,
               onChanged: (description) {
                 context
                     .read<DonationCreationBloc>()
