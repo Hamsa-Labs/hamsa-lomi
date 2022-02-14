@@ -15,16 +15,17 @@ This project is a starting point for a Flutter application.
 
 ```sh
 git clone https://github.com/nebiyuelias1/hamsa-lomi.git
-   # It should clone the latest version of hamsa lomi project // Expected result
 ```
 
-2.
+2. After you clone the project open dirctory by using the following cmd to see files inside
 
 ```sh
  cd hamsa-lomi
- ls # to show how many file you have inside the project
-   # You should see the following files README.md docs hamsa_lomi lefthook.yml// Expected result
+ ls
 ```
+![screenshot](./assets/screenshot/Screen Shot 2022-02-14 at 6.46.36 PM.png)
+
+
 
 3. Install [lefthook](https://github.com/evilmartians/lefthook/blob/master/docs/other.md),
    which is a fast and powerful Git hooks manager for projects of any languages. After installing
