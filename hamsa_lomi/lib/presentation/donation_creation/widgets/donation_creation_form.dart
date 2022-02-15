@@ -36,6 +36,7 @@ class DonationCreationForm extends StatefulWidget {
 class _DonationCreationFormState extends State<DonationCreationForm> {
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
+  String? _initialCoverPhoto;
 
   @override
   void initState() {
@@ -43,6 +44,7 @@ class _DonationCreationFormState extends State<DonationCreationForm> {
     if (widget.campaign != null) {
       _titleController.text = widget.campaign!.title;
       _descriptionController.text = widget.campaign!.description;
+      _initialCoverPhoto = widget.campaign!.coverPhoto;
     }
   }
 
@@ -65,7 +67,9 @@ class _DonationCreationFormState extends State<DonationCreationForm> {
               _TitleInput(
                 controller: _titleController,
               ),
-              _CoverPhotoInput(),
+              _CoverPhotoInput(
+                initialCoverPhoto: _initialCoverPhoto,
+              ),
               _CategoryInput(),
               _GoalInput(),
               _DescriptionInput(
@@ -471,7 +475,8 @@ class _AddDocumentInputState extends State<_AddDocumentInput> {
 }
 
 class _CoverPhotoInput extends StatelessWidget {
-  const _CoverPhotoInput({Key? key}) : super(key: key);
+  final String? initialCoverPhoto;
+  const _CoverPhotoInput({Key? key, this.initialCoverPhoto}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -489,6 +494,8 @@ class _CoverPhotoInput extends StatelessWidget {
                   .add(CoverPhotoModified(null));
             },
             maxImages: 1,
+            initialImages:
+                initialCoverPhoto != null ? [initialCoverPhoto!] : [],
           );
         },
       ),
