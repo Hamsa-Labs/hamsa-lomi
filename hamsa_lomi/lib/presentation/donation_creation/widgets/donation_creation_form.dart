@@ -36,7 +36,10 @@ class DonationCreationForm extends StatefulWidget {
 class _DonationCreationFormState extends State<DonationCreationForm> {
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
+  final _goalController = TextEditingController();
   String? _initialCoverPhoto;
+  DonationCategory? _initialDonationCategory;
+  DateTime? _initialDueDate;
 
   @override
   void initState() {
@@ -45,6 +48,9 @@ class _DonationCreationFormState extends State<DonationCreationForm> {
       _titleController.text = widget.campaign!.title;
       _descriptionController.text = widget.campaign!.description;
       _initialCoverPhoto = widget.campaign!.coverPhoto;
+      _initialDonationCategory = widget.campaign!.category;
+      _goalController.text = widget.campaign!.goal.toString();
+      _initialDueDate = widget.campaign!.dueDate;
     }
   }
 
@@ -70,12 +76,18 @@ class _DonationCreationFormState extends State<DonationCreationForm> {
               _CoverPhotoInput(
                 initialCoverPhoto: _initialCoverPhoto,
               ),
-              _CategoryInput(),
-              _GoalInput(),
+              _CategoryInput(
+                initialDonationCategory: _initialDonationCategory,
+              ),
+              _GoalInput(
+                controller: _goalController,
+              ),
               _DescriptionInput(
                 controller: _descriptionController,
               ),
-              _DueDateInput(),
+              _DueDateInput(
+                initialValue: _initialDueDate,
+              ),
               _GalleryInput(),
               _AddVideoInput(),
               _AddDocumentInput(),
@@ -121,6 +133,7 @@ class _TitleInput extends StatelessWidget {
 }
 
 class _CategoryInput extends StatelessWidget {
+  final DonationCategory? initialDonationCategory;
   final List<Map<String, dynamic>> _categories = const [
     {'value': DonationCategory.emergency, 'display': 'Emergency'},
     {'value': DonationCategory.health, 'display': 'Health'},
@@ -129,7 +142,8 @@ class _CategoryInput extends StatelessWidget {
     {'value': DonationCategory.charity, 'display': 'Charity'},
   ];
 
-  const _CategoryInput({Key? key}) : super(key: key);
+  const _CategoryInput({Key? key, this.initialDonationCategory})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -154,6 +168,7 @@ class _CategoryInput extends StatelessWidget {
                     .read<DonationCreationBloc>()
                     .add(CategoryChanged(newValue as DonationCategory));
               },
+              value: initialDonationCategory,
             ));
       },
     );
@@ -161,7 +176,9 @@ class _CategoryInput extends StatelessWidget {
 }
 
 class _GoalInput extends StatelessWidget {
-  const _GoalInput({Key? key}) : super(key: key);
+  final TextEditingController controller;
+
+  const _GoalInput({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -180,6 +197,7 @@ class _GoalInput extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            controller: controller,
             keyboardType: TextInputType.numberWithOptions(),
             onChanged: (amount) {
               context
@@ -227,7 +245,8 @@ class _DescriptionInput extends StatelessWidget {
 }
 
 class _DueDateInput extends StatelessWidget {
-  const _DueDateInput({Key? key}) : super(key: key);
+  final DateTime? initialValue;
+  const _DueDateInput({Key? key, this.initialValue}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -254,6 +273,7 @@ class _DueDateInput extends StatelessWidget {
                 lastDate: DateTime(2100),
               );
             },
+            initialValue: initialValue,
             onChanged: (dueDate) {
               if (dueDate != null) {
                 context
