@@ -15,21 +15,23 @@ import '../../../injection/injection.dart';
 import '../../constants/app_assets_constant.dart';
 import '../bloc/image_upload/attachment_upload_bloc.dart';
 
-const width = 68;
-const height = 56;
+const width = 68.0;
+const height = 56.0;
 final borderRadius = BorderRadius.circular(16);
 
 class ImageUploader extends StatefulWidget {
   final ValueChanged<String> onUploadSuccess;
   final ValueChanged<int> onImageRemove;
+  final List<String> initialImages;
   final int maxImages;
 
-  const ImageUploader({
-    Key? key,
-    required this.onUploadSuccess,
-    required this.onImageRemove,
-    this.maxImages = 4,
-  }) : super(key: key);
+  const ImageUploader(
+      {Key? key,
+      required this.onUploadSuccess,
+      required this.onImageRemove,
+      this.maxImages = 4,
+      this.initialImages = const []})
+      : super(key: key);
 
   @override
   State<ImageUploader> createState() => _ImageUploaderState();
@@ -37,12 +39,43 @@ class ImageUploader extends StatefulWidget {
 
 class _ImageUploaderState extends State<ImageUploader> {
   final _images = <File>[];
+  late final List<String> _initialImages;
+
+  @override
+  void initState() {
+    super.initState();
+    _initialImages = widget.initialImages;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        ..._initialImages
+            .map(
+              (e) => _ImageDisplay(
+                onRemove: () {
+                  setState(() {
+                    _initialImages.remove(e);
+                    widget.onImageRemove(_initialImages.indexOf(e));
+                  });
+                },
+                image: Container(
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    borderRadius: borderRadius,
+                  ),
+                  child: Image.network(
+                    e,
+                    width: width,
+                    height: height,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            )
+            .toList(),
         ..._images
             .map(
               (i) => Padding(
@@ -62,7 +95,7 @@ class _ImageUploaderState extends State<ImageUploader> {
               ),
             )
             .toList(),
-        if (_images.length < widget.maxImages)
+        if ((_images.length + _initialImages.length) < widget.maxImages)
           InkWell(
             onTap: () => _showDialog(context),
             child: Container(
@@ -151,75 +184,94 @@ class _Image extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          return Column(
-            children: [
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  Container(
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                      borderRadius: borderRadius,
-                    ),
-                    child: Image.file(
-                      file,
-                      width: 68,
-                      height: 56,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  if (state.uploadProgress < 100)
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.4),
-                        shape: BoxShape.circle,
-                      ),
-                      child: IconButton(
-                        onPressed: () {
-                          context
-                              .read<AttachmentUploadBloc>()
-                              .add(RunningStateToggled());
-                        },
-                        icon: Icon(
-                            state.uploadStatus == AttachmentUploadStatus.running
-                                ? Icons.pause
-                                : Icons.play_arrow,
-                            color: Colors.white),
-                      ),
-                    ),
-                  if (state.uploadProgress < 100)
-                    SizedBox(
-                      width: 24.0,
-                      height: 24.0,
-                      child: CircularProgressIndicator(
-                        value: state.uploadProgress / 100,
-                      ),
-                    ),
-                ],
-              ),
-              SizedBox(height: 4),
-              InkWell(
-                onTap: () {
-                  onRemove(file);
-                  context
-                      .read<AttachmentUploadBloc>()
-                      .add(AttachmentUploadCancelled());
-                },
-                child: Container(
+          return _ImageDisplay(
+            image: Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
-                    color: HamsaColors.lightGray,
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: borderRadius,
                   ),
-                  child: Icon(
-                    Icons.remove,
-                    color: Colors.white,
+                  child: Image.file(
+                    file,
+                    width: width,
+                    height: height,
+                    fit: BoxFit.cover,
                   ),
                 ),
-              ),
-            ],
+                if (state.uploadProgress < 100)
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.4),
+                      shape: BoxShape.circle,
+                    ),
+                    child: IconButton(
+                      onPressed: () {
+                        context
+                            .read<AttachmentUploadBloc>()
+                            .add(RunningStateToggled());
+                      },
+                      icon: Icon(
+                          state.uploadStatus == AttachmentUploadStatus.running
+                              ? Icons.pause
+                              : Icons.play_arrow,
+                          color: Colors.white),
+                    ),
+                  ),
+                if (state.uploadProgress < 100)
+                  SizedBox(
+                    width: 24.0,
+                    height: 24.0,
+                    child: CircularProgressIndicator(
+                      value: state.uploadProgress / 100,
+                    ),
+                  ),
+              ],
+            ),
+            onRemove: () {
+              onRemove(file);
+              context
+                  .read<AttachmentUploadBloc>()
+                  .add(AttachmentUploadCancelled());
+            },
           );
         },
       ),
+    );
+  }
+}
+
+class _ImageDisplay extends StatelessWidget {
+  final VoidCallback onRemove;
+  final Widget image;
+
+  const _ImageDisplay({
+    Key? key,
+    required this.onRemove,
+    required this.image,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        image,
+        SizedBox(height: 4),
+        InkWell(
+          onTap: onRemove,
+          child: Container(
+            decoration: BoxDecoration(
+              color: HamsaColors.lightGray,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Icon(
+              Icons.remove,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
