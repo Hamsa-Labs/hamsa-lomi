@@ -18,6 +18,7 @@ HamsaCampaignModel _$HamsaCampaignModelFromJson(Map<String, dynamic> json) =>
           .toList(),
       id: json['id'] as String,
       coverPhoto: json['coverPhoto'] as String,
+      videoAttachment: json['videoAttachment'] as String?,
       amountRaised: (json['amountRaised'] as num?)?.toDouble(),
     );
 
@@ -30,6 +31,7 @@ Map<String, dynamic> _$HamsaCampaignModelToJson(HamsaCampaignModel instance) =>
       'dueDate': instance.dueDate.toIso8601String(),
       'imageGallery': instance.imageGallery,
       'coverPhoto': instance.coverPhoto,
+      'videoAttachment': instance.videoAttachment,
       'id': instance.id,
       'amountRaised': instance.amountRaised,
     };
