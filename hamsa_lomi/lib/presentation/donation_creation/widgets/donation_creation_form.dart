@@ -37,9 +37,11 @@ class _DonationCreationFormState extends State<DonationCreationForm> {
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _goalController = TextEditingController();
+  final _videoInputController = TextEditingController();
   String? _initialCoverPhoto;
   DonationCategory? _initialDonationCategory;
   DateTime? _initialDueDate;
+  List<String>? _initialImageGallery;
 
   @override
   void initState() {
@@ -47,10 +49,12 @@ class _DonationCreationFormState extends State<DonationCreationForm> {
     if (widget.campaign != null) {
       _titleController.text = widget.campaign!.title;
       _descriptionController.text = widget.campaign!.description;
+      _videoInputController.text = widget.campaign!.videoAttachment ?? '';
       _initialCoverPhoto = widget.campaign!.coverPhoto;
       _initialDonationCategory = widget.campaign!.category;
       _goalController.text = widget.campaign!.goal.toString();
       _initialDueDate = widget.campaign!.dueDate;
+      _initialImageGallery = widget.campaign!.imageGallery;
     }
   }
 
@@ -88,8 +92,12 @@ class _DonationCreationFormState extends State<DonationCreationForm> {
               _DueDateInput(
                 initialValue: _initialDueDate,
               ),
-              _GalleryInput(),
-              _AddVideoInput(),
+              _GalleryInput(
+                initialImages: _initialImageGallery,
+              ),
+              _AddVideoInput(
+                controller: _videoInputController,
+              ),
               _AddDocumentInput(),
               Center(child: _SubmitFormButton()),
             ],
@@ -289,7 +297,9 @@ class _DueDateInput extends StatelessWidget {
 }
 
 class _GalleryInput extends StatelessWidget {
-  const _GalleryInput({Key? key}) : super(key: key);
+  final List<String>? initialImages;
+
+  const _GalleryInput({Key? key, this.initialImages}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -306,6 +316,7 @@ class _GalleryInput extends StatelessWidget {
             onImageRemove: (index) {
               context.read<DonationCreationBloc>().add(ImageRemoved(index));
             },
+            initialImages: initialImages ?? [],
           ),
         );
       },
@@ -314,14 +325,15 @@ class _GalleryInput extends StatelessWidget {
 }
 
 class _AddVideoInput extends StatefulWidget {
-  const _AddVideoInput({Key? key}) : super(key: key);
+  final TextEditingController controller;
+
+  const _AddVideoInput({Key? key, required this.controller}) : super(key: key);
 
   @override
   State<_AddVideoInput> createState() => _AddVideoInputState();
 }
 
 class _AddVideoInputState extends State<_AddVideoInput> {
-  XFile? _pickedFile;
 
   @override
   Widget build(BuildContext context) {
@@ -346,10 +358,9 @@ class _AddVideoInputState extends State<_AddVideoInput> {
           return CreationFormField(
             label: 'Add Video Attachment',
             child: Visibility(
-              visible: _pickedFile != null,
+              visible: widget.controller.text.isNotEmpty,
               child: TextField(
-                controller:
-                    TextEditingController(text: _pickedFile?.name ?? ''),
+                controller: widget.controller,
                 readOnly: true,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -368,7 +379,7 @@ class _AddVideoInputState extends State<_AddVideoInput> {
                           .read<AttachmentUploadBloc>()
                           .add(AttachmentUploadCancelled());
                       setState(() {
-                        _pickedFile = null;
+                        widget.controller.text = '';
                       });
                     },
                     icon: Icon(Icons.close),
@@ -386,9 +397,9 @@ class _AddVideoInputState extends State<_AddVideoInput> {
                         UploadAttachmentRequested(
                             file: File(file.path),
                             attachmentType: AttachmentType.video));
-                  }
 
-                  _pickedFile = file;
+                    widget.controller.text = file.name;
+                  }
                 },
                 child: Text('ADD'),
               ),
