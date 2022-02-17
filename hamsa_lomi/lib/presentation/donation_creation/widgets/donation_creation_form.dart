@@ -38,6 +38,7 @@ class _DonationCreationFormState extends State<DonationCreationForm> {
   final _descriptionController = TextEditingController();
   final _goalController = TextEditingController();
   final _videoInputController = TextEditingController();
+  final _documentAttachmentController = TextEditingController();
   String? _initialCoverPhoto;
   DonationCategory? _initialDonationCategory;
   DateTime? _initialDueDate;
@@ -50,6 +51,8 @@ class _DonationCreationFormState extends State<DonationCreationForm> {
       _titleController.text = widget.campaign!.title;
       _descriptionController.text = widget.campaign!.description;
       _videoInputController.text = widget.campaign!.videoAttachment ?? '';
+      _documentAttachmentController.text =
+          widget.campaign!.documentAttachment ?? '';
       _initialCoverPhoto = widget.campaign!.coverPhoto;
       _initialDonationCategory = widget.campaign!.category;
       _goalController.text = widget.campaign!.goal.toString();
@@ -98,7 +101,9 @@ class _DonationCreationFormState extends State<DonationCreationForm> {
               _AddVideoInput(
                 controller: _videoInputController,
               ),
-              _AddDocumentInput(),
+              _AddDocumentInput(
+                controller: _documentAttachmentController,
+              ),
               Center(child: _SubmitFormButton()),
             ],
           ),
@@ -334,7 +339,6 @@ class _AddVideoInput extends StatefulWidget {
 }
 
 class _AddVideoInputState extends State<_AddVideoInput> {
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -412,14 +416,18 @@ class _AddVideoInputState extends State<_AddVideoInput> {
 }
 
 class _AddDocumentInput extends StatefulWidget {
-  const _AddDocumentInput({Key? key}) : super(key: key);
+  final TextEditingController controller;
+
+  const _AddDocumentInput({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
 
   @override
   State<_AddDocumentInput> createState() => _AddDocumentInputState();
 }
 
 class _AddDocumentInputState extends State<_AddDocumentInput> {
-  FilePickerResult? _result;
 
   @override
   Widget build(BuildContext context) {
@@ -444,10 +452,9 @@ class _AddDocumentInputState extends State<_AddDocumentInput> {
           return CreationFormField(
             label: 'Add Document',
             child: Visibility(
-              visible: _result != null,
+              visible: widget.controller.text.isNotEmpty,
               child: TextField(
-                controller: TextEditingController(
-                    text: _result?.files.first.name ?? ''),
+                controller: widget.controller,
                 readOnly: true,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -466,7 +473,7 @@ class _AddDocumentInputState extends State<_AddDocumentInput> {
                           .read<AttachmentUploadBloc>()
                           .add(AttachmentUploadCancelled());
                       setState(() {
-                        _result = null;
+                        widget.controller.text = '';
                       });
                     },
                     icon: Icon(
@@ -492,8 +499,8 @@ class _AddDocumentInputState extends State<_AddDocumentInput> {
                               file: file,
                               attachmentType: AttachmentType.document),
                         );
+                    widget.controller.text = result.files.first.name;
                   }
-                  _result = result;
                 },
                 child: Text('ADD'),
               ),
