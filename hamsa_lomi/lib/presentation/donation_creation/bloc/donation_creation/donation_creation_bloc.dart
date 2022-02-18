@@ -111,10 +111,10 @@ class DonationCreationBloc
           coverPhoto: state.coverPhoto);
       emit(state.copyWith(status: status, imageGallery: imageGalleryInput));
     });
-    on<VideoAttachmentAdded>((event, emit) {
+    on<VideoAttachmentModified>((event, emit) {
       emit(state.copyWith(videoAttachment: event.downloadUrl));
     });
-    on<DocumentAttachmentAdded>((event, emit) {
+    on<DocumentAttachmentModified>((event, emit) {
       emit(state.copyWith(documentAttachment: event.downloadUrl));
     });
     on<CoverPhotoModified>((event, emit) async {
