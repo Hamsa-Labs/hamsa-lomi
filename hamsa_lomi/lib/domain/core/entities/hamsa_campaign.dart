@@ -2,10 +2,10 @@
 import 'entities.dart';
 
 class HamsaCampaign extends BaseHamsaCampaign {
-  final String id;
   final double amountRaised;
 
   HamsaCampaign({
+    required String id,
     required String title,
     required DonationCategory category,
     required double goal,
@@ -15,9 +15,9 @@ class HamsaCampaign extends BaseHamsaCampaign {
     required String coverPhoto,
     final String? videoAttachment,
     final String? documentAttachment,
-    required this.id,
     required this.amountRaised,
   }) : super(
+          id: id,
           title: title,
           category: category,
           goal: goal,
@@ -30,7 +30,7 @@ class HamsaCampaign extends BaseHamsaCampaign {
         );
 
   @override
-  List<Object?> get props => [...super.props, id, amountRaised];
+  List<Object?> get props => [...super.props, amountRaised];
 
   double get remainingDays {
     return (dueDate.difference(DateTime.now()).inHours / 24).floorToDouble();

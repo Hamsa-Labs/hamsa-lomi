@@ -25,6 +25,7 @@ HamsaCampaignModel _$HamsaCampaignModelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$HamsaCampaignModelToJson(HamsaCampaignModel instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'title': instance.title,
       'category': _$DonationCategoryEnumMap[instance.category],
       'goal': instance.goal,
@@ -34,7 +35,6 @@ Map<String, dynamic> _$HamsaCampaignModelToJson(HamsaCampaignModel instance) =>
       'coverPhoto': instance.coverPhoto,
       'videoAttachment': instance.videoAttachment,
       'documentAttachment': instance.documentAttachment,
-      'id': instance.id,
       'amountRaised': instance.amountRaised,
     };
 

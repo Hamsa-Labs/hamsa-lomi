@@ -3,6 +3,7 @@ import '../../core/entities/entities.dart';
 
 class CreateHamsaCampaign extends BaseHamsaCampaign {
   CreateHamsaCampaign({
+    String? id,
     required String title,
     required DonationCategory category,
     required double goal,
@@ -13,6 +14,7 @@ class CreateHamsaCampaign extends BaseHamsaCampaign {
     final String? videoAttachment,
     final String? documentAttachment,
   }) : super(
+          id: id,
           title: title,
           category: category,
           goal: goal,
