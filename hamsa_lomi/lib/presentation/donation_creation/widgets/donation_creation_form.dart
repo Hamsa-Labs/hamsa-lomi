@@ -9,6 +9,7 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import '../bloc/donation_creation/donation_creation_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
@@ -17,7 +18,6 @@ import '../../../domain/core/core.dart';
 import '../../../domain/donation_creation/entities/upload_attachment_param.dart';
 import '../../../injection/injection.dart';
 import '../../constants/app_assets_constant.dart';
-import '../bloc/donation_creation/donation_creation_bloc.dart';
 import '../bloc/image_upload/attachment_upload_bloc.dart';
 import 'creation_form_field.dart';
 import 'image_uploader.dart';
@@ -34,6 +34,7 @@ class DonationCreationForm extends StatefulWidget {
 }
 
 class _DonationCreationFormState extends State<DonationCreationForm> {
+  final _bloc = getIt<DonationCreationBloc>();
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _goalController = TextEditingController();
@@ -48,16 +49,39 @@ class _DonationCreationFormState extends State<DonationCreationForm> {
   void initState() {
     super.initState();
     if (widget.campaign != null) {
-      _titleController.text = widget.campaign!.title;
-      _descriptionController.text = widget.campaign!.description;
-      _videoInputController.text = widget.campaign!.videoAttachment ?? '';
-      _documentAttachmentController.text =
-          widget.campaign!.documentAttachment ?? '';
-      _initialCoverPhoto = widget.campaign!.coverPhoto;
-      _initialDonationCategory = widget.campaign!.category;
-      _goalController.text = widget.campaign!.goal.toString();
-      _initialDueDate = widget.campaign!.dueDate;
-      _initialImageGallery = widget.campaign!.imageGallery;
+      _initializeFormFields();
+    }
+  }
+
+  void _initializeFormFields() {
+    _titleController.text = widget.campaign!.title;
+    _bloc.add(TitleChanged(title: widget.campaign!.title));
+
+    _descriptionController.text = widget.campaign!.description;
+    _bloc.add(DescriptionChanged(description: widget.campaign!.description));
+
+    _videoInputController.text = widget.campaign!.videoAttachment ?? '';
+    _bloc.add(VideoAttachmentModified(widget.campaign!.videoAttachment));
+
+    _documentAttachmentController.text =
+        widget.campaign!.documentAttachment ?? '';
+    _bloc.add(DocumentAttachmentModified(widget.campaign!.documentAttachment));
+
+    _initialCoverPhoto = widget.campaign!.coverPhoto;
+    _bloc.add(CoverPhotoModified(widget.campaign!.coverPhoto));
+
+    _initialDonationCategory = widget.campaign!.category;
+    _bloc.add(CategoryChanged(widget.campaign!.category));
+
+    _goalController.text = widget.campaign!.goal.toString();
+    _bloc.add(GoalAmountChanged(widget.campaign!.goal));
+
+    _initialDueDate = widget.campaign!.dueDate;
+    _bloc.add(DueDateChanged(widget.campaign!.dueDate));
+
+    _initialImageGallery = widget.campaign!.imageGallery;
+    for (var downloadUrl in widget.campaign!.imageGallery) {
+      _bloc.add(ImageGalleryUpdated(downloadUrl));
     }
   }
 
@@ -66,7 +90,7 @@ class _DonationCreationFormState extends State<DonationCreationForm> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: BlocProvider(
-        create: (context) => getIt<DonationCreationBloc>(),
+        create: (context) => _bloc,
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,7 +128,11 @@ class _DonationCreationFormState extends State<DonationCreationForm> {
               _AddDocumentInput(
                 controller: _documentAttachmentController,
               ),
-              Center(child: _SubmitFormButton()),
+              Center(
+                child: _SubmitFormButton(
+                  label: widget.campaign == null ? 'Start' : 'Update',
+                ),
+              ),
             ],
           ),
         ),
@@ -355,7 +383,7 @@ class _AddVideoInputState extends State<_AddVideoInput> {
               state.downloadUrl != null) {
             context
                 .read<DonationCreationBloc>()
-                .add(VideoAttachmentAdded(state.downloadUrl!));
+                .add(VideoAttachmentModified(state.downloadUrl!));
           }
         },
         builder: (context, state) {
@@ -382,6 +410,10 @@ class _AddVideoInputState extends State<_AddVideoInput> {
                       context
                           .read<AttachmentUploadBloc>()
                           .add(AttachmentUploadCancelled());
+                      context
+                          .read<DonationCreationBloc>()
+                          .add(VideoAttachmentModified(null));
+
                       setState(() {
                         widget.controller.text = '';
                       });
@@ -428,7 +460,6 @@ class _AddDocumentInput extends StatefulWidget {
 }
 
 class _AddDocumentInputState extends State<_AddDocumentInput> {
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -445,7 +476,7 @@ class _AddDocumentInputState extends State<_AddDocumentInput> {
               state.downloadUrl != null) {
             context
                 .read<DonationCreationBloc>()
-                .add(DocumentAttachmentAdded(state.downloadUrl!));
+                .add(DocumentAttachmentModified(state.downloadUrl!));
           }
         },
         builder: (context, state) {
@@ -472,6 +503,9 @@ class _AddDocumentInputState extends State<_AddDocumentInput> {
                       context
                           .read<AttachmentUploadBloc>()
                           .add(AttachmentUploadCancelled());
+                      context
+                          .read<DonationCreationBloc>()
+                          .add(DocumentAttachmentModified(null));
                       setState(() {
                         widget.controller.text = '';
                       });
@@ -542,7 +576,8 @@ class _CoverPhotoInput extends StatelessWidget {
 }
 
 class _SubmitFormButton extends StatelessWidget {
-  const _SubmitFormButton({Key? key}) : super(key: key);
+  final String label;
+  const _SubmitFormButton({Key? key, required this.label}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -570,7 +605,7 @@ class _SubmitFormButton extends StatelessWidget {
                     ),
                   ),
                 ),
-              Text('Start'),
+              Text(label),
             ],
           ),
         );
