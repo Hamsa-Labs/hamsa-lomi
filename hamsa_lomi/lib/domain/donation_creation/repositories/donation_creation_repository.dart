@@ -9,7 +9,7 @@ import '../entities/create_hamsa_campaign.dart';
 import '../entities/upload_attachment_param.dart';
 
 abstract class DonationCreationRepository {
-  Future<Either<Failure, HamsaCampaign>> createHamsaCampaign(
+  Future<Either<Failure, HamsaCampaign>> saveHamsaCampaign(
       CreateHamsaCampaign campaign);
   Future<UploadTask> uploadAttachment(UploadAttachmentParam uploadImageParam);
 }

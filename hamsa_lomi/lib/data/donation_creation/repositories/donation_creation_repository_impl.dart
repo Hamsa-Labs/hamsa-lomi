@@ -17,8 +17,14 @@ class DonationCreationRepositoryImpl implements DonationCreationRepository {
   DonationCreationRepositoryImpl(this._dataSource);
 
   @override
-  Future<Either<Failure, HamsaCampaign>> createHamsaCampaign(
+  Future<Either<Failure, HamsaCampaign>> saveHamsaCampaign(
       CreateHamsaCampaign campaign) async {
+    if (campaign.id != null) {
+      final result = await _dataSource
+          .updateHamsaCampaign(CreateHamsaCampaignModel.toModel(campaign));
+      return right(result);
+    }
+    
     final result = await _dataSource
         .createHamsaCampaign(CreateHamsaCampaignModel.toModel(campaign));
     return right(result);

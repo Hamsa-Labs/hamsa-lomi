@@ -9,6 +9,7 @@ part of 'create_hamsa_campaign_model.dart';
 CreateHamsaCampaignModel _$CreateHamsaCampaignModelFromJson(
         Map<String, dynamic> json) =>
     CreateHamsaCampaignModel(
+      id: json['id'] as String?,
       title: json['title'] as String,
       category: $enumDecode(_$DonationCategoryEnumMap, json['category']),
       goal: (json['goal'] as num).toDouble(),
@@ -25,6 +26,7 @@ CreateHamsaCampaignModel _$CreateHamsaCampaignModelFromJson(
 Map<String, dynamic> _$CreateHamsaCampaignModelToJson(
         CreateHamsaCampaignModel instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'title': instance.title,
       'goal': instance.goal,
       'description': instance.description,

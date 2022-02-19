@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'donation_category.dart';
 
 abstract class BaseHamsaCampaign extends Equatable {
+  final String? id;
   final String title;
   final DonationCategory category;
   final double goal;
@@ -16,6 +17,7 @@ abstract class BaseHamsaCampaign extends Equatable {
   final String? documentAttachment;
 
   BaseHamsaCampaign({
+    this.id,
     required this.title,
     required this.category,
     required this.goal,
@@ -29,6 +31,7 @@ abstract class BaseHamsaCampaign extends Equatable {
 
   @override
   List<Object?> get props => [
+        id,
         title,
         category,
         goal,

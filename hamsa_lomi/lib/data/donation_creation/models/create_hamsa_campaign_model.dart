@@ -13,6 +13,7 @@ class CreateHamsaCampaignModel extends CreateHamsaCampaign {
   final DonationCategory category;
 
   CreateHamsaCampaignModel({
+    String? id,
     required String title,
     required this.category,
     required double goal,
@@ -23,6 +24,7 @@ class CreateHamsaCampaignModel extends CreateHamsaCampaign {
     final String? videoAttachment,
     final String? documentAttachment,
   }) : super(
+          id: id,
           category: category,
           description: description,
           dueDate: dueDate,
@@ -36,6 +38,7 @@ class CreateHamsaCampaignModel extends CreateHamsaCampaign {
 
   static CreateHamsaCampaignModel toModel(CreateHamsaCampaign entity) {
     return CreateHamsaCampaignModel(
+      id: entity.id,
       title: entity.title,
       category: entity.category,
       goal: entity.goal,

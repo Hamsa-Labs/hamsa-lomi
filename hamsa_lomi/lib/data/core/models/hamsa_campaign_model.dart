@@ -17,6 +17,8 @@ class HamsaCampaignModel extends HamsaCampaign {
     required List<String> imageGallery,
     required String id,
     required String coverPhoto,
+    String? videoAttachment,
+    String? documentAttachment,
     double? amountRaised,
   }) : super(
           title: title,
@@ -28,6 +30,8 @@ class HamsaCampaignModel extends HamsaCampaign {
           imageGallery: imageGallery,
           amountRaised: amountRaised ?? 0,
           coverPhoto: coverPhoto,
+          videoAttachment: videoAttachment,
+          documentAttachment: documentAttachment
         );
 
   factory HamsaCampaignModel.fromJson(Map<String, dynamic> json) =>

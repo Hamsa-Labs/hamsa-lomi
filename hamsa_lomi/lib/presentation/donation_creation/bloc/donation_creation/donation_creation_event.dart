@@ -67,19 +67,19 @@ class ImageRemoved extends DonationCreationEvent {
   List<Object?> get props => [index];
 }
 
-class VideoAttachmentAdded extends DonationCreationEvent {
-  final String downloadUrl;
+class VideoAttachmentModified extends DonationCreationEvent {
+  final String? downloadUrl;
 
-  VideoAttachmentAdded(this.downloadUrl);
+  VideoAttachmentModified(this.downloadUrl);
 
   @override
   List<Object?> get props => [downloadUrl];
 }
 
-class DocumentAttachmentAdded extends DonationCreationEvent {
-  final String downloadUrl;
+class DocumentAttachmentModified extends DonationCreationEvent {
+  final String? downloadUrl;
 
-  DocumentAttachmentAdded(this.downloadUrl);
+  DocumentAttachmentModified(this.downloadUrl);
 
   @override
   List<Object?> get props => [downloadUrl];
@@ -97,4 +97,13 @@ class CoverPhotoModified extends DonationCreationEvent {
 
   @override
   List<Object?> get props => [coverPhoto];
+}
+
+class IdSet extends DonationCreationEvent {
+  final String? id;
+
+  IdSet(this.id);
+
+  @override
+  List<Object?> get props => [id];
 }

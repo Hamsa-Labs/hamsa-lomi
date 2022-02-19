@@ -19,10 +19,13 @@ part 'donation_creation_state.dart';
 @injectable
 class DonationCreationBloc
     extends Bloc<DonationCreationEvent, DonationCreationState> {
-  final CreateHamsaCampaignUseCase _createHamsaCampaignUseCase;
+  final SaveHamsaCampaignUseCase _createHamsaCampaignUseCase;
 
   DonationCreationBloc(this._createHamsaCampaignUseCase)
       : super(DonationCreationState()) {
+    on<IdSet>((event, emit) {
+      emit(state.copyWith(id: event.id));
+    });
     on<TitleChanged>((event, emit) {
       final titleInput = RequiredTextInput.dirty(event.title);
       final status = _validateFormInputs(
@@ -111,10 +114,10 @@ class DonationCreationBloc
           coverPhoto: state.coverPhoto);
       emit(state.copyWith(status: status, imageGallery: imageGalleryInput));
     });
-    on<VideoAttachmentAdded>((event, emit) {
+    on<VideoAttachmentModified>((event, emit) {
       emit(state.copyWith(videoAttachment: event.downloadUrl));
     });
-    on<DocumentAttachmentAdded>((event, emit) {
+    on<DocumentAttachmentModified>((event, emit) {
       emit(state.copyWith(documentAttachment: event.downloadUrl));
     });
     on<CoverPhotoModified>((event, emit) async {
@@ -138,6 +141,7 @@ class DonationCreationBloc
 
         final failureOrSuccess = await _createHamsaCampaignUseCase(
           CreateHamsaCampaign(
+            id: state.id,
             title: state.title.value,
             category: state.category.value!,
             goal: state.goal.value,

@@ -22,33 +22,119 @@ import '../bloc/image_upload/attachment_upload_bloc.dart';
 import 'creation_form_field.dart';
 import 'image_uploader.dart';
 
-class DonationCreationForm extends StatelessWidget {
-  const DonationCreationForm({Key? key}) : super(key: key);
+class DonationCreationForm extends StatefulWidget {
+  final HamsaCampaign? campaign;
+  const DonationCreationForm({
+    Key? key,
+    this.campaign,
+  }) : super(key: key);
+
+  @override
+  State<DonationCreationForm> createState() => _DonationCreationFormState();
+}
+
+class _DonationCreationFormState extends State<DonationCreationForm> {
+  final _bloc = getIt<DonationCreationBloc>();
+  final _titleController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  final _goalController = TextEditingController();
+  final _videoInputController = TextEditingController();
+  final _documentAttachmentController = TextEditingController();
+  String? _initialCoverPhoto;
+  DonationCategory? _initialDonationCategory;
+  DateTime? _initialDueDate;
+  List<String>? _initialImageGallery;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.campaign != null) {
+      _initializeFormFields();
+    }
+  }
+
+  void _initializeFormFields() {
+    _bloc.add(IdSet(widget.campaign!.id));
+
+    _titleController.text = widget.campaign!.title;
+    _bloc.add(TitleChanged(title: widget.campaign!.title));
+
+    _descriptionController.text = widget.campaign!.description;
+    _bloc.add(DescriptionChanged(description: widget.campaign!.description));
+
+    _videoInputController.text = widget.campaign!.videoAttachment ?? '';
+    _bloc.add(VideoAttachmentModified(widget.campaign!.videoAttachment));
+
+    _documentAttachmentController.text =
+        widget.campaign!.documentAttachment ?? '';
+    _bloc.add(DocumentAttachmentModified(widget.campaign!.documentAttachment));
+
+    _initialCoverPhoto = widget.campaign!.coverPhoto;
+    _bloc.add(CoverPhotoModified(widget.campaign!.coverPhoto));
+
+    _initialDonationCategory = widget.campaign!.category;
+    _bloc.add(CategoryChanged(widget.campaign!.category));
+
+    _goalController.text = widget.campaign!.goal.toString();
+    _bloc.add(GoalAmountChanged(widget.campaign!.goal));
+
+    _initialDueDate = widget.campaign!.dueDate;
+    _bloc.add(DueDateChanged(widget.campaign!.dueDate));
+
+    _initialImageGallery = widget.campaign!.imageGallery;
+    for (var downloadUrl in widget.campaign!.imageGallery) {
+      _bloc.add(ImageGalleryUpdated(downloadUrl));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: BlocProvider(
-        create: (context) => getIt<DonationCreationBloc>(),
+        create: (context) => _bloc,
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Enter The Following Details',
+                widget.campaign == null
+                    ? 'Enter The Following Details'
+                    : 'Update The Following Details',
                 style: Theme.of(context).textTheme.headline5,
               ),
-              _TitleInput(),
-              _CoverPhotoInput(),
-              _CategoryInput(),
-              _GoalInput(),
-              _DescriptionInput(),
-              _DueDateInput(),
-              _GalleryInput(),
-              _AddVideoInput(),
-              _AddDocumentInput(),
-              Center(child: _SubmitFormButton()),
+              _TitleInput(
+                controller: _titleController,
+              ),
+              _CoverPhotoInput(
+                initialCoverPhoto: _initialCoverPhoto,
+              ),
+              _CategoryInput(
+                initialDonationCategory: _initialDonationCategory,
+              ),
+              _GoalInput(
+                controller: _goalController,
+              ),
+              _DescriptionInput(
+                controller: _descriptionController,
+              ),
+              _DueDateInput(
+                initialValue: _initialDueDate,
+              ),
+              _GalleryInput(
+                initialImages: _initialImageGallery,
+              ),
+              _AddVideoInput(
+                controller: _videoInputController,
+              ),
+              _AddDocumentInput(
+                controller: _documentAttachmentController,
+              ),
+              Center(
+                child: _SubmitFormButton(
+                  label: widget.campaign == null ? 'Start' : 'Update',
+                ),
+              ),
             ],
           ),
         ),
@@ -58,7 +144,11 @@ class DonationCreationForm extends StatelessWidget {
 }
 
 class _TitleInput extends StatelessWidget {
-  const _TitleInput({Key? key}) : super(key: key);
+  final TextEditingController controller;
+  const _TitleInput({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +162,7 @@ class _TitleInput extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16.0),
               ),
             ),
+            controller: controller,
             onChanged: (title) {
               context
                   .read<DonationCreationBloc>()
@@ -85,6 +176,7 @@ class _TitleInput extends StatelessWidget {
 }
 
 class _CategoryInput extends StatelessWidget {
+  final DonationCategory? initialDonationCategory;
   final List<Map<String, dynamic>> _categories = const [
     {'value': DonationCategory.emergency, 'display': 'Emergency'},
     {'value': DonationCategory.health, 'display': 'Health'},
@@ -93,7 +185,8 @@ class _CategoryInput extends StatelessWidget {
     {'value': DonationCategory.charity, 'display': 'Charity'},
   ];
 
-  const _CategoryInput({Key? key}) : super(key: key);
+  const _CategoryInput({Key? key, this.initialDonationCategory})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -118,6 +211,7 @@ class _CategoryInput extends StatelessWidget {
                     .read<DonationCreationBloc>()
                     .add(CategoryChanged(newValue as DonationCategory));
               },
+              value: initialDonationCategory,
             ));
       },
     );
@@ -125,7 +219,9 @@ class _CategoryInput extends StatelessWidget {
 }
 
 class _GoalInput extends StatelessWidget {
-  const _GoalInput({Key? key}) : super(key: key);
+  final TextEditingController controller;
+
+  const _GoalInput({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -144,6 +240,7 @@ class _GoalInput extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            controller: controller,
             keyboardType: TextInputType.numberWithOptions(),
             onChanged: (amount) {
               context
@@ -158,7 +255,11 @@ class _GoalInput extends StatelessWidget {
 }
 
 class _DescriptionInput extends StatelessWidget {
-  const _DescriptionInput({Key? key}) : super(key: key);
+  final TextEditingController controller;
+  const _DescriptionInput({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -174,6 +275,7 @@ class _DescriptionInput extends StatelessWidget {
               ),
               minLines: 3,
               maxLines: 5,
+              controller: controller,
               onChanged: (description) {
                 context
                     .read<DonationCreationBloc>()
@@ -186,7 +288,8 @@ class _DescriptionInput extends StatelessWidget {
 }
 
 class _DueDateInput extends StatelessWidget {
-  const _DueDateInput({Key? key}) : super(key: key);
+  final DateTime? initialValue;
+  const _DueDateInput({Key? key, this.initialValue}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -213,6 +316,7 @@ class _DueDateInput extends StatelessWidget {
                 lastDate: DateTime(2100),
               );
             },
+            initialValue: initialValue,
             onChanged: (dueDate) {
               if (dueDate != null) {
                 context
@@ -228,7 +332,9 @@ class _DueDateInput extends StatelessWidget {
 }
 
 class _GalleryInput extends StatelessWidget {
-  const _GalleryInput({Key? key}) : super(key: key);
+  final List<String>? initialImages;
+
+  const _GalleryInput({Key? key, this.initialImages}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -245,6 +351,7 @@ class _GalleryInput extends StatelessWidget {
             onImageRemove: (index) {
               context.read<DonationCreationBloc>().add(ImageRemoved(index));
             },
+            initialImages: initialImages ?? [],
           ),
         );
       },
@@ -253,15 +360,15 @@ class _GalleryInput extends StatelessWidget {
 }
 
 class _AddVideoInput extends StatefulWidget {
-  const _AddVideoInput({Key? key}) : super(key: key);
+  final TextEditingController controller;
+
+  const _AddVideoInput({Key? key, required this.controller}) : super(key: key);
 
   @override
   State<_AddVideoInput> createState() => _AddVideoInputState();
 }
 
 class _AddVideoInputState extends State<_AddVideoInput> {
-  XFile? _pickedFile;
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -278,17 +385,16 @@ class _AddVideoInputState extends State<_AddVideoInput> {
               state.downloadUrl != null) {
             context
                 .read<DonationCreationBloc>()
-                .add(VideoAttachmentAdded(state.downloadUrl!));
+                .add(VideoAttachmentModified(state.downloadUrl!));
           }
         },
         builder: (context, state) {
           return CreationFormField(
             label: 'Add Video Attachment',
             child: Visibility(
-              visible: _pickedFile != null,
+              visible: widget.controller.text.isNotEmpty,
               child: TextField(
-                controller:
-                    TextEditingController(text: _pickedFile?.name ?? ''),
+                controller: widget.controller,
                 readOnly: true,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -306,8 +412,12 @@ class _AddVideoInputState extends State<_AddVideoInput> {
                       context
                           .read<AttachmentUploadBloc>()
                           .add(AttachmentUploadCancelled());
+                      context
+                          .read<DonationCreationBloc>()
+                          .add(VideoAttachmentModified(null));
+
                       setState(() {
-                        _pickedFile = null;
+                        widget.controller.text = '';
                       });
                     },
                     icon: Icon(Icons.close),
@@ -325,9 +435,9 @@ class _AddVideoInputState extends State<_AddVideoInput> {
                         UploadAttachmentRequested(
                             file: File(file.path),
                             attachmentType: AttachmentType.video));
-                  }
 
-                  _pickedFile = file;
+                    widget.controller.text = file.name;
+                  }
                 },
                 child: Text('ADD'),
               ),
@@ -340,15 +450,18 @@ class _AddVideoInputState extends State<_AddVideoInput> {
 }
 
 class _AddDocumentInput extends StatefulWidget {
-  const _AddDocumentInput({Key? key}) : super(key: key);
+  final TextEditingController controller;
+
+  const _AddDocumentInput({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
 
   @override
   State<_AddDocumentInput> createState() => _AddDocumentInputState();
 }
 
 class _AddDocumentInputState extends State<_AddDocumentInput> {
-  FilePickerResult? _result;
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -365,17 +478,16 @@ class _AddDocumentInputState extends State<_AddDocumentInput> {
               state.downloadUrl != null) {
             context
                 .read<DonationCreationBloc>()
-                .add(DocumentAttachmentAdded(state.downloadUrl!));
+                .add(DocumentAttachmentModified(state.downloadUrl!));
           }
         },
         builder: (context, state) {
           return CreationFormField(
             label: 'Add Document',
             child: Visibility(
-              visible: _result != null,
+              visible: widget.controller.text.isNotEmpty,
               child: TextField(
-                controller: TextEditingController(
-                    text: _result?.files.first.name ?? ''),
+                controller: widget.controller,
                 readOnly: true,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -393,8 +505,11 @@ class _AddDocumentInputState extends State<_AddDocumentInput> {
                       context
                           .read<AttachmentUploadBloc>()
                           .add(AttachmentUploadCancelled());
+                      context
+                          .read<DonationCreationBloc>()
+                          .add(DocumentAttachmentModified(null));
                       setState(() {
-                        _result = null;
+                        widget.controller.text = '';
                       });
                     },
                     icon: Icon(
@@ -420,8 +535,8 @@ class _AddDocumentInputState extends State<_AddDocumentInput> {
                               file: file,
                               attachmentType: AttachmentType.document),
                         );
+                    widget.controller.text = result.files.first.name;
                   }
-                  _result = result;
                 },
                 child: Text('ADD'),
               ),
@@ -434,7 +549,8 @@ class _AddDocumentInputState extends State<_AddDocumentInput> {
 }
 
 class _CoverPhotoInput extends StatelessWidget {
-  const _CoverPhotoInput({Key? key}) : super(key: key);
+  final String? initialCoverPhoto;
+  const _CoverPhotoInput({Key? key, this.initialCoverPhoto}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -452,6 +568,8 @@ class _CoverPhotoInput extends StatelessWidget {
                   .add(CoverPhotoModified(null));
             },
             maxImages: 1,
+            initialImages:
+                initialCoverPhoto != null ? [initialCoverPhoto!] : [],
           );
         },
       ),
@@ -460,7 +578,8 @@ class _CoverPhotoInput extends StatelessWidget {
 }
 
 class _SubmitFormButton extends StatelessWidget {
-  const _SubmitFormButton({Key? key}) : super(key: key);
+  final String label;
+  const _SubmitFormButton({Key? key, required this.label}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -488,7 +607,7 @@ class _SubmitFormButton extends StatelessWidget {
                     ),
                   ),
                 ),
-              Text('Start'),
+              Text(label),
             ],
           ),
         );

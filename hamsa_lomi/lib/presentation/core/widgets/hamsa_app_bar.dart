@@ -13,13 +13,13 @@ class HamsaAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool withLogo;
   final bool withLeading;
   final Text? appBarText;
-  final Widget? actionButton;
+  final List<Widget>? actions;
 
   const HamsaAppBar({
     this.appBarText,
     required this.withLogo,
     required this.withLeading,
-    this.actionButton,
+    this.actions,
   });
 
   @override
@@ -54,9 +54,8 @@ class HamsaAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   )
                 ]
-              : actionButton != null
-                  ? [_OutlinedIconButton(child: actionButton!)]
-                  : null,
+              : actions?.map((e) => _OutlinedIconButton(child: e)).toList() ??
+                  null,
         ),
       ),
       preferredSize: Size.fromHeight(kToolbarHeight),
