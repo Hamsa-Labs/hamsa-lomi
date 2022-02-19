@@ -1,6 +1,7 @@
 part of 'donation_creation_bloc.dart';
 
 class DonationCreationState extends Equatable {
+  final String? id;
   final RequiredTextInput title;
   final RequiredTextInput description;
   final RequiredTextInput coverPhoto;
@@ -23,11 +24,13 @@ class DonationCreationState extends Equatable {
     this.coverPhoto = const RequiredTextInput.pure(),
     this.videoAttachment,
     this.documentAttachment,
+    this.id,
     this.status = FormzStatus.pure,
   });
 
   @override
   List<Object?> get props => [
+        id,
         title,
         description,
         status,
@@ -41,6 +44,7 @@ class DonationCreationState extends Equatable {
       ];
 
   DonationCreationState copyWith({
+    String? id,
     RequiredTextInput? title,
     RequiredTextInput? description,
     RequiredCategoryInput? category,
@@ -63,6 +67,7 @@ class DonationCreationState extends Equatable {
       documentAttachment: documentAttachment ?? this.documentAttachment,
       videoAttachment: videoAttachment ?? this.videoAttachment,
       coverPhoto: coverPhoto ?? this.coverPhoto,
+      id: id ?? this.id,
     );
   }
 }

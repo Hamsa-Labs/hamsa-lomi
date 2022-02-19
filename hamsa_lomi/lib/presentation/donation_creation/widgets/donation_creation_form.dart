@@ -54,6 +54,8 @@ class _DonationCreationFormState extends State<DonationCreationForm> {
   }
 
   void _initializeFormFields() {
+    _bloc.add(IdSet(widget.campaign!.id));
+
     _titleController.text = widget.campaign!.title;
     _bloc.add(TitleChanged(title: widget.campaign!.title));
 

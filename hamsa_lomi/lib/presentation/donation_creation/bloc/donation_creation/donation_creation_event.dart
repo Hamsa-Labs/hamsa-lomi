@@ -98,3 +98,12 @@ class CoverPhotoModified extends DonationCreationEvent {
   @override
   List<Object?> get props => [coverPhoto];
 }
+
+class IdSet extends DonationCreationEvent {
+  final String? id;
+
+  IdSet(this.id);
+
+  @override
+  List<Object?> get props => [id];
+}
