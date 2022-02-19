@@ -38,6 +38,7 @@ class CreateHamsaCampaignModel extends CreateHamsaCampaign {
 
   static CreateHamsaCampaignModel toModel(CreateHamsaCampaign entity) {
     return CreateHamsaCampaignModel(
+      id: entity.id,
       title: entity.title,
       category: entity.category,
       goal: entity.goal,

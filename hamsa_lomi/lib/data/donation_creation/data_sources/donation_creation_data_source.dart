@@ -13,6 +13,8 @@ import '../donation_creation.dart';
 abstract class DonationCreationDataSource {
   Future<HamsaCampaign> createHamsaCampaign(CreateHamsaCampaignModel campaign);
   Future<UploadTask> uploadAttachment(UploadAttachmentParam param);
+
+  Future<HamsaCampaign> updateHamsaCampaign(CreateHamsaCampaignModel model);
 }
 
 @LazySingleton(as: DonationCreationDataSource)
@@ -69,5 +71,13 @@ class DonationCreationDataSourceImpl implements DonationCreationDataSource {
         break;
     }
     return ref;
+  }
+
+  @override
+  Future<HamsaCampaign> updateHamsaCampaign(
+      CreateHamsaCampaignModel model) async {
+    await hamsaCampaigns.doc(model.id).update(model.toJson());
+    final data = (await hamsaCampaigns.doc(model.id).get()).data();
+    return HamsaCampaignModel.fromJson(data!);
   }
 }
