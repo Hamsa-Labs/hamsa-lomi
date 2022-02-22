@@ -1,10 +1,13 @@
-# Hamsa-lomi
+# Hamsa Lomi
 
-Hamsa Lomi (ሃምሳ ሎሚ) is an Ethiopian proverb about the power of togetherness. Fifty lemons are a load carried by one person, but for fifty people they are perfumed.
+is a decentralized crowdfunding app run by Lomi Organization. Where people offer kindness to help people in need for more existing and empower the next generation. “If we're together we can make a difference.”
 
-Hamsa Lomi is a decenteralize crowdfunding app run by Lomi organzation where people offer kindness to people in need to help the humanity for more existing and impower next generation for more hope and success. “If we're together we can make a difference.”
+## Hamsa Lomi Meaning
 
-## Lomi organzation
+Hamsa Lomi (ሃምሳ ሎሚ) is an Ethiopian proverb about the power of togetherness. Fifty lemons are a load carried by one person, but for fifty people they are perfume
+
+
+## Lomi Organization
 
 Lomi is DAO (Decenteralize Autonomous Organzation) run as an entity with no central leadership. Decisions get made from the bottom-up, governed by a community organized called themselve as Lomores around a specific set of rules enforced on a blockchain.
 
