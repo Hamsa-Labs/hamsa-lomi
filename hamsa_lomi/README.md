@@ -1,4 +1,4 @@
-# Hamsa Lomi Frontend
+# Hamsa Lomi Mobile
 
 Hamsa Lomi mobile project using flutter.
 
