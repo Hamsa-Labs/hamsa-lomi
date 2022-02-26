@@ -225,20 +225,23 @@ class BuildIntroContent3 extends StatelessWidget {
   // ElevatedButton
   ElevatedButton _startButton(BuildContext context, String text) {
     return ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => SignInPage()));
-        },
-        child: Text(
-          text,
-          style: TextStyle(fontSize: 15),
+      onPressed: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => SignInPage()));
+      },
+      child: Text(
+        text,
+        style: TextStyle(fontSize: 15),
+      ),
+      style: ButtonStyle(
+        backgroundColor:
+            MaterialStateProperty.all<Color>(HamsaColors.primaryColor),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18.0),
+          ),
         ),
-        style: ButtonStyle(
-            backgroundColor:
-                MaterialStateProperty.all<Color>(HamsaColors.primaryColor),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(18.0),
-            ))));
+      ),
+    );
   }
 }
