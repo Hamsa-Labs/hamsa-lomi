@@ -52,5 +52,5 @@ jobs:
         encodedString: ${{ secrets.GOOGLE_PLAY_API_KEY }}
     
     # Build app with a new build number and publish
-#     - name: Build and publish app
-#     - run: cd hamsa_lomi && flutter pub get && flutter build appbundle --build-number {{ env.BUILD_NUMBER }}
+    - name: Build and publish app
+    - run: cd hamsa_lomi && flutter pub get && flutter build appbundle --build-number ${{ env.BUILD_NUMBER }}
