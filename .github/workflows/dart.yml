@@ -28,3 +28,29 @@ jobs:
     # Run linting and run our unit tests
     - name: Lint and test code
       run: cd hamsa_lomi && flutter pub get && flutter analyze && flutter test
+      
+    # Create a build number based on timestamp / UTC time
+    - name: set release date
+      run: echo "BUILD_NUMBER=$(date +"%s")" >> ${GITHUB_ENV}
+        
+    # Decode the keystore file containing the signing key
+    - name: Decode Keystore
+      id: decode_keystore
+      uses: timheuer/base64-to-file@v1.1
+      with:
+        fileDir: './secrets'
+        fileName: 'my.keystore'
+        encodedString: ${{ secrets.KEYSTORE_FILE }}
+        
+    # Decode the Google Play api key file
+    - name: Decode Google Play API key
+      id: decode_api_key
+      uses: timheuer/base64-to-file@v1.1
+      with:
+        fileDir: './secrets'
+        fileName: 'google-play-api-key.json'
+        encodedString: ${{ secrets.GOOGLE_PLAY_API_KEY }}
+    
+    # Build app with a new build number and publish
+    - name: Build and publish app
+    - run: cd hamsa_lomi && flutter pub get && flutter build appbundle --build-number {{ env.BUILD_NUMBER }}
