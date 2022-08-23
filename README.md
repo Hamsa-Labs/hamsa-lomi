@@ -1,15 +1,15 @@
 # Hamsa Lomi
 
-is a decentralized crowdfunding app run by Lomi Organization. Where people offer kindness to help people in need for more existing and empower the next generation. “If we're together we can make a difference.”
+is a decentralized crowdfunding app run by Hamsa Labs. Where people offer kindness to help people in need for more existing and empower the next generation. “If we're together we can make a difference.”
 
 ## Hamsa Lomi Meaning
 
 Hamsa Lomi (ሃምሳ ሎሚ) is an Ethiopian proverb about the power of togetherness. Fifty lemons are a load carried by one person, but for fifty people they are perfume
 
 
-## Lomi Organization
+## Hamsa Organization
 
-Lomi is DAO (Decenteralize Autonomous Organzation) run as an entity with no central leadership. Decisions get made from the bottom-up, governed by a community organized called themselve as Lomores around a specific set of rules enforced on a blockchain.
+Hamsa is DAO (Decenteralize Autonomous Organzation) run as an entity with no central leadership. Decisions get made from the bottom-up, governed by a community organized called themselve as Lomores around a specific set of rules enforced on a blockchain.
 
 ## Founders
 
@@ -25,7 +25,7 @@ Lomi is DAO (Decenteralize Autonomous Organzation) run as an entity with no cent
 
 ## 🙌 Want to join us to shape the world?
 
-- 🤔 Suggest a feature
+- 🤔 [Suggest a feature](../../issues/).
 - 🐛 [Report an issue](../../issues/).
 
 ## Show your support
