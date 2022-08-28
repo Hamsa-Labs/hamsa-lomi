@@ -46,7 +46,6 @@ jobs:
       id: decode_api_key
       uses: timheuer/base64-to-file@v1.1
       with:
-        fileDir: './secrets'
         fileName: 'google-play-api-key.json'
         encodedString: ${{ secrets.GOOGLE_PLAY_API_KEY }}
     
@@ -67,6 +66,6 @@ jobs:
         
         cd android
         
-        export ANDROID_PUBLISHER_CREDENTIALS=$(cat ./secrets/google-play-api-key.json)
+        export ANDROID_PUBLISHER_CREDENTIALS=$(cat "${{ steps.decode_api_key.outputs.filePath }}")
         
         ./gradlew publishBundle
