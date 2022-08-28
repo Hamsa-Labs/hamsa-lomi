@@ -55,7 +55,15 @@ jobs:
     - name: Build and publish app
       run: |
         cd hamsa_lomi
+        
         flutter pub get
         flutter build appbundle --build-number $GITHUB_RUN_NUMBER
+        
         cd android
+        
+        echo storePassword=${{ secrets.KEYSTORE_PASSWORD }} >> key.properties
+        echo keyPassword=${{ secrets.KEY_PASSWORD }} >> key.properties
+        echo keyAlias=${{ secrets.KEY_ALIAS }} >> key.properties
+        echo storeFile=./secrets/my.keystore >> key.properties
+        
         ./gradlew publishBundle
