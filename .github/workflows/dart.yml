@@ -38,7 +38,6 @@ jobs:
       id: decode_keystore
       uses: timheuer/base64-to-file@v1.1
       with:
-        fileDir: './secrets'
         fileName: 'my.keystore'
         encodedString: ${{ secrets.KEYSTORE_FILE }}
         
