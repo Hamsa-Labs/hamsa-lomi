@@ -59,7 +59,7 @@ jobs:
         echo storePassword=${{ secrets.KEYSTORE_PASSWORD }} >> android/key.properties
         echo keyPassword=${{ secrets.KEY_PASSWORD }} >> android/key.properties
         echo keyAlias=${{ secrets.KEY_ALIAS }} >> android/key.properties
-        echo storeFile=./secrets/my.keystore >> android/key.properties
+        echo storeFile="${{ steps.decode_keystore.outputs.filePath }}" >> android/key.properties
         
         flutter pub get
         flutter build appbundle --build-number $GITHUB_RUN_NUMBER
