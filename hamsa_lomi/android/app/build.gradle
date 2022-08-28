@@ -65,9 +65,12 @@ android {
     }
 }
 
+import com.github.triplet.gradle.androidpublisher.ReleaseStatus
+
 play {
     artifactDir.set(file("../../build/app/outputs/bundle/release"))
     track.set("internal")
+    releaseStatus.set(ReleaseStatus.DRAFT)
 }
 
 flutter {
