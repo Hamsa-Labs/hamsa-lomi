@@ -26,12 +26,12 @@ jobs:
         flutter-version: '2.5.1'
     
     # Run linting and run our unit tests
-    - name: Lint and test code
-      run: cd hamsa_lomi && flutter pub get && flutter analyze && flutter test
+#     - name: Lint and test code
+#       run: cd hamsa_lomi && flutter pub get && flutter analyze && flutter test
       
     # Create a build number based on timestamp / UTC time
-    - name: set release date
-      run: echo "BUILD_NUMBER=$(date +"%s")" >> ${GITHUB_ENV}
+#     - name: set release date
+#       run: echo "BUILD_NUMBER=$(date +"%s")" >> ${GITHUB_ENV}
         
     # Decode the keystore file containing the signing key
     - name: Decode Keystore
@@ -56,14 +56,16 @@ jobs:
       run: |
         cd hamsa_lomi
         
+        echo storePassword=${{ secrets.KEYSTORE_PASSWORD }} >> android/key.properties
+        echo keyPassword=${{ secrets.KEY_PASSWORD }} >> android/key.properties
+        echo keyAlias=${{ secrets.KEY_ALIAS }} >> android/key.properties
+        echo storeFile=./secrets/my.keystore >> android/key.properties
+        
         flutter pub get
         flutter build appbundle --build-number $GITHUB_RUN_NUMBER
         
         cd android
         
-        echo storePassword=${{ secrets.KEYSTORE_PASSWORD }} >> key.properties
-        echo keyPassword=${{ secrets.KEY_PASSWORD }} >> key.properties
-        echo keyAlias=${{ secrets.KEY_ALIAS }} >> key.properties
-        echo storeFile=./secrets/my.keystore >> key.properties
+        export ANDROID_PUBLISHER_CREDENTIALS=$(cat ./secrets/google-play-api-key.json)
         
         ./gradlew publishBundle
