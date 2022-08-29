@@ -69,7 +69,7 @@ import com.github.triplet.gradle.androidpublisher.ReleaseStatus
 
 play {
     artifactDir.set(file("../../build/app/outputs/bundle/release"))
-    releaseStatus.set(ReleaseStatus.DRAFT)
+    releaseStatus.set(ReleaseStatus.IN_PROGRESS)
     track.set("internal")
 }
 
